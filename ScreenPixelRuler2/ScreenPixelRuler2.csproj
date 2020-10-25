@@ -1,9 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
+    <Version>2.0.0.0</Version>
+    <Product>Screen Pixel Ruler</Product>
+    <Company>
+    </Company>
+    <Authors>Stewart Cossey</Authors>
+    <PackageId>ScreenPixelRuler</PackageId>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/Cossey/ScreenPixelRuler2</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Copyright>2020 Stewart Cossey</Copyright>
+    <ApplicationIcon>Application.ico</ApplicationIcon>
   </PropertyGroup>
-
+  <ItemGroup>
+    <None Include="..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath>
+      </PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

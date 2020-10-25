@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ScreenPixelRuler2
 {
     public partial class Ruler : Form
     {
-        RulerRenderer renderer;
+        readonly RulerRenderer renderer;
         public Ruler()
         {
             InitializeComponent();
@@ -25,13 +17,10 @@ namespace ScreenPixelRuler2
             OptionsMenu.Click += OptionsMenu_Click;
             AboutMenu.Click += AboutMenu_Click;
 
-            this.MouseMove += Ruler_MouseMove;
-            this.MouseDown += Ruler_MouseDown;
-            this.MouseUp += Ruler_MouseUp;
-
+            MouseMove += Ruler_MouseMove;
+            MouseDown += Ruler_MouseDown;
+            MouseUp += Ruler_MouseUp;
         }
-
-        int cursorPosition = 0;
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -58,6 +47,42 @@ namespace ScreenPixelRuler2
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            renderer.RenderAll(e.Graphics);
+        }
+
+        private Point mouseDownPosition;
+        private bool isRulerBeingMoved = false;
+        private bool isRulerMoving = false;
+
+        private void Ruler_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isRulerBeingMoved = true;
+                mouseDownPosition = new Point
+                {
+                    X = e.X,
+                    Y = e.Y
+                };
+            }
+        }
+
+        private void Ruler_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isRulerBeingMoved)
+            {
+                isRulerMoving = true;
+
+                Location = new Point
+                {
+                    X = Location.X + (e.X - mouseDownPosition.X),
+                    Y = Location.Y + (e.Y - mouseDownPosition.Y)
+                };
+            }
+        }
+
         private void Ruler_MouseUp(object sender, MouseEventArgs e)
         {
             switch (e.Button)
@@ -76,45 +101,14 @@ namespace ScreenPixelRuler2
             }
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            renderer.RenderAll(e.Graphics);
-        }
-
-        private void Ruler_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                isRulerBeingMoved = true;
-                mouseDownPosition = new Point
-                {
-                    X = e.X,
-                    Y = e.Y
-                };
-            }
-        }
-
-        private Point mouseDownPosition;
-        private bool isRulerBeingMoved = false;
-        private bool isRulerMoving = false;
-
-        private void Ruler_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (isRulerBeingMoved)
-            {
-                isRulerMoving = true;
-
-                this.Location = new Point
-                {
-                    X = this.Location.X + (e.X - mouseDownPosition.X),
-                    Y = this.Location.Y + (e.Y - mouseDownPosition.Y)
-                };
-            }
-        }
-
         private void AboutMenu_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            using (About about = new About())
+            {
+                renderer.DialogDisplay();
+                about.ShowDialog();
+                renderer.NoDialogDisplay();
+            }
         }
 
         private void OptionsMenu_Click(object sender, EventArgs e)
@@ -125,11 +119,6 @@ namespace ScreenPixelRuler2
         private void ExitMenu_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void Position_Tick(object sender, EventArgs e)
-        {
-            renderer.Refresh();
         }
     }
 }

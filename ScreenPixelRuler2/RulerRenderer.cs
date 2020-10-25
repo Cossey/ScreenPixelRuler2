@@ -9,12 +9,25 @@ using System.Windows.Forms;
 
 namespace ScreenPixelRuler2
 {
-    class RulerRenderer
+    class RulerRenderer : IDisposable
     {
         Form form;
+
+        System.Timers.Timer redrawer = new System.Timers.Timer
+        {
+             AutoReset = true,
+             Interval = 20
+        };
         public RulerRenderer(Form form)
         {
             this.form = form;
+            redrawer.Elapsed += Redrawer_Elapsed;
+            redrawer.Start();
+        }
+
+        private void Redrawer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            form.Invalidate();
         }
 
         int BorderSpacing = 15;
@@ -28,6 +41,23 @@ namespace ScreenPixelRuler2
             {
                 return form.Height > form.Width;
             }
+        }
+
+        bool LastFreezePosition = false;
+
+        public void DialogDisplay()
+        {
+            LastFreezePosition = FreezePosition;
+            FreezePosition = true;
+            form.TopMost = false;
+            form.Invalidate();
+        }
+
+        public void NoDialogDisplay()
+        {
+            FreezePosition = LastFreezePosition;
+            form.TopMost = true;
+            form.Invalidate();
         }
 
         public void ToggleFreezePosition()
@@ -126,11 +156,6 @@ namespace ScreenPixelRuler2
             }
         }
 
-        public void Refresh()
-        {
-            form.Invalidate();
-        }
-
         private void CursorPosition(Graphics graphics)
         {
             Point cursor = form.PointToClient(Cursor.Position);
@@ -184,5 +209,9 @@ namespace ScreenPixelRuler2
             CursorPosition(graphics);
         }
 
+        public void Dispose()
+        {
+            redrawer.Stop();
+        }
     }
 }

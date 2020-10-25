@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.Position = new System.Windows.Forms.Timer(this.components);
             this.RulerMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.OptionsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.AboutMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,12 +36,6 @@
             this.ExitMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.RulerMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // Position
-            // 
-            this.Position.Enabled = true;
-            this.Position.Interval = 30;
-            this.Position.Tick += new System.EventHandler(this.Position_Tick);
             // 
             // RulerMenu
             // 
@@ -101,8 +94,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Timer Position;
         private System.Windows.Forms.ContextMenuStrip RulerMenu;
         private System.Windows.Forms.ToolStripMenuItem OptionsMenu;
         private System.Windows.Forms.ToolStripMenuItem AboutMenu;

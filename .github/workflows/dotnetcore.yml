@@ -1,0 +1,46 @@
+name: Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    name: .NET
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.403
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build code
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+
+    - name: Upload compiled files
+      uses: actions/upload-artifact@v2
+      with:
+        name: compiled-files
+        path: ScreenPixelRuler2/bin/Release/**/
+
+    - name: Build installer
+      run: iscc /F"installer.exe" Deployment\Installer.iss
+  
+    - name: Install
+      run: |
+        cd Deployment\Output 
+        .\installer.exe /SP- /VERYSILENT /SUPPRESSMSGBOXES /LOG=".\install.log"
+  
+    - name: Upload Install log
+      uses: actions/upload-artifact@v2
+      with:
+        name: install-log
+        path: Deployment\Output\install.log
