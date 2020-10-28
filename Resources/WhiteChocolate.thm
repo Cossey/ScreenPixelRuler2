@@ -1,0 +1,27 @@
+Name: White Chocolate
+Cursor:
+  Line: '#FFFFFF'
+  Font:
+    Colour: '#000000'
+    Padding:
+      Horizontal: 3
+      Vertical: 3
+    Font:
+      Size: 9
+      Family: Courier New
+  Background: [ '#FFFFFF' ]
+Ruler:
+  Size: 40
+  Background: [ '#7C4700', '#622A0F' ]
+  Lines: '#FFFFFF'
+  Numbers: 
+    Font:
+      Size: 9
+      Family: Courier New
+    Colour: '#FFFFFF'
+    Padding: 
+      Horizontal: 3
+      Vertical: 5
+  Border:
+    Colour: '#FFFFFF'
+    Spacing: 15

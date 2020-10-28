@@ -12,11 +12,13 @@ VersionInfoVersion={#ApplicationVersion}
 DefaultDirName={code:GetProgramFiles}\ScreenPixelRuler
 OutputBaseFilename=ScreenPixelRuler-{#ApplicationVersion}
 UsePreviousTasks=yes
+LicenseFile={#RootPath}\LICENSE.md
 
 [Files]
 Source: "{#AppPath}\*"; DestDir: "{app}"; Excludes: "*.pdb,*.bat"; Flags: recursesubdirs createallsubdirs
 Source: "{#RootPath}\LICENSE.md"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "{#EngineProject}\ChangeLog.txt"; DestDir: "{app}"; DestName: "EngineChangelog.txt"; Flags: ignoreversion
+Source: "{#RootPath}\Resources\*.thm"; DestDir: "{userappdata}\screenpixelruler"; Flags: ignoreversion
+;Source: "{#RootPath}\CHANGELOG.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RootPath}\README.md"; DestDir: "{app}";  Flags: ignoreversion
 
 [CustomMessages]

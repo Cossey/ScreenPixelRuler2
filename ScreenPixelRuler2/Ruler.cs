@@ -13,6 +13,18 @@ namespace ScreenPixelRuler2
 
             renderer = new RulerRenderer(this);
 
+            renderer.UseTheme(Theming.GetThemeByName(Program.appConfig.Theme));
+
+            if (Program.appConfig.Direction)
+            {
+                renderer.FlipDirection();
+            }
+
+            if (Program.appConfig.Vertical)
+            {
+                renderer.ChangeOrientation();
+            }
+
             ExitMenu.Click += ExitMenu_Click;
             OptionsMenu.Click += OptionsMenu_Click;
             AboutMenu.Click += AboutMenu_Click;
@@ -20,6 +32,13 @@ namespace ScreenPixelRuler2
             MouseMove += Ruler_MouseMove;
             MouseDown += Ruler_MouseDown;
             MouseUp += Ruler_MouseUp;
+
+            Shown += Ruler_Shown;
+        }
+
+        private void Ruler_Shown(object sender, EventArgs e)
+        {
+            Location = Program.appConfig.Position.Point(); //Display ruler at last position on shutdown
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -113,11 +132,25 @@ namespace ScreenPixelRuler2
 
         private void OptionsMenu_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //Theme thm = Theming.LoadTheme(@"C:\Users\Stewart\source\repos\ScreenPixelRuler2\Resources\Chocolate.thm");
+            //renderer.UseTheme(thm);
+
+            using (Options options = new Options(ref Program.appConfig))
+            {
+                renderer.DialogDisplay();
+                if (options.ShowDialog() == DialogResult.OK)
+                {
+                    renderer.UseTheme(Theming.GetThemeByName(Program.appConfig.Theme));
+                }
+                renderer.NoDialogDisplay();
+            }
         }
 
         private void ExitMenu_Click(object sender, EventArgs e)
         {
+            Program.appConfig.Position.Point(Location);
+            Program.appConfig.Vertical = renderer.Vertical;
+            Program.appConfig.Direction = renderer.Direction;
             Application.Exit();
         }
     }

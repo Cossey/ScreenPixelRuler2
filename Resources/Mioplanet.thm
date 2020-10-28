@@ -1,0 +1,27 @@
+Name: MioPlanet PixelRuler
+Cursor:
+  Line: '#FFFFFF'
+  Font: 
+    Colour: '#000000'
+    Padding:
+      Horizontal: 3
+      Vertical: 3
+    Font:
+      Size: 9
+      Family: Courier New
+  Background: [ '#FFFFFF' ]
+Ruler:
+  Size: 40
+  Background: [ '#91D4FF', '#0082FE' ]
+  Lines: '#000000'
+  Numbers:     
+    Font:
+      Size: 9
+      Family: Courier New
+    Colour: '#FFFFFF'
+    Padding: 
+      Horizontal: 3
+      Vertical: 5
+  Border:
+    Colour: '#000000'
+    Spacing: 15
