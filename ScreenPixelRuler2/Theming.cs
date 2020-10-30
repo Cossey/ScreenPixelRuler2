@@ -30,7 +30,7 @@ namespace ScreenPixelRuler2
                 }
                 catch
                 {
-                    MessageBox.Show(string.Format("Could not load theme file \"{0}\".", each.Name), "Theme Load Error");
+                    MessageBox.Show(string.Format("Could not load theme file \"{0}\".", each.Name), "Theme Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             });
 
@@ -43,7 +43,13 @@ namespace ScreenPixelRuler2
             {
                 return new Theme();
             }
-            return themes.Find(m => m.Name.Equals(name, StringComparison.Ordinal));
+            Theme theme = themes.Find(m => m.Name.Equals(name, StringComparison.Ordinal));
+            if (theme == null)
+            {
+                MessageBox.Show(string.Format("The theme \"{0}\" could not be found. Loading default theme.", name), "Theme Load Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                theme = new Theme();
+            }
+            return theme;
         }
 
         public static Theme GetThemeByName(string name)

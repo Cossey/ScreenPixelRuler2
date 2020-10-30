@@ -9,9 +9,8 @@ namespace ScreenPixelRuler2
 {
     class Theme
     {
-
-        int minSize = 20;
-        int maxSize = 100;
+        readonly int minSize = 20;
+        readonly int maxSize = 100;
         public Theme()
         {
             Name = Theming.DefaultTheme;
@@ -70,7 +69,7 @@ namespace ScreenPixelRuler2
                         new TLineSizes
                         {
                             Colour = Color.Black,
-                            Interval = 20,
+                            Interval = 10,
                             Size = new TVertHoriz
                             {
                                  Horizontal = 13,
@@ -80,7 +79,7 @@ namespace ScreenPixelRuler2
                         new TLineSizes
                         {
                             Colour = Color.Black,
-                            Interval = 100,
+                            Interval = 50,
                             Size = new TVertHoriz
                             {
                                 Horizontal = 20,
@@ -91,22 +90,25 @@ namespace ScreenPixelRuler2
                 },
                 Numbers = new TNumbers
                 {
-                     Colour = Color.Black,
-                     Padding = new TVertHoriz
-                     {
-                         Horizontal = 2,
-                         Vertical = 0
-                     },
-                     Font = new TFont
-                     {
-                          Bold = false,
-                          Italic = false,
-                          Strikeout = false,
-                          Underline = false,
-                          Family = "Courier New",
-                          Size = 9
-                     },
-                     Display = 100
+                    Colour = Color.Black,
+                    Padding = new TVertHoriz
+                    {
+                        Horizontal = 2,
+                        Vertical = 0
+                    },
+                    Font = new TFont
+                    {
+                        Bold = false,
+                        Italic = false,
+                        Strikeout = false,
+                        Underline = false,
+                        Family = "Courier New",
+                        Size = 9
+                    },
+                    Display = new TNumberDisplay
+                    {
+                        Interval = 50
+                    }
                 },
                 Border = new TBorder
                 {
@@ -164,16 +166,13 @@ namespace ScreenPixelRuler2
         public int GetLinesSize(int count, bool vertical)
         {
             List<TLineSizes> sorted = Ruler.Lines.Sizes.OrderByDescending(o => o.Interval).ToList();
-            TLineSizes lineSize = sorted.Find(f => count % f.Interval == GetBorderSpacing());
+            TLineSizes lineSize = sorted.Find(f => (count - GetBorderSpacing()) % f.Interval == 0);
 
             if (lineSize != null)
             {
                 return lineSize.Size.GetVH(vertical);
             }
-            else
-            {
-                return Ruler.Lines.Size.GetVH(vertical);
-            }
+            return Ruler.Lines.Size.GetVH(vertical);
         }
 
         public bool GetShowNumberZero()
@@ -238,6 +237,11 @@ namespace ScreenPixelRuler2
         }
     }
 
+    class TNumberDisplay
+    {
+        public int Interval { get; set; }
+    }
+
     class TRuler
     {
         public int Size { get; set; }
@@ -279,7 +283,7 @@ namespace ScreenPixelRuler2
     class TNumbers : TTextAspect
     {
         [DefaultValue(100)]
-        public int Display { get; set; }
+        public TNumberDisplay Display { get; set; }
     }
 
     class TFont
@@ -329,7 +333,7 @@ namespace ScreenPixelRuler2
 
     class TBorder
     {
-       // public Color Colour { get; set; }
+        // public Color Colour { get; set; }
         public int Spacing { get; set; }
     }
 

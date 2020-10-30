@@ -89,7 +89,7 @@ namespace ScreenPixelRuler2
 
         public Point Point()
         {
-            return new Point(X, Y);
+            return new Point(X < 0 ? 0 : X, Y < 0 ? 0 : Y);
         }
 
         public void Point(Point point)
