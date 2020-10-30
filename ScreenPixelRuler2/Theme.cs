@@ -296,7 +296,7 @@ namespace ScreenPixelRuler2
         [DefaultValue("Courier New")]
         public string Family { get; set; }
         [DefaultValue(9)]
-        public int Size { get; set; }
+        public float Size { get; set; }
         public bool Bold { get; set; }
         public bool Underline { get; set; }
         public bool Italic { get; set; }
@@ -321,7 +321,7 @@ namespace ScreenPixelRuler2
             {
                 fontStyle |= FontStyle.Strikeout;
             }
-            return new Font(Family, Size, fontStyle);
+            return new Font(Family, Size, fontStyle, GraphicsUnit.Point);
         }
     }
 

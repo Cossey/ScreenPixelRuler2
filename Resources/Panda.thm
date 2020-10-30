@@ -41,7 +41,10 @@ Ruler:
     Padding: 
       Horizontal: 3
       Vertical: 1
-    Display: 100
+    Display: 
+      Interval: 100
+      Vertical: Middle
+      Horizontal: Left
   Border:
     Colour: '#FFFFFF'
     Spacing: 15

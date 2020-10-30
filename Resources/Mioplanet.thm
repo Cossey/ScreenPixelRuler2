@@ -8,7 +8,7 @@ Cursor:
       Vertical: 0
     Font:
       Size: 8
-      Family: Courier New
+      Family: Verdana
   Background: [ '#FFFFFF' ]
 Ruler:
   Size: 40
@@ -37,12 +37,12 @@ Ruler:
   Numbers:     
     Font:
       Size: 8
-      Family: Courier New
+      Family: Verdana
     Colour: '#FFFFFF'
     Padding: 
       Horizontal: 3
       Vertical: 0
-    Display: 100
+    Display: 
+      Interval: 100
   Border:
-    Colour: '#000000'
     Spacing: 10
