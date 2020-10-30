@@ -101,6 +101,7 @@ namespace ScreenPixelRuler2
         private void Background(Graphics graphics)
         {
             graphics.FillRectangle(theme.GetBackgroundBrush(form.ClientRectangle, Vertical, Direction), form.ClientRectangle);
+            graphics.DrawRectangle(new Pen(theme.GetBorderColour(), 1), new Rectangle(0, 0, form.Width - 1, form.Height - 1));
         }
 
         readonly StringFormat horizontalFormat = new StringFormat

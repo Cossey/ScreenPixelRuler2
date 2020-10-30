@@ -113,7 +113,7 @@ namespace ScreenPixelRuler2
                 Border = new TBorder
                 {
                     Spacing = 15,
-                    //Colour = Color.Black
+                    Colour = Color.Black
                 }
             };
         }
@@ -203,6 +203,11 @@ namespace ScreenPixelRuler2
         public int GetBorderSpacing()
         {
             return Ruler != null && Ruler.Border != null ? Ruler.Border.Spacing : 15;
+        }
+
+        public Color GetBorderColour()
+        {
+            return Ruler != null && Ruler.Border != null && !Ruler.Border.Colour.IsEmpty ? Ruler.Border.Colour : Color.Transparent;
         }
 
         public Pen GetCursorLinePen()
@@ -333,7 +338,7 @@ namespace ScreenPixelRuler2
 
     class TBorder
     {
-        // public Color Colour { get; set; }
+        public Color Colour { get; set; }
         public int Spacing { get; set; }
     }
 
