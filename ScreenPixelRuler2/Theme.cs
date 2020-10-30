@@ -2,12 +2,16 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using YamlDotNet.Serialization;
 
 namespace ScreenPixelRuler2
 {
     class Theme
     {
+
+        int minSize = 20;
+        int maxSize = 100;
         public Theme()
         {
             Name = Theming.DefaultTheme;
@@ -16,10 +20,10 @@ namespace ScreenPixelRuler2
                 Font = new TTextAspect
                 {
                     Colour = Color.White,
-                    Padding = new TPadding
+                    Padding = new TVertHoriz
                     {
                         Horizontal = 2,
-                        Vertical = 2
+                        Vertical = 0
                     },
                     Font = new TFont
                     {
@@ -44,14 +48,54 @@ namespace ScreenPixelRuler2
                     Color.White
                 },
                 Size = 40,
-                Lines = Color.Black,
-                Numbers = new TTextAspect
+                Lines = new TLines
+                {
+                    Zero = new TZero
+                    {
+                        Size = new TVertHoriz
+                        {
+                            Horizontal = 20,
+                            Vertical = 40
+                        },
+                        NumberVisible = true
+                    },
+                    Colour = Color.Black,
+                    Size = new TVertHoriz
+                    {
+                        Horizontal = 8,
+                        Vertical = 8
+                    },
+                    Sizes = new List<TLineSizes>
+                    {
+                        new TLineSizes
+                        {
+                            Colour = Color.Black,
+                            Interval = 20,
+                            Size = new TVertHoriz
+                            {
+                                 Horizontal = 13,
+                                 Vertical = 13
+                            }
+                        },
+                        new TLineSizes
+                        {
+                            Colour = Color.Black,
+                            Interval = 100,
+                            Size = new TVertHoriz
+                            {
+                                Horizontal = 20,
+                                Vertical = 40
+                            }
+                        }
+                    }
+                },
+                Numbers = new TNumbers
                 {
                      Colour = Color.Black,
-                     Padding = new TPadding
+                     Padding = new TVertHoriz
                      {
-                         Horizontal = 3,
-                         Vertical = 2
+                         Horizontal = 2,
+                         Vertical = 0
                      },
                      Font = new TFont
                      {
@@ -61,12 +105,13 @@ namespace ScreenPixelRuler2
                           Underline = false,
                           Family = "Courier New",
                           Size = 9
-                     }
+                     },
+                     Display = 100
                 },
                 Border = new TBorder
                 {
                     Spacing = 15,
-                    Colour = Color.Black
+                    //Colour = Color.Black
                 }
             };
         }
@@ -101,9 +146,39 @@ namespace ScreenPixelRuler2
             }
         }
 
-        public Pen GetLinesPen()
+        public Pen GetLinesPen(int count)
         {
-            return new Pen(Ruler.Lines, 1);
+            List<TLineSizes> sorted = Ruler.Lines.Sizes.OrderByDescending(o => o.Interval).ToList();
+            TLineSizes lineSize = sorted.Find(f => count % f.Interval == GetBorderSpacing());
+
+            if (lineSize != null)
+            {
+                return new Pen(lineSize.Colour.IsEmpty ? Ruler.Lines.Colour : lineSize.Colour, 1);
+            }
+            else
+            {
+                return new Pen(Ruler.Lines.Colour, 1);
+            }
+        }
+
+        public int GetLinesSize(int count, bool vertical)
+        {
+            List<TLineSizes> sorted = Ruler.Lines.Sizes.OrderByDescending(o => o.Interval).ToList();
+            TLineSizes lineSize = sorted.Find(f => count % f.Interval == GetBorderSpacing());
+
+            if (lineSize != null)
+            {
+                return lineSize.Size.GetVH(vertical);
+            }
+            else
+            {
+                return Ruler.Lines.Size.GetVH(vertical);
+            }
+        }
+
+        public bool GetShowNumberZero()
+        {
+            return Ruler.Lines != null && Ruler.Lines.Zero != null ? Ruler.Lines.Zero.NumberVisible : false;
         }
 
         public Brush GetNumberBrush()
@@ -116,9 +191,14 @@ namespace ScreenPixelRuler2
             return vertical ? Ruler.Numbers.Padding.Vertical : Ruler.Numbers.Padding.Horizontal;
         }
 
-        public Pen GetBorderPen()
+        public Pen GetZeroPen()
         {
-            return new Pen(Ruler.Border.Colour, 1);
+            return new Pen(Ruler.Lines.Zero == null || Ruler.Lines.Zero.Colour.IsEmpty ? Ruler.Lines.Colour : Ruler.Lines.Zero.Colour, 1);
+        }
+
+        public int GetZeroLineSize(bool vertical)
+        {
+            return Ruler.Lines.Zero == null ? Ruler.Lines.Size.GetVH(vertical) : Ruler.Lines.Zero.Size.GetVH(vertical);
         }
 
         public int GetBorderSpacing()
@@ -154,24 +234,52 @@ namespace ScreenPixelRuler2
         }
         public int GetRulerSize()
         {
-            return Ruler != null && Ruler.Size > 20 && Ruler.Size <= 100 ? Ruler.Size : 40;
+            return Ruler != null && Ruler.Size >= minSize && Ruler.Size <= maxSize ? Ruler.Size : (Ruler.Size < minSize ? minSize : maxSize);
         }
     }
 
     class TRuler
     {
         public int Size { get; set; }
-        public Color Lines { get; set; }
-        public TTextAspect Numbers { get; set; }
+        public TLines Lines { get; set; }
+        public TNumbers Numbers { get; set; }
         public TBorder Border { get; set; }
         public List<Color> Background { get; set; }
     }
 
+    class TLines
+    {
+        public Color Colour { get; set; }
+        public TVertHoriz Size { get; set; }
+        public List<TLineSizes> Sizes { get; set; }
+        public TZero Zero { get; set; }
+    }
+
+    class TZero
+    {
+        public Color Colour { get; set; }
+        public TVertHoriz Size { get; set; }
+        public bool NumberVisible { get; set; }
+    }
+
+    class TLineSizes
+    {
+        public int Interval { get; set; }
+        public TVertHoriz Size { get; set; }
+        public Color Colour { get; set; }
+    }
+
     class TTextAspect
     {
-        public TPadding Padding { get; set; }
+        public TVertHoriz Padding { get; set; }
         public Color Colour { get; set; }
         public TFont Font { get; set; }
+    }
+
+    class TNumbers : TTextAspect
+    {
+        [DefaultValue(100)]
+        public int Display { get; set; }
     }
 
     class TFont
@@ -208,15 +316,20 @@ namespace ScreenPixelRuler2
         }
     }
 
-    class TPadding
+    class TVertHoriz
     {
         public int Horizontal { get; set; }
         public int Vertical { get; set; }
+
+        public int GetVH(bool vertical)
+        {
+            return vertical ? Vertical : Horizontal;
+        }
     }
 
     class TBorder
     {
-        public Color Colour { get; set; }
+       // public Color Colour { get; set; }
         public int Spacing { get; set; }
     }
 

@@ -7,21 +7,41 @@ Cursor:
       Horizontal: 3
       Vertical: 3
     Font:
-      Size: 9
+      Size: 14
       Family: Courier New
   Background: [ '#FFFFFF' ]
 Ruler:
-  Size: 60
+  Size: 70
   Background: [ '#000000' ]
-  Lines: '#FFFFFF'
+  Lines:
+    Zero:
+      Size:
+        Vertical: 70
+        Horizontal: 70
+    Colour: '#FFFFFF'
+    Size: 
+      Vertical: 10
+      Horizontal: 10
+    Sizes:
+      - Interval: 20
+        Colour: '#FFFFFF'
+        Size: 
+          Vertical: 15
+          Horizontal: 15
+      - Interval: 100
+        Colour: '#FFFFFF'
+        Size:
+          Vertical: 70
+          Horizontal: 40
   Numbers: 
     Font:
-      Size: 9
+      Size: 14
       Family: Courier New
     Colour: '#FFFFFF'
     Padding: 
       Horizontal: 3
-      Vertical: 5
+      Vertical: 1
+    Display: 100
   Border:
     Colour: '#FFFFFF'
     Spacing: 15

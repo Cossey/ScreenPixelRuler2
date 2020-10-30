@@ -5,23 +5,44 @@ Cursor:
     Colour: '#000000'
     Padding:
       Horizontal: 3
-      Vertical: 3
+      Vertical: 0
     Font:
-      Size: 9
+      Size: 8
       Family: Courier New
   Background: [ '#FFFFFF' ]
 Ruler:
   Size: 40
-  Background: [ '#91D4FF', '#0082FE' ]
-  Lines: '#000000'
+  Background: [ '#0082FE', '#91D4FF' ]
+  Lines:
+    Zero:
+      Colour: '#B3DAFF'
+      Size:
+        Vertical: 40
+        Horizontal: 40
+    Colour: '#035DB3'
+    Size: 
+      Vertical: 10
+      Horizontal: 10
+    Sizes:
+      - Interval: 20
+        Colour: '#0B3966'
+        Size: 
+          Vertical: 15
+          Horizontal: 15
+      - Interval: 100
+        Colour: '#000000'
+        Size:
+          Vertical: 40
+          Horizontal: 20
   Numbers:     
     Font:
-      Size: 9
+      Size: 8
       Family: Courier New
     Colour: '#FFFFFF'
     Padding: 
       Horizontal: 3
-      Vertical: 5
+      Vertical: 0
+    Display: 100
   Border:
     Colour: '#000000'
-    Spacing: 15
+    Spacing: 10

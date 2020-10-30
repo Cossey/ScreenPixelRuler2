@@ -36,8 +36,6 @@ namespace ScreenPixelRuler2
 
             try
             {
-
-
                 using (StreamReader reader = new StreamReader(File.Open(configPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
                 {
                     IDeserializer deserializer = new DeserializerBuilder()

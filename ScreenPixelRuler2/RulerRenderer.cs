@@ -30,7 +30,7 @@ namespace ScreenPixelRuler2
         public void UseTheme(Theme theme)
         {
             this.theme = theme;
-            form.Size = form.MaximumSize = form.MinimumSize = !Vertical ? new Size(MinSize, theme.GetRulerSize()) : new Size(theme.GetRulerSize(), MinSize);
+            form.Size = form.MaximumSize = form.MinimumSize = !Vertical ? new Size(GetMinSize(), theme.GetRulerSize()) : new Size(theme.GetRulerSize(), GetMinSize());
             form.Invalidate();
         }
 
@@ -40,7 +40,12 @@ namespace ScreenPixelRuler2
         }
 
         int CursorLastPos = 0;
-        readonly int MinSize = 440;
+        readonly int VertMinSize = 410;
+        readonly int HorizMinSize = 620;
+        int GetMinSize()
+        {
+            return Vertical ? VertMinSize + (theme.GetBorderSpacing() * 2) : HorizMinSize + (theme.GetBorderSpacing() * 2);
+        }
         bool FreezePosition { get; set; }
         public bool Direction { get; private set; }
         public bool Vertical => form.Height > form.Width;
@@ -82,7 +87,7 @@ namespace ScreenPixelRuler2
 
         public void ChangeOrientation()
         {
-            form.Size = form.MaximumSize = form.MinimumSize = Vertical ? new Size(MinSize, theme.GetRulerSize()) : new Size(theme.GetRulerSize(), MinSize);
+            form.Size = form.MaximumSize = form.MinimumSize = Vertical ? new Size(GetMinSize(), theme.GetRulerSize()) : new Size(theme.GetRulerSize(), GetMinSize());
             form.Invalidate();
         }
 
@@ -106,28 +111,19 @@ namespace ScreenPixelRuler2
         private StringFormat VerticalFormat => new StringFormat
         {
             Alignment = Direction ? StringAlignment.Far : StringAlignment.Near,
-            LineAlignment = Direction ? StringAlignment.Far : StringAlignment.Near
+            LineAlignment = StringAlignment.Far
         };
 
         private void Markings(Graphics graphics)
         {
-            int notchSize = 10;
-            int notchHalfCmSize = 15;
-            int notchCmSize = 20;
-
             for (int i = theme.GetBorderSpacing(); i < (Vertical ? form.Height : form.Width) - theme.GetBorderSpacing(); i += 2)
             {
-                int size = notchSize;
-                Pen pen = theme.GetLinesPen();
-                if ((i % 20) == theme.GetBorderSpacing())
-                {
-                    size = notchHalfCmSize;
-                }
-                if ((i % 100 == theme.GetBorderSpacing()) && (i - theme.GetBorderSpacing() != 0))
-                {
-                    //Draw the numbers
-                    size = Vertical ? form.Width : notchCmSize;
+                Pen pen = theme.GetLinesPen(i);
+                int size = theme.GetLinesSize(i, Vertical);
 
+                //Display the number based off the interval theme setting
+                if ((i % theme.Ruler.Numbers.Display == theme.GetBorderSpacing()) && (theme.GetShowNumberZero() || i - theme.GetBorderSpacing() != 0))
+                {
                     SizeF measureSize = graphics.MeasureString((i - theme.GetBorderSpacing()).ToString(), theme.Ruler.Numbers.Font.GetFont());
                     Size textSize = new Size((int)Math.Ceiling(measureSize.Width), (int)Math.Ceiling(measureSize.Height));
 
@@ -150,8 +146,8 @@ namespace ScreenPixelRuler2
 
                 if (i == theme.GetBorderSpacing())
                 {
-                    pen = theme.GetBorderPen();
-                    size = Vertical ? form.Height : form.Width;
+                    pen = theme.GetZeroPen();
+                    size = theme.GetZeroLineSize(Vertical);
                 }
 
                 graphics.DrawLine(pen,
@@ -171,7 +167,7 @@ namespace ScreenPixelRuler2
                 pos = CursorLastPos;
             }
 
-            if (pos >= MinSize)
+            if (pos >= GetMinSize())
             {
                 form.Size = form.MaximumSize = form.MinimumSize = new Size
                 {
@@ -183,8 +179,8 @@ namespace ScreenPixelRuler2
             {
                 form.Size = form.MaximumSize = form.MinimumSize = new Size
                 {
-                    Width = Vertical ? form.Width : MinSize,
-                    Height = Vertical ? MinSize : form.Height
+                    Width = Vertical ? form.Width : GetMinSize(),
+                    Height = Vertical ? GetMinSize() : form.Height
                 };
             }
 
@@ -194,19 +190,41 @@ namespace ScreenPixelRuler2
                 Vertical ? 0 : pos,
                 Vertical ? pos : 0);
 
-            SizeF textSize = graphics.MeasureString((pos - theme.GetBorderSpacing()).ToString(), theme.Ruler.Numbers.Font.GetFont());
+            SizeF measureSize = graphics.MeasureString((pos - theme.GetBorderSpacing()).ToString(), theme.Cursor.Font.Font.GetFont());
+            Size textSize = new Size((int)Math.Ceiling(measureSize.Width), (int)Math.Ceiling(measureSize.Height));
+
+            int padVertical = theme.Cursor.Font.Padding.Vertical;
+            int padHoriz = theme.Cursor.Font.Padding.Horizontal;
 
             Rectangle cursorBackgroundArea = new Rectangle(
-                Vertical ? (int)(Direction ? form.Width - textSize.Width + 1 : 1) : (int)(pos - (textSize.Width / 2)),
-                Vertical ? pos - 14 : (Direction ? 22 : 4),
-                (int)textSize.Width,
-                Vertical ? 13 : 14);
+                Vertical ?
+                    new Point( //Vertical
+                        Direction ?
+                            form.Width - (textSize.Width + padVertical) :
+                            padVertical, 
+                        pos - textSize.Height) :
+                    new Point( //Horizontal
+                        pos - (textSize.Width / 2),
+                        Direction ?
+                            form.Height - (padHoriz + textSize.Height) :
+                            padHoriz),
+                textSize);
 
             graphics.FillRectangle(theme.GetCursorBackground(cursorBackgroundArea, Vertical, Direction), cursorBackgroundArea);
 
-            graphics.DrawString((pos - theme.GetBorderSpacing()).ToString(), theme.Ruler.Numbers.Font.GetFont(), theme.GetCursorFontBrush(),
-                Vertical ? new Rectangle(0, pos - 15, 40, 15) : new Rectangle(pos - 20, Direction ? 22 : 3, 40, 15),
-                Vertical ? VerticalFormat : horizontalFormat);
+            graphics.DrawString((pos - theme.GetBorderSpacing()).ToString(), theme.Cursor.Font.Font.GetFont(), theme.GetCursorFontBrush(), new Rectangle(
+                Vertical ?
+                    new Point( //Vertical
+                        Direction ?
+                            form.Width - (textSize.Width + padVertical) :
+                            padVertical,
+                        pos - textSize.Height) :
+                    new Point( //Horizontal
+                        pos - ((textSize.Width + padHoriz) / 2),
+                        Direction ?
+                            form.Height - (padHoriz + textSize.Height):
+                            padHoriz),
+                textSize), Vertical ? VerticalFormat : horizontalFormat);
 
             CursorLastPos = pos;
         }
