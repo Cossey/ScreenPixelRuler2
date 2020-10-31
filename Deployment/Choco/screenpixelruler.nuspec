@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>screenpixelruler</id>
+    <version>%version%</version>
+    <owners>Stewart Cossey</owners>
+    <title>Screen Pixel Ruler</title>
+    <authors>Stewart Cossey</authors>
+    <projectUrl>https://github.com/Cossey/ScreenPixelRuler2</projectUrl>
+    <iconUrl>https://cdn.rawgit.com/Cossey/storage/8fb7267a/images/logos/screenpixelruler.png</iconUrl>
+    <copyright>2020 Stewart Cossey</copyright>
+    <licenseUrl>https://github.com/Cossey/ScreenPixelRuler2/blob/master/LICENSE.md</licenseUrl>
+    <projectSourceUrl>https://github.com/Cossey/ScreenPixelRuler2</projectSourceUrl>
+    <bugTrackerUrl>https://github.com/Cossey/ScreenPixelRuler2/issues</bugTrackerUrl>
+    <tags>screenpixelruler pixel ruler</tags>
+    <summary>An open source and free screen pixel ruler written in C# that is a clone of MioPlanet PixelRuler.</summary>
+    <description>An open source and free screen pixel ruler  written in C# that is a clone of MioPlanet PixelRuler.</description>
+    <releaseNotes>
+%releasenotes%
+    </releaseNotes>
+    <dependencies>
+      <dependency id="dotnetcore3-desktop-runtime" version="3.1.9" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
