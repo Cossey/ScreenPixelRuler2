@@ -32,7 +32,7 @@ Ruler:
       - Interval: 100
         Colour: '#000000'
         Size:
-          Vertical: 40
+          Vertical: 37
           Horizontal: 20
   Numbers:     
     Font:
