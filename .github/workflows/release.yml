@@ -28,7 +28,7 @@ jobs:
       run: msbuild -r -p:Version=${{ github.event.milestone.title }} -p:Configuration=Release
 
     - name: Remove unrequired files
-      run: Remove-Item ScreenPixelRuler2/bin/Release/netcoreapp3.1/* -exclude *.exe,*.dll
+      run: Remove-Item ScreenPixelRuler2/bin/Release/netcoreapp3.1/* -include *.pdb
       shell: pwsh
 
     - name: Upload compiled artifacts
