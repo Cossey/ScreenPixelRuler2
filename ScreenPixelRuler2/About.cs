@@ -12,9 +12,9 @@ namespace ScreenPixelRuler2
             Text = string.Format("About {0}", AssemblyTitle);
             labelProductName.Text = AssemblyProduct;
             labelVersion.Text = string.Format("Version {0}", AssemblyVersion);
-            linkLinks.Text = "Downloads Page Report Issue or Request Feature";
-            linkLinks.Links.Add(0, 14, "releases");
-            linkLinks.Links.Add(15, 45, "issues");
+            linkLinks.Text = "View Releases Page Report Issue or Request Feature";
+            linkLinks.Links.Add(0, 18, "releases");
+            linkLinks.Links.Add(19, 45, "issues");
             linkLinks.LinkClicked += LinkLinks_LinkClicked;
             textBoxLicense.Text = @"BSD 3-Clause License
 
@@ -38,11 +38,23 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ""AS IS"" AN
             switch (e.Link.LinkData)
             {
                 case "releases":
-                    Process.Start(new ProcessStartInfo
+                    if (AppConfig.IsPackageDeployed()) //Package deployment to go straight to chocolatey package page
                     {
-                        UseShellExecute = true,
-                        FileName = "https://github.com/Cossey/ScreenPixelRuler2/releases"
-                    });
+                        Process.Start(new ProcessStartInfo
+                        {
+                            UseShellExecute = true,
+                            FileName = "https://chocolatey.org/packages/screenpixelruler"
+                        });
+                    }
+                    else
+                    {
+                        Process.Start(new ProcessStartInfo
+                        {
+                            UseShellExecute = true,
+                            FileName = "https://github.com/Cossey/ScreenPixelRuler2/releases"
+                        });
+                    }
+
                     break;
 
                 case "issues":

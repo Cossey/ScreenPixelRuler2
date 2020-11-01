@@ -18,10 +18,28 @@ namespace ScreenPixelRuler2
         [DefaultValue("[Default]")]
         public string Theme { get; set; }
 
+        public static string AppLocation()
+        {
+            return Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        }
+
+        public static bool IsPackageDeployed()
+        {
+            //Current directory
+            return File.Exists(string.Format(@"{0}\package.yes", AppLocation()));
+        }
+
+        const string ConfigFileName = "app.cfg";
+
         public static AppConfig LoadConfig()
         {
             string userPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string configPath = userPath + @"\screenpixelruler\app.cfg";
+            string configPath = string.Format(@"{0}\screenpixelruler\{1}", userPath, ConfigFileName);
+
+            if (IsPackageDeployed())
+            {
+                configPath = string.Format(@"{0}\{1}", AppLocation(), ConfigFileName);
+            }
 
             AppConfig def = new AppConfig
             {
@@ -51,8 +69,13 @@ namespace ScreenPixelRuler2
                 MessageBox.Show("The configuration file is not valid. Loading Default Configuration.", "Screen Pixel Ruler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return def;
             }
-            catch (System.IO.FileNotFoundException)
+            catch (FileNotFoundException)
             {
+                return def;
+            }
+            catch (DirectoryNotFoundException) //Create directory if does not exist
+            {
+                Directory.CreateDirectory(string.Format(@"{0}\screenpixelruler", userPath));
                 return def;
             }
         }
@@ -64,7 +87,12 @@ namespace ScreenPixelRuler2
 
             Directory.CreateDirectory(configPath); //Create folders if they do not exist
 
-            configPath += @"\app.cfg";
+            configPath += string.Format(@"\{0}", ConfigFileName);
+
+            if (IsPackageDeployed())
+            {
+                configPath = string.Format(@"{0}\{1}", AppLocation(), ConfigFileName);
+            }
 
             ISerializer serializer = new SerializerBuilder()
                 .WithNamingConvention(PascalCaseNamingConvention.Instance)

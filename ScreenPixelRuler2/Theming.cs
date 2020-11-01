@@ -19,6 +19,12 @@ namespace ScreenPixelRuler2
 
             List<Theme> themes = new List<Theme>();
             DirectoryInfo directory = new DirectoryInfo(userPath + @"\screenpixelruler");
+
+            if (AppConfig.IsPackageDeployed())
+            {
+                directory = new DirectoryInfo(AppConfig.AppLocation());
+            }
+
             FileInfo[] themeFiles = directory.GetFiles("*.thm");
             themes.Add(new Theme()); //Add Default Theme
             themeFiles.ToList().ForEach(each =>
