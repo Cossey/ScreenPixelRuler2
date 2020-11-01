@@ -13,6 +13,7 @@ DefaultDirName={code:GetProgramFiles}\ScreenPixelRuler
 OutputBaseFilename=ScreenPixelRuler-{#ApplicationVersion}
 UsePreviousTasks=yes
 LicenseFile={#RootPath}\LICENSE.md
+DisableProgramGroupPage=true
 
 [Files]
 Source: "{#AppPath}\*"; DestDir: "{app}"; Excludes: "*.pdb"; Flags: recursesubdirs createallsubdirs
@@ -20,11 +21,13 @@ Source: "{#RootPath}\LICENSE.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RootPath}\Resources\*.thm"; DestDir: "{userappdata}\screenpixelruler"; Flags: ignoreversion
 Source: "{#RootPath}\README.md"; DestDir: "{app}";  Flags: ignoreversion
 
+[Icons]
+Name: "{commonprograms}\Screen Pixel Ruler"; Filename: "{app}\screenpixelruler.exe"; WorkingDir: "{app}"; Comment: "A pixel perfect on screen ruler."
+
 [CustomMessages]
 #include "depend\lang\english.iss"
 #include "depend\products.iss"
 #include "depend\products\dotnetcore319.iss"
-
 
 [Code]
 function IsUpgrade: Boolean;
