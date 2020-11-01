@@ -50,8 +50,10 @@ jobs:
       with:
         name: deployment-files
         path: |
-          Deployment/Output/${{ steps.install_name.outputs.filename }}
+          Deployment/Installer/Output/${{ steps.install_name.outputs.filename }}
           Deployment/Choco
+          Resources
+          LICENSE.md
           .github/release-notes.yml
 
   publish:
@@ -130,8 +132,11 @@ jobs:
         $content | Set-Content -Path 'artifacts/deployment-files/Deployment/Choco/screenpixelruler.nuspec'
       shell: pwsh
 
-    - name: Copy compiled files
-      run: Copy-Item -Path 'artifacts/compiled-files/*' -Destination 'artifacts/deployment-files/Deployment/Choco/tools'
+    - name: Copy files to package folder
+      run: |
+        Copy-Item -Path 'artifacts/compiled-files/*' -Destination 'artifacts/deployment-files/Deployment/Choco/tools'
+        Copy-Item -Path 'artifacts/deployment-files/Resources/*.thm' -Destination 'artifacts/deployment-files/Deployment/Choco/tools'
+        Copy-Item -Path 'artifacts/deployment-files/LICENSE.md' -Destination 'artifacts/deployment-files/Deployment/Choco/tools'
       shell: pwsh
     
     - name: Create package
