@@ -1,4 +1,4 @@
-#define RootPath "..\"
+#define RootPath "..\..\"
 #define AppPath RootPath + "ScreenPixelRuler2\bin\Release\netcoreapp3.1\"
 
 #define ApplicationVersion GetFileVersion(AppPath + 'ScreenPixelRuler.dll')
@@ -15,18 +15,15 @@ UsePreviousTasks=yes
 LicenseFile={#RootPath}\LICENSE.md
 
 [Files]
-Source: "{#AppPath}\*"; DestDir: "{app}"; Excludes: "*.pdb,*.bat"; Flags: recursesubdirs createallsubdirs
+Source: "{#AppPath}\*"; DestDir: "{app}"; Excludes: "*.pdb"; Flags: recursesubdirs createallsubdirs
 Source: "{#RootPath}\LICENSE.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RootPath}\Resources\*.thm"; DestDir: "{userappdata}\screenpixelruler"; Flags: ignoreversion
-;Source: "{#RootPath}\CHANGELOG.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RootPath}\README.md"; DestDir: "{app}";  Flags: ignoreversion
 
 [CustomMessages]
-;DependenciesDir=depend
-
-;#include "depend\lang\english.iss"
-;#include "depend\products.iss"
-;#include "depend\products\dotnetcore312.iss"
+#include "depend\lang\english.iss"
+#include "depend\products.iss"
+#include "depend\products\dotnetcore319.iss"
 
 
 [Code]
@@ -54,6 +51,6 @@ end;
 
 function InitializeSetup(): boolean;
 begin
-  //dotnetcore312();
+  dotnetcore319desktop();
   Result := true;
 end;

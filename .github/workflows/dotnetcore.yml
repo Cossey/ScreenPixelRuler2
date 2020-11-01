@@ -36,15 +36,15 @@ jobs:
         path: ScreenPixelRuler2/bin/Release/**/
 
     - name: Build installer
-      run: iscc /F"installer.exe" Deployment\Installer.iss
+      run: iscc /F"installer.exe" Deployment\Installer\Installer.iss
   
     - name: Install
       run: |
-        cd Deployment\Output 
+        cd Deployment\Installer\Output 
         .\installer.exe /SP- /VERYSILENT /SUPPRESSMSGBOXES /LOG=".\install.log"
   
     - name: Upload Install log
       uses: actions/upload-artifact@v2
       with:
         name: install-log
-        path: Deployment\Output\install.log
+        path: Deployment\Installer\Output\install.log
