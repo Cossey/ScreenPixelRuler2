@@ -38,11 +38,11 @@ jobs:
         path: ScreenPixelRuler2/bin/Release/netcoreapp3.1
 
     - name: Compile installer
-      run: iscc Deployment\Installer.iss
+      run: iscc Deployment\Installer\Installer.iss
 
     - name: Get installer file name
       id: install_name
-      run: echo "::set-output name=filename::$((Get-ChildItem Deployment\Output\*.exe)[0].Name)"
+      run: echo "::set-output name=filename::$((Get-ChildItem Deployment\Installer\Output\*.exe)[0].Name)"
       shell: pwsh
 
     - name: Upload deployment artifacts
@@ -95,7 +95,7 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./Deployment/Output/${{ needs.build.outputs.installfile }}
+        asset_path: ./Deployment/Installer/Output/${{ needs.build.outputs.installfile }}
         asset_name: ${{ needs.build.outputs.installfile }}
         asset_content_type: application/octet-stream
 
