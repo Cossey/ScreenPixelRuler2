@@ -1,7 +1,7 @@
 #define RootPath "..\"
 #define AppPath RootPath + "ScreenPixelRuler2\bin\Release\netcoreapp3.1\"
 
-#define ApplicationVersion GetFileVersion(AppPath + 'ScreenPixelRuler2.dll')
+#define ApplicationVersion GetFileVersion(AppPath + 'ScreenPixelRuler.dll')
 
 [Setup]
 AppId=91F2F59D-F956-4226-B263-1DCE83C12DE0

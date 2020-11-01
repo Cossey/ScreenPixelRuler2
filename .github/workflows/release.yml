@@ -1,0 +1,149 @@
+name: Publish
+
+on:
+  milestone:
+    types: [closed]
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+
+    outputs:
+      installfile: ${{ steps.install_name.outputs.filename }}
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.403
+
+    - name: Setup msbuild
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Compile code
+      run: msbuild -r -p:Version=${{ github.event.milestone.title }} -p:Configuration=Release
+
+    - name: Remove unrequired files
+      run: Remove-Item ScreenPixelRuler2/bin/Release/netcoreapp3.1/* -exclude *.exe,*.dll
+      shell: pwsh
+
+    - name: Upload compiled artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: compiled-files
+        path: ScreenPixelRuler2/bin/Release/netcoreapp3.1
+
+    - name: Compile installer
+      run: iscc Deployment\Installer.iss
+
+    - name: Get installer file name
+      id: install_name
+      run: echo "::set-output name=filename::$((Get-ChildItem Deployment\Output\*.exe)[0].Name)"
+      shell: pwsh
+
+    - name: Upload deployment artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: deployment-files
+        path: |
+          Deployment/Output/${{ steps.install_name.outputs.filename }}
+          Deployment/Choco
+          .github/release-notes.yml
+
+  publish:
+    name: Publish Github Release
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Download deployment artifacts
+      uses: actions/download-artifact@v2
+      with: 
+        name: deployment-files
+
+    - name: Create release notes
+      uses: Cossey/release-notes-generator-action@v2.1.4
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        OUTPUT_FOLDER: temp_release_notes
+
+    - name: Upload release note artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: release-notes
+        path: temp_release_notes/changelog.md
+
+    - name: Create release draft
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.event.milestone.title }}
+        release_name: Release ${{ github.event.milestone.title }}
+        body_path: temp_release_notes/changelog.md
+        draft: true
+        prerelease: false
+
+    - name: Upload installer
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./Deployment/Output/${{ needs.build.outputs.installfile }}
+        asset_name: ${{ needs.build.outputs.installfile }}
+        asset_content_type: application/octet-stream
+
+    - name: Publish release
+      uses: eregon/publish-release@v1.0.3
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        release_id: ${{ steps.create_release.outputs.id }}
+
+  choco:
+    name: Publish Chocolatey Release
+    runs-on: windows-latest
+    needs: publish
+
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v2
+      with:
+        path: artifacts
+  
+    - name: Remove deployment artifacts
+      uses: geekyeggo/delete-artifact@v1
+      with:
+        name: deployment-files
+
+    - name: Setup nuspec values
+      run: |
+        $content = Get-Content -Path 'artifacts/deployment-files/Deployment/Choco/screenpixelruler.nuspec'
+        $content = $content -replace '%version%', '${{ github.event.milestone.title }}'
+        $content = $content -replace '%releasenotes%', (Get-Content -Path 'artifacts/release-notes/changelog.md')
+        $content | Set-Content -Path 'artifacts/deployment-files/Deployment/Choco/screenpixelruler.nuspec'
+      shell: pwsh
+
+    - name: Copy compiled files
+      run: Copy-Item -Path 'artifacts/compiled-files/*' -Destination 'artifacts/deployment-files/Deployment/Choco/tools'
+      shell: pwsh
+    
+    - name: Create package
+      run: choco pack screenpixelruler.nuspec
+      working-directory: artifacts/deployment-files/Deployment/Choco
+
+    - name: Upload package artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: package-file
+        path: artifacts/deployment-files/Deployment/Choco/screenpixelruler.${{ github.event.milestone.title }}.nupkg
+
+    - name: Upload package
+      run: choco push screenpixelruler.${{ github.event.milestone.title }}.nupkg --source https://push.chocolatey.org/ --api-key=${{ secrets.CHOCO_API_KEY }}
+      working-directory: artifacts/deployment-files/Deployment/Choco

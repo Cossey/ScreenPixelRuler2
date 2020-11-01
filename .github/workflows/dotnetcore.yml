@@ -14,14 +14,18 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.403
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build code
-      run: dotnet build --configuration Release --no-restore
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Compile code
+      run: msbuild -r -p:Configuration=Release
+
     - name: Test
       run: dotnet test --no-restore --verbosity normal
 
