@@ -6,6 +6,8 @@ namespace ScreenPixelRuler2
 {
     public partial class Ruler : Form
     {
+        KeyboardHook hook = new KeyboardHook();
+
         readonly RulerRenderer renderer;
         public Ruler()
         {
@@ -13,6 +15,30 @@ namespace ScreenPixelRuler2
 
             renderer = new RulerRenderer(this);
 
+            RestoreConfiguration();
+            CreateContextMenuEvents();
+            CreateRulerEvents();
+            RegisterGlobalHotkeys();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+
+                hook.Dispose();
+                renderer.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+
+        private void RestoreConfiguration()
+        {
             renderer.UseTheme(Theming.GetThemeByName(Program.appConfig.Theme));
 
             if (Program.appConfig.Direction)
@@ -24,11 +50,10 @@ namespace ScreenPixelRuler2
             {
                 renderer.ChangeOrientation();
             }
+        }
 
-            ExitMenu.Click += ExitMenu_Click;
-            OptionsMenu.Click += OptionsMenu_Click;
-            AboutMenu.Click += AboutMenu_Click;
-
+        private void CreateRulerEvents()
+        {
             MouseMove += Ruler_MouseMove;
             MouseDown += Ruler_MouseDown;
             MouseUp += Ruler_MouseUp;
@@ -41,35 +66,48 @@ namespace ScreenPixelRuler2
             Location = Program.appConfig.Position.Point(); //Display ruler at last position on shutdown
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == (Keys.Control | Keys.S))
-            {
-                renderer.SetStart();
-            }
-            if (keyData == (Keys.Control | Keys.F))
-            {
-                renderer.ToggleFreezePosition();
-            }
-            if (keyData == (Keys.Control | Keys.R))
-            {
-                renderer.ChangeOrientation();
-            }
-            if (keyData == (Keys.Control | Keys.E))
-            {
-                renderer.FlipDirection();
-            }
-            if (keyData == (Keys.Control | Keys.X))
-            {
-                Application.Exit();
-            }
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
-
         protected override void OnPaint(PaintEventArgs e)
         {
             renderer.RenderAll(e.Graphics);
         }
+
+        #region "Global Hotkeys"
+        private void RegisterGlobalHotkeys()
+        {
+            hook.KeyPressed += Hook_KeyPressed;
+            ModifierKeys csa = ScreenPixelRuler2.ModifierKeys.Control | ScreenPixelRuler2.ModifierKeys.Alt | ScreenPixelRuler2.ModifierKeys.Shift;
+            hook.RegisterHotKey(csa, Keys.R);
+            hook.RegisterHotKey(csa, Keys.E);
+            hook.RegisterHotKey(csa, Keys.S);
+            hook.RegisterHotKey(csa, Keys.X);
+            hook.RegisterHotKey(csa, Keys.F);
+        }
+
+        private void Hook_KeyPressed(object sender, KeyPressedEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Keys.R:
+                    renderer.ChangeOrientation();
+                    break;
+                case Keys.E:
+                    renderer.FlipDirection();
+                    break;
+                case Keys.S:
+                    renderer.SetStart();
+                    break;
+                case Keys.F:
+                    renderer.ToggleFreezePosition();
+                    break;
+                case Keys.X:
+                    Application.Exit();
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region "Ruler Mouse Events"
 
         private Point mouseDownPosition;
         private bool isRulerBeingMoved = false;
@@ -107,7 +145,7 @@ namespace ScreenPixelRuler2
             switch (e.Button)
             {
                 case MouseButtons.Left:
-                    if (!isRulerMoving)
+                    if (!isRulerMoving && Program.appConfig.ClickToRotate)
                     {
                         renderer.ChangeOrientation();
                     }
@@ -118,6 +156,29 @@ namespace ScreenPixelRuler2
                     renderer.FlipDirection();
                     break;
             }
+        }
+
+        #endregion
+
+        #region "Context Menu"
+
+        private void CreateContextMenuEvents()
+        {
+            ExitMenu.Click += ExitMenu_Click;
+            OptionsMenu.Click += OptionsMenu_Click;
+            AboutMenu.Click += AboutMenu_Click;
+            RotateMenu.Click += RotateMenu_Click;
+            FlipDirectionMenu.Click += FlipDirectionMenu_Click;
+        }
+
+        private void FlipDirectionMenu_Click(object sender, EventArgs e)
+        {
+            renderer.FlipDirection();
+        }
+
+        private void RotateMenu_Click(object sender, EventArgs e)
+        {
+            renderer.ChangeOrientation();
         }
 
         private void AboutMenu_Click(object sender, EventArgs e)
@@ -132,9 +193,6 @@ namespace ScreenPixelRuler2
 
         private void OptionsMenu_Click(object sender, EventArgs e)
         {
-            //Theme thm = Theming.LoadTheme(@"C:\Users\Stewart\source\repos\ScreenPixelRuler2\Resources\Chocolate.thm");
-            //renderer.UseTheme(thm);
-
             using (Options options = new Options(ref Program.appConfig))
             {
                 renderer.DialogDisplay();
@@ -153,5 +211,7 @@ namespace ScreenPixelRuler2
             Program.appConfig.Direction = renderer.Direction;
             Application.Exit();
         }
+
+        #endregion
     }
 }
