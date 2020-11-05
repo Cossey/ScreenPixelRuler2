@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ScreenPixelRuler2
 {
-    static class Helpers
+    static class Extension
     {
         public static int ClosestTo(this IEnumerable<int> collection, int target)
         {
