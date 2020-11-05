@@ -26,11 +26,13 @@ namespace ScreenPixelRuler2
                 comboTheme.Text = Theming.DefaultTheme;
                 comboTheme.Enabled = false;
             }
+            LeftClickRotate.Checked = appConfig.ClickToRotate;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
             AppConfig.Theme = comboTheme.Text;
+            AppConfig.ClickToRotate = LeftClickRotate.Checked;
         }
     }
 }

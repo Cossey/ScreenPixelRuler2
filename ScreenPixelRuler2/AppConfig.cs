@@ -15,8 +15,10 @@ namespace ScreenPixelRuler2
         public bool Vertical { get; set; }
         [DefaultValue(false)]
         public bool Direction { get; set; }
-        [DefaultValue("[Default]")]
+        [DefaultValue(Theming.DefaultTheme)]
         public string Theme { get; set; }
+        [DefaultValue(true)]
+        public bool ClickToRotate { get; set; }
 
         public static string AppLocation()
         {
@@ -29,6 +31,7 @@ namespace ScreenPixelRuler2
             return File.Exists(string.Format(@"{0}\package.yes", AppLocation()));
         }
 
+        [YamlIgnore]
         const string ConfigFileName = "app.cfg";
 
         public static AppConfig LoadConfig()
@@ -106,8 +109,6 @@ namespace ScreenPixelRuler2
                 serializer.Serialize(writer, appConfig, typeof(AppConfig));
             }
         }
-
-
     }
 
     public class CPoint
