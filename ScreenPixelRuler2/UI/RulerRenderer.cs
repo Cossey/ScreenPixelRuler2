@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ScreenPixelRuler2
@@ -23,7 +25,6 @@ namespace ScreenPixelRuler2
             redrawer.Start();
         }
 
-
         public void UseTheme(Theme theme)
         {
             if (theme == null)
@@ -38,6 +39,7 @@ namespace ScreenPixelRuler2
         private void Redrawer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             form.Invalidate();
+            GuidelineMouseLocker();
         }
 
         int CursorLastPos = 0;
@@ -45,13 +47,126 @@ namespace ScreenPixelRuler2
         readonly int HorizMinSize = 620;
         int GetMinSize()
         {
-            return Vertical ? VertMinSize + (theme.GetBorderSpacing() * 2) : HorizMinSize + (theme.GetBorderSpacing() * 2);
+
+            return Vertical ?
+                (VertMinSize < GetMaxSize() ? GetMaxSize() : VertMinSize) + (theme.GetBorderSpacing() * 2) :
+                (HorizMinSize < GetMaxSize() ? GetMaxSize() : HorizMinSize) + (theme.GetBorderSpacing() * 2);
+        }
+        int GetMaxSize()
+        {
+            if (Guidelines.Count > 0)
+            {
+                return Guidelines.Max() + theme.GetBorderSpacing();
+            }
+            return 0;
         }
         bool FreezePosition { get; set; }
         public bool Direction { get; private set; }
         public bool Vertical => form.Height > form.Width;
 
         bool LastFreezePosition = false;
+        public List<int> Guidelines = new List<int>();
+
+        public void ToggleGuidelineAtPosition()
+        {
+            int pos = CursorLastPos - theme.GetBorderSpacing();
+            if (Guidelines.Contains(pos) && pos != 0)
+            {
+                Guidelines.RemoveAll(m => m.Equals(pos));
+            }
+            else
+            {
+                Guidelines.Add(pos);
+                Guidelines.Sort();
+            }
+            form.Invalidate();
+        }
+
+        public void RemoveNearestGuideline()
+        {
+            Point cursor = form.PointToClient(Cursor.Position);
+            Guidelines.Remove(Vertical ? Guidelines.ClosestTo(cursor.Y - theme.GetBorderSpacing()) : Guidelines.ClosestTo(cursor.X - theme.GetBorderSpacing()));
+        }
+
+        public void RemoveAllGuidelines()
+        {
+            Guidelines.Clear();
+            form.Invalidate();
+        }
+
+        bool guidelineLock = false;
+        int guidelineNearestPos = 0;
+        public void LockToNearestGuideline()
+        {
+            guidelineLock = !guidelineLock;
+
+            Point cursor = form.PointToClient(Cursor.Position);
+            guidelineNearestPos = Vertical ? Guidelines.ClosestTo(cursor.Y) : Guidelines.ClosestTo(cursor.X);
+
+            if (!guidelineLock)
+            {
+                Cursor.Clip = Rectangle.Empty;
+            }
+        }
+
+        private void GuidelineMouseLocker()
+        {
+            if (guidelineLock)
+            {
+                if (Vertical)
+                {
+                    Cursor.Clip = new Rectangle(0, guidelineNearestPos + form.Top + theme.GetBorderSpacing(), Screen.GetBounds(Cursor.Position).Width, 1);
+                }
+                else
+                {
+                    Cursor.Clip = new Rectangle(guidelineNearestPos + form.Left + theme.GetBorderSpacing(), 0, 1, Screen.GetBounds(Cursor.Position).Height);
+                }
+            }
+        }
+
+        public void AddGuideline()
+        {
+            int pos = CursorLastPos - theme.GetBorderSpacing();
+            if (!Guidelines.Contains(pos))
+            {
+                Guidelines.Add(pos);
+                Guidelines.Sort();
+                form.Invalidate();
+            }
+        }
+
+        private void LineGuides(Graphics graphics)
+        {
+            Guidelines.ForEach(pos =>
+            {
+                int renderPos = pos + theme.GetBorderSpacing();
+                int calcPos = pos - theme.GetBorderSpacing();
+                Point cursor = form.PointToClient(Cursor.Position);
+                bool isNearest = pos == (Vertical ? Guidelines.ClosestTo(cursor.Y - theme.GetBorderSpacing()) : Guidelines.ClosestTo(cursor.X - theme.GetBorderSpacing()));
+                bool isLockedTo = guidelineLock && guidelineNearestPos == calcPos;
+
+                Point startPoint = new Point
+                {
+                    X = Vertical ?
+                        (Direction ? 0 : form.Width) :
+                        renderPos,
+                    Y = Vertical ?
+                        renderPos :
+                        (Direction ? 0 : form.Height)
+                };
+                Point endPoint = new Point
+                {
+                    X = Vertical ?
+                        (Direction ? theme.GetGuidelineSize(Vertical, isLockedTo, isNearest) : form.Width - theme.GetGuidelineSize(Vertical, isLockedTo, isNearest)) :
+                        renderPos,
+                    Y = Vertical ?
+                        renderPos :
+                        (Direction ? theme.GetGuidelineSize(Vertical, isLockedTo, isNearest) : form.Height - theme.GetGuidelineSize(Vertical, isLockedTo, isNearest))
+                };
+
+                graphics.DrawLine(theme.GetGuidelinePen(isLockedTo, isNearest), startPoint, endPoint);
+            });
+        }
 
         public void DialogDisplay()
         {
@@ -243,12 +358,13 @@ namespace ScreenPixelRuler2
         {
             Background(graphics);
             Markings(graphics);
+            LineGuides(graphics);
             CursorPosition(graphics);
         }
 
         public void Dispose()
         {
-            redrawer.Stop();
+            redrawer.Dispose();
         }
     }
 }

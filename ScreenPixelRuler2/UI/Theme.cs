@@ -131,6 +131,35 @@ namespace ScreenPixelRuler2
         public TCursor Cursor { get; set; }
         public TRuler Ruler { get; set; }
 
+        #region "Shortcut Functions"
+
+        public int GetGuidelineSize(bool vertical, bool locked, bool nearest)
+        {
+            int size = Ruler.Guidelines != null && Ruler.Guidelines.Guideline != null && Ruler.Guidelines.Guideline.Size != null ? Ruler.Guidelines.Guideline.Size.GetVH(vertical) : Ruler.Size;
+            if (nearest)
+            {
+                size = Ruler.Guidelines != null && Ruler.Guidelines.Nearest != null && Ruler.Guidelines.Nearest.Size != null ? Ruler.Guidelines.Nearest.Size.GetVH(vertical) : size;
+            }
+            if (locked)
+            {
+                size = Ruler.Guidelines != null && Ruler.Guidelines.Locked != null && Ruler.Guidelines.Locked.Size != null ? Ruler.Guidelines.Locked.Size.GetVH(vertical) : size;
+            }
+            return size;
+        }
+        public Pen GetGuidelinePen(bool locked, bool nearest)
+        {
+            Color penColour = Ruler.Guidelines != null && Ruler.Guidelines.Guideline != null && !Ruler.Guidelines.Guideline.Colour.IsEmpty ? Ruler.Guidelines.Guideline.Colour : Ruler.Lines.Colour;
+            if (nearest)
+            {
+                penColour = Ruler.Guidelines != null && Ruler.Guidelines.Nearest != null && !Ruler.Guidelines.Nearest.Colour.IsEmpty ? Ruler.Guidelines.Nearest.Colour : penColour;
+            }
+            if (locked)
+            {
+                penColour = Ruler.Guidelines != null && Ruler.Guidelines.Locked != null && !Ruler.Guidelines.Locked.Colour.IsEmpty ? Ruler.Guidelines.Locked.Colour : penColour;
+            }
+            return new Pen(penColour, 1);
+        }
+
         public Brush GetBackgroundBrush(Rectangle clientArea, bool verticality, bool direction)
         {
             if (Ruler.Background.Count == 0)
@@ -240,6 +269,9 @@ namespace ScreenPixelRuler2
         {
             return Ruler != null && Ruler.Size >= minSize && Ruler.Size <= maxSize ? Ruler.Size : (Ruler.Size < minSize ? minSize : maxSize);
         }
+
+        #endregion
+
     }
 
     class TNumberDisplay
@@ -254,6 +286,21 @@ namespace ScreenPixelRuler2
         public TNumbers Numbers { get; set; }
         public TBorder Border { get; set; }
         public List<Color> Background { get; set; }
+
+        public TGuidelines Guidelines { get; set; }
+    }
+
+    class TGuidelines
+    {
+        public SizeAndColour Guideline { get; set; }
+        public SizeAndColour Locked { get; set; }
+        public SizeAndColour Nearest { get; set; }
+    }
+
+    class SizeAndColour
+    {
+        public Color Colour { get; set; }
+        public TVertHoriz Size { get; set; }
     }
 
     class TLines

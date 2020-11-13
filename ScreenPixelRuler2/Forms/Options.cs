@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ScreenPixelRuler2
@@ -26,13 +28,39 @@ namespace ScreenPixelRuler2
                 comboTheme.Text = Theming.DefaultTheme;
                 comboTheme.Enabled = false;
             }
-            LeftClickRotate.Checked = appConfig.ClickToRotate;
+
+            PrimaryClick.DisplayMember = MiddleClick.DisplayMember = X1Click.DisplayMember = X2Click.DisplayMember = "Description";
+            PrimaryClick.ValueMember = MiddleClick.ValueMember = X1Click.ValueMember = X2Click.ValueMember = "Value";
+
+
+            var buttonList = Enum.GetValues(typeof(AppConfig.MouseClick))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+            PrimaryClick.DataSource = buttonList;
+
+            MiddleClick.DataSource = buttonList.ToList();
+            X1Click.DataSource = buttonList.ToList();
+            X2Click.DataSource = buttonList.ToList();
+
+            PrimaryClick.SelectedValue = appConfig.PrimaryClick;
+            MiddleClick.SelectedValue = appConfig.MiddleClick;
+            X1Click.SelectedValue = appConfig.X1Click;
+            X2Click.SelectedValue = appConfig.X2Click;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
             AppConfig.Theme = comboTheme.Text;
-            AppConfig.ClickToRotate = LeftClickRotate.Checked;
+            AppConfig.PrimaryClick = (AppConfig.MouseClick)PrimaryClick.SelectedValue;
+            AppConfig.MiddleClick = (AppConfig.MouseClick)MiddleClick.SelectedValue;
+            AppConfig.X1Click = (AppConfig.MouseClick)X1Click.SelectedValue;
+            AppConfig.X2Click = (AppConfig.MouseClick)X2Click.SelectedValue;
         }
     }
 }

@@ -1,12 +1,16 @@
-﻿using System;
+﻿using ScreenPixelRuler2.Forms;
+using System;
 using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace ScreenPixelRuler2
 {
     public partial class Ruler : Form
     {
-        KeyboardHook hook = new KeyboardHook();
+        readonly KeyboardHook hook = new KeyboardHook();
 
         readonly RulerRenderer renderer;
         public Ruler()
@@ -81,6 +85,7 @@ namespace ScreenPixelRuler2
             hook.RegisterHotKey(csa, Keys.S);
             hook.RegisterHotKey(csa, Keys.X);
             hook.RegisterHotKey(csa, Keys.F);
+            hook.RegisterHotKey(csa, Keys.G);
         }
 
         private void Hook_KeyPressed(object sender, KeyPressedEventArgs e)
@@ -101,6 +106,9 @@ namespace ScreenPixelRuler2
                     break;
                 case Keys.X:
                     Application.Exit();
+                    break;
+                case Keys.G:
+                    renderer.ToggleGuidelineAtPosition();
                     break;
             }
         }
@@ -140,22 +148,119 @@ namespace ScreenPixelRuler2
             }
         }
 
+        private void PrimaryClick()
+        {
+            PerformTask(Program.appConfig.PrimaryClick);
+        }
+
+        public void MiddleClick()
+        {
+            PerformTask(Program.appConfig.MiddleClick);
+        }
+
+        public void X1Click()
+        {
+            PerformTask(Program.appConfig.X1Click);
+        }
+
+        public void X2Click()
+        {
+            PerformTask(Program.appConfig.X2Click);
+        }
+
+        private void PerformTask(AppConfig.MouseClick mouseClickObject)
+        {
+            switch (mouseClickObject)
+            {
+                case AppConfig.MouseClick.Rotate:
+                    renderer.ChangeOrientation();
+                    break;
+
+                case AppConfig.MouseClick.Flip:
+                    renderer.FlipDirection();
+                    break;
+
+                case AppConfig.MouseClick.ToggleGuide:
+                    renderer.ToggleGuidelineAtPosition();
+                    break;
+
+                case AppConfig.MouseClick.AddGuide:
+                    renderer.AddGuideline();
+                    break;
+
+                case AppConfig.MouseClick.RemoveNearestGuide:
+                    renderer.RemoveNearestGuideline();
+                    break;
+
+                case AppConfig.MouseClick.RemoveAllGuides:
+                    renderer.RemoveAllGuidelines();
+                    break;
+
+                case AppConfig.MouseClick.LockToNearestGuide:
+                    renderer.LockToNearestGuideline();
+                    break;
+
+            }
+        }
+
         private void Ruler_MouseUp(object sender, MouseEventArgs e)
         {
             switch (e.Button)
             {
                 case MouseButtons.Left:
-                    if (!isRulerMoving && Program.appConfig.ClickToRotate)
+                    if (!isRulerMoving)
                     {
-                        renderer.ChangeOrientation();
+                        PrimaryClick();
                     }
                     isRulerMoving = false;
                     isRulerBeingMoved = false;
                     break;
                 case MouseButtons.Middle:
-                    renderer.FlipDirection();
+                    MiddleClick();
+                    break;
+                case MouseButtons.XButton1:
+                    X1Click();
+                    break;
+                case MouseButtons.XButton2:
+                    X2Click();
                     break;
             }
+        }
+
+        #endregion
+
+        #region "File Load/Save"
+
+        private void SaveGuidelines(string path)
+        {
+            StringBuilder output = new StringBuilder();
+            renderer.Guidelines.ForEach(each => output.AppendLine(each.ToString()));
+            File.WriteAllText(path, output.ToString());
+        }
+
+        private void LoadGuidelines(string path)
+        {
+            string data = File.ReadAllText(path);
+
+            string[] items;
+            if (data.Contains(','))
+            {
+                items = data.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            }
+            else
+            {
+                items = data.Split("\r\n", StringSplitOptions.RemoveEmptyEntries);
+            }
+
+            renderer.Guidelines.Clear();
+            foreach (string item in items)
+            {
+                if (item.All(char.IsDigit))
+                {
+                    renderer.Guidelines.Add(Convert.ToInt32(item));
+                }
+            }
+            this.Invalidate();
         }
 
         #endregion
@@ -164,11 +269,100 @@ namespace ScreenPixelRuler2
 
         private void CreateContextMenuEvents()
         {
+            RulerMenu.Opening += RulerMenu_Opening;
+            RulerMenu.Closing += RulerMenu_Closing;
+
             ExitMenu.Click += ExitMenu_Click;
             OptionsMenu.Click += OptionsMenu_Click;
             AboutMenu.Click += AboutMenu_Click;
             RotateMenu.Click += RotateMenu_Click;
             FlipDirectionMenu.Click += FlipDirectionMenu_Click;
+            RemoveAllGuidelinesMenu.Click += RemoveAllGuidelinesMenu_Click;
+            AddGuidelineMenu.Click += AddGuidelineMenu_Click;
+            RemoveNearestGuidelineMenu.Click += RemoveNearestGuidelineMenu_Click;
+            EditGuidelinesMenu.Click += EditGuidelinesMenu_Click;
+            ImportMenu.Click += ImportMenu_Click;
+            ExportMenu.Click += ExportMenu_Click;
+        }
+
+        private void ExportMenu_Click(object sender, EventArgs e)
+        {
+            if (renderer.Guidelines.Count > 0)
+            {
+                using (SaveFileDialog save = new SaveFileDialog())
+                {
+                    save.Title = "Export Guidelines";
+                    save.OverwritePrompt = true;
+                    save.Filter = "All Files|*.*";
+                    save.AutoUpgradeEnabled = true;
+                    renderer.DialogDisplay();
+                    if (save.ShowDialog() == DialogResult.OK)
+                    {
+                        SaveGuidelines(save.FileName);
+                    }
+                    renderer.NoDialogDisplay();
+                }
+            }
+            else
+            {
+                MessageBox.Show("There are no Guidelines to export.", "Export Guidelines", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ImportMenu_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog open = new OpenFileDialog())
+            {
+                open.Title = "Import Guidelines";
+                open.CheckFileExists = true;
+                open.Filter = "All Files|*.*";
+                open.Multiselect = false;
+                open.AutoUpgradeEnabled = true;
+                renderer.DialogDisplay();
+                if (open.ShowDialog() == DialogResult.OK)
+                {
+                    LoadGuidelines(open.FileName);
+                }
+                renderer.NoDialogDisplay();
+            }
+        }
+
+        private void EditGuidelinesMenu_Click(object sender, EventArgs e)
+        {
+            renderer.DialogDisplay();
+            using (Guidelines guidelines = new Guidelines(renderer.Guidelines))
+            {
+                renderer.Guidelines = guidelines.ShowDialog();
+            }
+            renderer.NoDialogDisplay();
+        }
+
+        private void RemoveNearestGuidelineMenu_Click(object sender, EventArgs e)
+        {
+            renderer.RemoveNearestGuideline();
+        }
+
+        private void AddGuidelineMenu_Click(object sender, EventArgs e)
+        {
+            renderer.AddGuideline();
+        }
+
+        private void RulerMenu_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+        {
+            renderer.NoDialogDisplay();
+        }
+
+        private void RulerMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            renderer.DialogDisplay();
+        }
+
+        private void RemoveAllGuidelinesMenu_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Do you want to clear all Guidelines?", "Clear Guidelines", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                renderer.RemoveAllGuidelines();
+            }
         }
 
         private void FlipDirectionMenu_Click(object sender, EventArgs e)

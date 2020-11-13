@@ -17,8 +17,31 @@ namespace ScreenPixelRuler2
         public bool Direction { get; set; }
         [DefaultValue(Theming.DefaultTheme)]
         public string Theme { get; set; }
-        [DefaultValue(true)]
-        public bool ClickToRotate { get; set; }
+
+        public MouseClick PrimaryClick { get; set; }
+        public MouseClick MiddleClick { get; set; }
+        public MouseClick X1Click { get; set; }
+        public MouseClick X2Click { get; set; }
+        public enum MouseClick
+        {
+            [Description("None")]
+            None = 0,
+            [Description("Rotate")]
+            Rotate,
+            [Description("Flip")]
+            Flip,
+            [Description("Add Guide")]
+            AddGuide,
+            [Description("Toggle Guide")]
+            ToggleGuide,
+            [Description("Remove Nearest Guide")]
+            RemoveNearestGuide,
+            [Description("Remove All Guides")]
+            RemoveAllGuides,
+            [Description("Lock to Nearest Guide")]
+            LockToNearestGuide
+        }
+
 
         public static string AppLocation()
         {
@@ -110,6 +133,7 @@ namespace ScreenPixelRuler2
             }
         }
     }
+
 
     public class CPoint
     {
