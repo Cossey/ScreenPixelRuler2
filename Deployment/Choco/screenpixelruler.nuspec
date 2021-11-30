@@ -15,7 +15,17 @@
     <bugTrackerUrl>https://github.com/Cossey/ScreenPixelRuler2/issues</bugTrackerUrl>
     <tags>screenpixelruler pixel ruler</tags>
     <summary>An open source and free screen pixel ruler written in C# that is a clone of MioPlanet PixelRuler.</summary>
-    <description>An open source and free screen pixel ruler  written in C# that is a clone of MioPlanet PixelRuler.</description>
+    <description>An open source and free screen pixel ruler written in C# that is a clone of MioPlanet PixelRuler.
+
+# Features
+
+* Vertical and hortizontal rotatable ruler.
+* Flip ruler markings to the opposite side of the ruler.
+* Shift the start of the ruler to your cursor location when using `Ctrl + Shift + Alt + S`.
+* Support themes to customize your experience.
+* Global hotkeys for operating the ruler.
+* Guidelines to lock your mouse cursor hortizontally or vertically.
+    </description>
     <releaseNotes>
 %releasenotes%
     </releaseNotes>
