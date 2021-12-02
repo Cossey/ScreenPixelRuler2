@@ -220,7 +220,10 @@
             this.ClientSize = new System.Drawing.Size(282, 189);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Options";
+            this.ShowIcon = false;
             this.Text = "Options";
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
