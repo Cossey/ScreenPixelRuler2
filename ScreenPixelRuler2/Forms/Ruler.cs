@@ -86,6 +86,8 @@ namespace ScreenPixelRuler2
             hook.RegisterHotKey(csa, Keys.X);
             hook.RegisterHotKey(csa, Keys.F);
             hook.RegisterHotKey(csa, Keys.G);
+            hook.RegisterHotKey(csa, Keys.D);
+            hook.RegisterHotKey(csa, Keys.A);
         }
 
         private void Hook_KeyPressed(object sender, KeyPressedEventArgs e)
@@ -108,7 +110,13 @@ namespace ScreenPixelRuler2
                     Application.Exit();
                     break;
                 case Keys.G:
-                    renderer.ToggleGuidelineAtPosition();
+                    renderer.LockToNearestGuideline();
+                    break;
+                case Keys.D:
+                    renderer.RemoveNearestGuideline();
+                    break;
+                case Keys.A:
+                    renderer.AddGuideline();
                     break;
             }
         }
