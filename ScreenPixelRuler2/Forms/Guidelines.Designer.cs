@@ -105,7 +105,6 @@
             this.GuidelineList.Location = new System.Drawing.Point(3, 32);
             this.GuidelineList.Name = "GuidelineList";
             this.GuidelineList.Size = new System.Drawing.Size(156, 275);
-            this.GuidelineList.Sorted = true;
             this.GuidelineList.TabIndex = 2;
             // 
             // tableLayoutPanel3

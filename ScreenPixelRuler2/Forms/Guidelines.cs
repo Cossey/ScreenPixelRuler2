@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -13,13 +14,31 @@ namespace ScreenPixelRuler2.Forms
             NumberBox.Controls[0].Visible = false;
             NumberBox.ResetText();
 
+            guidelines.Sort();
 
             guidelines.ForEach(each =>
             {
                 GuidelineList.Items.Add(each);
             });
 
+            SortListBox();
+
             this.Shown += Guidelines_Shown;
+        }
+
+        private void SortListBox()
+        {
+            ArrayList temp = new ArrayList();
+            foreach (object o in GuidelineList.Items)
+            {
+                temp.Add(o);
+            }
+            temp.Sort();
+            GuidelineList.Items.Clear();
+            foreach (object o in temp)
+            {
+                GuidelineList.Items.Add(o);
+            }
         }
 
         private void Guidelines_Shown(object sender, EventArgs e)
@@ -48,6 +67,7 @@ namespace ScreenPixelRuler2.Forms
         {
             GuidelineList.Items.Add((int)NumberBox.Value);
             NumberBox.ResetText();
+            SortListBox();
         }
 
         private void ClearAllButton_Click(object sender, EventArgs e)
@@ -60,6 +80,7 @@ namespace ScreenPixelRuler2.Forms
             if (e.KeyChar == (char)Keys.Enter)
             {
                 AddButton_Click(sender, e);
+                e.Handled = true;
             }
         }
     }
