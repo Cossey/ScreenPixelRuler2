@@ -187,3 +187,11 @@ FakesAssemblies/
 
 # MSBuild Binary and Structured Log
 *.binlog
+
+# Bookdown
+.Rproj.user
+.Rhistory
+.RData
+Help/_book
+Help/_bookdown_files
+Help/rsconnect

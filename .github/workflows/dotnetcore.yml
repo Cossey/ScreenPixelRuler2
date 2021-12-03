@@ -23,22 +23,22 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
 
-    - name: Compile code
+    - name: Build Code
       run: msbuild -r -p:Configuration=Release
 
-    - name: Test
+    - name: Test Code
       run: dotnet test --no-restore --verbosity normal
 
-    - name: Upload compiled files
+    - name: Upload Build
       uses: actions/upload-artifact@v2
       with:
         name: compiled-files
         path: ScreenPixelRuler2/bin/Release/**/
 
-    - name: Build installer
+    - name: Build Installer
       run: iscc /F"installer.exe" Deployment\Installer\Installer.iss
   
-    - name: Install
+    - name: Test Installer
       run: |
         cd Deployment\Installer\Output 
         .\installer.exe /SP- /VERYSILENT /SUPPRESSMSGBOXES /LOG=".\install.log"

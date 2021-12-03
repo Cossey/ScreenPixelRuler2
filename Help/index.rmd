@@ -1,0 +1,14 @@
+---
+title: "Screen Pixel Ruler"
+author: "Stewart Cossey"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+github-repo: cossey/screenpixelruler2
+description: "Help documentation for Screen Pixel Ruler."
+---
+
+# Overview
+
+Screen Pixel Ruler is a on screen ruler that can assist in measuring elements from web pages, documents or software which does not implement a native ruler.

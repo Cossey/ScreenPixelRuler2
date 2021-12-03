@@ -1,0 +1,20 @@
+bookdown::gitbook:
+  number_sections: false
+  css: style.css
+  config:
+    toc:
+      before: |
+        <li><a href="./">Screen Pixel Ruler</a></li>
+      after: |
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    edit: https://github.com/Cossey/screenpixelruler2/edit/master/Help/%s
+    download: ["pdf", "epub"]
+bookdown::pdf_book:
+  number_sections: false
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+bookdown::epub_book: default
+bookdown::bs4_book: default
