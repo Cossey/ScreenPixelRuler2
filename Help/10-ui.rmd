@@ -1,3 +1,7 @@
 # User Interface {#ui}
 
 The user interface consists of a single ruler that can be displayed either horizontally or vertically.
+
+```{r, echo=FALSE, out.width="100%", fig.cap="The Ruler user interface."}
+knitr::include_graphics("images/ruler.png")
+```

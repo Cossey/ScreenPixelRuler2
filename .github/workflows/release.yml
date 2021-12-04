@@ -204,4 +204,4 @@ jobs:
           folder: Help/_book/
           target-folder: help/${{ github.event.milestone.title }}
       - run: |
-          echo "::notice title=Bookdown Deployment::Accessible at https://cossey.github.io/screenpixelruler2/help/${{ github.event.milestone.title }}/"
+          echo "::notice title=Bookdown Deployment::Accessible at https://cossey.github.io/ScreenPixelRuler2/help/${{ github.event.milestone.title }}/"

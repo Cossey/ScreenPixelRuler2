@@ -1,0 +1,14 @@
+# Global Shortcuts {#keyboard}
+
+These shortcuts can be used even when the Screen Pixel Ruler is not focused.
+
+| Keystroke               | Function                                                     |
+|:----------------------- |:------------------------------------------------------------ |
+| Ctrl + Shift + Alt + R  | Change ruler rotation.                                       |
+| Ctrl + Shift + Alt + E  | Flip ruler notch direction.                                  |
+| Ctrl + Shift + Alt + F  | Freeze the position marker on the ruler.                     |
+| Ctrl + Shift + Alt + S  | Move position 0 of the ruler to the current mouse position.  |
+| Ctrl + Shift + Alt + X  | Exit Screen Pixel Ruler 2.                                   |
+| Ctrl + Shift + Alt + A  | Add Guideline at current position on the ruler.              |
+| Ctrl + Shift + Alt + D  | Delete nearest Guideline from current position on the ruler. |
+| Ctrl + Shift + Alt + G  | Lock mouse position to nearest Guideline.                    |
