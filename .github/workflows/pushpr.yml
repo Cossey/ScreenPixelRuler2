@@ -1,0 +1,101 @@
+name: Push/PR
+
+on: [push, pull_request]
+
+jobs:
+  net:
+    name: .NET
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.403
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Build Code
+      run: msbuild -r -p:Configuration=Release
+
+    - name: Test Code
+      run: dotnet test --no-restore --verbosity normal
+
+    - name: Upload Build
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-files
+        path: ScreenPixelRuler2/bin/Release/**/
+
+    - name: Build Installer
+      run: iscc /F"installer.exe" Deployment\Installer\Installer.iss
+  
+    - name: Test Installer
+      run: |
+        cd Deployment\Installer\Output 
+        .\installer.exe /SP- /VERYSILENT /SUPPRESSMSGBOXES /LOG=".\install.log"
+  
+    - name: Upload Install log
+      uses: actions/upload-artifact@v2
+      with:
+        name: install-log
+        path: Deployment\Installer\Output\install.log
+
+  bookdown:
+    name: Bookdown
+    runs-on: macOS-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v1
+      - name: Setup Pandoc
+        uses: r-lib/actions/setup-pandoc@v1
+      - name: Setup Tinytex
+        uses: r-lib/actions/setup-tinytex@v1
+      - name: Setup rmarkdown
+        run: Rscript -e 'install.packages(c("rmarkdown","bookdown"))'
+      - name: Build HTML
+        run: |
+          cd Help
+          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook', clean_envir = FALSE, params = list(version = '[${{ github.ref_name }}]'))")"
+      - name: Build ePub
+        run: |
+          cd Help
+          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::epub_book', clean_envir = FALSE, params = list(version = '[${{ github.ref_name }}]'))")"
+      - name: Build PDF
+        run: |
+          cd Help
+          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book', clean_envir = FALSE, params = list(version = '[${{ github.ref_name }}]'))")"
+      - name: Upload help files
+        uses: actions/upload-artifact@v2
+        with:
+          name: help-files
+          path: Help/_book/
+
+  bookdown-deploy:
+    name: Bookdown Deploy
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    needs: bookdown
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Download help files
+        uses: actions/download-artifact@v2
+        with:
+          name: help-files
+          path: Help/_book/
+      - name: Deploy to Pages
+        uses: JamesIves/github-pages-deploy-action@4.1.7
+        with:
+          branch: gh-pages
+          folder: Help/_book/
+          target-folder: help/${{ github.ref_name }}
+      - run: |
+          echo "::notice title=Bookdown Deployment::Accessible at https://cossey.github.io/screenpixelruler2/help/${{ github.ref_name }}/"
+          
