@@ -1,8 +1,10 @@
 ﻿using ScreenPixelRuler2.Forms;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -291,6 +293,16 @@ namespace ScreenPixelRuler2
             EditGuidelinesMenu.Click += EditGuidelinesMenu_Click;
             ImportMenu.Click += ImportMenu_Click;
             ExportMenu.Click += ExportMenu_Click;
+            HelpMenu.Click += HelpMenu_Click;
+        }
+
+        private void HelpMenu_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                UseShellExecute = true,
+                FileName = string.Format("https://cossey.github.io/ScreenPixelRuler2/help/{0}", Assembly.GetExecutingAssembly().GetName().Version.ToString())
+            });
         }
 
         private void ExportMenu_Click(object sender, EventArgs e)
@@ -415,5 +427,6 @@ namespace ScreenPixelRuler2
         }
 
         #endregion
+
     }
 }

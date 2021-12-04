@@ -12,9 +12,10 @@ namespace ScreenPixelRuler2
             Text = string.Format("About {0}", AssemblyTitle);
             labelProductName.Text = AssemblyProduct;
             labelVersion.Text = string.Format("Version {0}", AssemblyVersion);
-            linkLinks.Text = "View Releases Page Report Issue or Request Feature";
-            linkLinks.Links.Add(0, 18, "releases");
-            linkLinks.Links.Add(19, 45, "issues");
+            linkLinks.Text = "View Releases Report Issue Online Help";
+            linkLinks.Links.Add(0, 13, "releases");
+            linkLinks.Links.Add(14, 12, "issues");
+            linkLinks.Links.Add(27, 11, "help");
             linkLinks.LinkClicked += LinkLinks_LinkClicked;
             textBoxLicense.Text = @"BSD 3-Clause License
 
@@ -62,6 +63,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ""AS IS"" AN
                     {
                         UseShellExecute = true,
                         FileName = "https://github.com/Cossey/ScreenPixelRuler2/issues"
+                    });
+                    break;
+
+                case "help":
+                    Process.Start(new ProcessStartInfo
+                    {
+                        UseShellExecute = true,
+                        FileName = string.Format("https://cossey.github.io/ScreenPixelRuler2/help/{0}", AssemblyVersion)
                     });
                     break;
             }

@@ -34,6 +34,7 @@
             this.AboutMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.SepMenu = new System.Windows.Forms.ToolStripSeparator();
             this.ExitMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.RulerMenu.SuspendLayout();
             this.GuidelineMenu.SuspendLayout();
             this.SuspendLayout();
@@ -46,13 +47,14 @@
             this.GuidelinesMenu,
             this.toolStripSeparator1,
             this.OptionsMenu,
+            this.HelpMenu,
             this.AboutMenu,
             this.SepMenu,
             this.ExitMenu});
             this.RulerMenu.Name = "RulerMenu";
             this.RulerMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.RulerMenu.ShowImageMargin = false;
-            this.RulerMenu.Size = new System.Drawing.Size(215, 148);
+            this.RulerMenu.Size = new System.Drawing.Size(215, 192);
             // 
             // RotateMenu
             // 
@@ -92,7 +94,6 @@
             this.ImportMenu,
             this.ExportMenu});
             this.GuidelineMenu.Name = "contextMenuStrip1";
-            this.GuidelineMenu.OwnerItem = this.GuidelinesMenu;
             this.GuidelineMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.GuidelineMenu.ShowImageMargin = false;
             this.GuidelineMenu.Size = new System.Drawing.Size(136, 148);
@@ -174,6 +175,14 @@
             this.ExitMenu.Size = new System.Drawing.Size(214, 22);
             this.ExitMenu.Text = "E&xit";
             // 
+            // HelpMenu
+            // 
+            this.HelpMenu.Name = "HelpMenu";
+            this.HelpMenu.ShortcutKeyDisplayString = "";
+            this.HelpMenu.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.HelpMenu.Size = new System.Drawing.Size(214, 22);
+            this.HelpMenu.Text = "&Help";
+            // 
             // Ruler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -216,6 +225,7 @@
         private System.Windows.Forms.ToolStripMenuItem ImportMenu;
         private System.Windows.Forms.ToolStripMenuItem ExportMenu;
         private System.Windows.Forms.ContextMenuStrip GuidelineMenu;
+        private System.Windows.Forms.ToolStripMenuItem HelpMenu;
     }
 }
 
