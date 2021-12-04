@@ -170,15 +170,15 @@ jobs:
       - name: Build HTML
         run: |
           cd Help
-          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook'), clean_envir = FALSE, params = list(version = '[${{ github.event.milestone.title }}]'))")"
+          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook', clean_envir = FALSE, params = list(version = '${{ github.event.milestone.title }}'))"
       - name: Build ePub
         run: |
           cd Help
-          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::epub_book'), clean_envir = FALSE, params = list(version = '[${{ github.event.milestone.title }}]'))")"
+          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::epub_book', clean_envir = FALSE, params = list(version = '${{ github.event.milestone.title }}'))"
       - name: Build PDF
         run: |
           cd Help
-          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book'), clean_envir = FALSE, params = list(version = '[${{ github.event.milestone.title }}]'))")"
+          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book', clean_envir = FALSE, params = list(version = '${{ github.event.milestone.title }}'))"
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
