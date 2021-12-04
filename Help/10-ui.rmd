@@ -1,0 +1,3 @@
+# User Interface {#ui}
+
+The user interface consists of a single ruler that can be displayed either horizontally or vertically.

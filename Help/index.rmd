@@ -1,5 +1,5 @@
 ---
-title: "Screen Pixel Ruler"
+title: "Screen Pixel Ruler `r params$version`"
 author: "Stewart Cossey"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -7,8 +7,20 @@ output: bookdown::gitbook
 documentclass: book
 github-repo: cossey/screenpixelruler2
 description: "Help documentation for Screen Pixel Ruler."
+params:
+  version: "MASTER"
 ---
 
 # Overview
 
 Screen Pixel Ruler is a on screen ruler that can assist in measuring elements from web pages, documents or software which does not implement a native ruler.
+Based on .NET Core 3.1 and inspired by MioPlanet PixelRuler.
+
+## Features
+
+- Global hotkeys to trigger functionality when other software is in focus.
+- Rotatable vertical or horizontal ruler. *Ctrl + Shift + Alt + R*
+- Customizable ruler themes.
+- Freezable position. *Ctrl + Shift + Alt + F*
+- Guideline system that can lock the mouse cursor horizontally or vertically
+- Position 0 of the ruler to the current cursor location. *Ctrl + Shift + Alt + S*

@@ -1,0 +1,13 @@
+# Themes {#themes}
+
+Themes can change the ruler colour, size or even the size of the ruler notches.
+
+You can create your own themes for Screen Pixel Ruler. 
+Themes have a `thm` file extension and are writtem in *yaml*.
+
+## Location
+
+Themes are stored in the two locations, depending on if you installed from the installer or from the chocolatey package.
+
+Installer: %appdata%\screenpixelruler  
+Chocolatey: %chocolateyinstall%\lib\screenpixelruler\tools  
