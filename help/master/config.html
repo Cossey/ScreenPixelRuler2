@@ -75,6 +75,7 @@
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#features"><i class="fa fa-check"></i>Features</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i>Installation</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html"><i class="fa fa-check"></i>User Interface</a></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html"><i class="fa fa-check"></i>Guidelines</a><ul>
@@ -84,7 +85,10 @@
 </ul></li>
 <li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html"><i class="fa fa-check"></i>Global Shortcuts</a></li>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html"><i class="fa fa-check"></i>Configuration</a><ul>
-<li class="chapter" data-level="" data-path="config.html"><a href="config.html#options"><i class="fa fa-check"></i>Options</a></li>
+<li class="chapter" data-level="" data-path="config.html"><a href="config.html#options"><i class="fa fa-check"></i>Options</a><ul>
+<li class="chapter" data-level="" data-path="config.html"><a href="config.html#theme"><i class="fa fa-check"></i>Theme</a></li>
+<li class="chapter" data-level="" data-path="config.html"><a href="config.html#primary-click-middle-click-button-4-click-button-5-click"><i class="fa fa-check"></i>Primary Click, Middle Click, Button 4 Click, Button 5 Click</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#location"><i class="fa fa-check"></i>Location</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="themes.html"><a href="themes.html"><i class="fa fa-check"></i>Themes</a><ul>
@@ -114,15 +118,30 @@
 <h1>Configuration</h1>
 <p>You can access the configuration by right clicking the ruler and selecting <em>Options</em>.
 This will then display the <em>Options window</em> where you can change the configuration.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="images/options.png" alt="The options window." width="100%" />
+<p class="caption">
+Figure 2: The options window.
+</p>
+</div>
 <div id="options" class="section level2">
 <h2>Options</h2>
-<p>Theme<br />
-Allows you to change the <a href="themes.html#themes">theme</a> of the ruler.</p>
+<div id="theme" class="section level3">
+<h3>Theme</h3>
+<p>Allows you to change the <a href="themes.html#themes">theme</a> of the ruler.</p>
+</div>
+<div id="primary-click-middle-click-button-4-click-button-5-click" class="section level3">
+<h3>Primary Click, Middle Click, Button 4 Click, Button 5 Click</h3>
+<p>Allows you to assign mouse button clicking the ruler to specific functionality.
+Pressing and holding the primary click will allow you to move the ruler.</p>
+<blockquote>
+<p>The primary click is determined by the <em>Select your primary button</em> option in the <em>Mouse Settings</em> on Microsoft Windows.</p>
+</blockquote>
+</div>
 </div>
 <div id="location" class="section level2">
 <h2>Location</h2>
-<p>Configuration is stored in two locations depending on if you installed from the installer or from the chocolatey package.
-Configuration is in <em>yaml</em>.</p>
+<p>Configuration is stored in two locations depending on if you installed from the installer or from the chocolatey package.</p>
 <p>Installer: %appdata%\screenpixelruler\app.cfg<br />
 Chocolatey: %chocolateyinstall%\lib\screenpixelruler\tools\app.cfg</p>
 
