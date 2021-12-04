@@ -9,5 +9,5 @@ Themes have a `thm` file extension and are writtem in *yaml*.
 
 Themes are stored in the two locations, depending on if you installed from the installer or from the chocolatey package.
 
-Installer: %appdata%\screenpixelruler  
-Chocolatey: %chocolateyinstall%\lib\screenpixelruler\tools  
+Installer: \%appdata\%\\screenpixelruler  
+Chocolatey: \%chocolateyinstall\%\\lib\\screenpixelruler\\tools  

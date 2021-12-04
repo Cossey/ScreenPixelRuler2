@@ -13,5 +13,5 @@ Allows you to change the [theme](#themes) of the ruler.
 Configuration is stored in two locations depending on if you installed from the installer or from the chocolatey package.
 Configuration is in *yaml*.
 
-Installer: %appdata%\screenpixelruler\app.cfg  
-Chocolatey: %chocolateyinstall%\lib\screenpixelruler\tools\app.cfg  
+Installer: \%appdata\%\\screenpixelruler\\app.cfg  
+Chocolatey: \%chocolateyinstall\%\\lib\\screenpixelruler\\tools\\app.cfg  
