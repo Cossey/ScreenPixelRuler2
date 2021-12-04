@@ -119,24 +119,84 @@ Based on .NET Core 3.1 and inspired by MioPlanet PixelRuler.
 
 The user interface consists of a single ruler that can be displayed either horizontally or vertically.
 
-\hypertarget{themes}{%
-\chapter{Themes}\label{themes}}
-
-Themes can change the ruler colour, size or even the size of the ruler notches.
-
-You can create your own themes for Screen Pixel Ruler.
-Themes have a \texttt{thm} file extension and are writtem in \emph{yaml}.
-
-\hypertarget{location}{%
-\section{Location}\label{location}}
-
-Themes are stored in the two locations, depending on if you installed from the installer or from the chocolatey package.
-
-Installer: \%appdata\%\textbackslash screenpixelruler\\
-Chocolatey: \%chocolateyinstall\%\textbackslash lib\textbackslash screenpixelruler\textbackslash tools
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/ruler} \caption{The Ruler user interface.}\label{fig:unnamed-chunk-1}
+\end{figure}
 
 \hypertarget{guidelines}{%
 \chapter{Guidelines}\label{guidelines}}
+
+Guidelines allow you to mark specific points on the ruler.
+
+\hypertarget{adding-and-removing-guidelines}{%
+\section{Adding and Removing Guidelines}\label{adding-and-removing-guidelines}}
+
+You can add and remove guidelines by using the Ruler Menu \textgreater{} Guidelines submenu.
+
+Adding a guideline will add it in positio
+
+\hypertarget{clearing-guidelines}{%
+\section{Clearing Guidelines}\label{clearing-guidelines}}
+
+\hypertarget{importing-and-exporting-guidelines}{%
+\section{Importing and Exporting Guidelines}\label{importing-and-exporting-guidelines}}
+
+\hypertarget{keyboard}{%
+\chapter{Global Shortcuts}\label{keyboard}}
+
+These shortcuts can be used even when the Screen Pixel Ruler is not focused.
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.27\columnwidth}\raggedright
+Keystroke\strut
+\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright
+Function\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.27\columnwidth}\raggedright
+Ctrl + Shift + Alt + R\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
+Change ruler rotation.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.27\columnwidth}\raggedright
+Ctrl + Shift + Alt + E\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
+Flip ruler notch direction.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.27\columnwidth}\raggedright
+Ctrl + Shift + Alt + F\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
+Freeze the position marker on the ruler.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.27\columnwidth}\raggedright
+Ctrl + Shift + Alt + S\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
+Move position 0 of the ruler to the current mouse position.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.27\columnwidth}\raggedright
+Ctrl + Shift + Alt + X\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
+Exit Screen Pixel Ruler 2.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.27\columnwidth}\raggedright
+Ctrl + Shift + Alt + A\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
+Add Guideline at current position on the ruler.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.27\columnwidth}\raggedright
+Ctrl + Shift + Alt + D\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
+Delete nearest Guideline from current position on the ruler.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.27\columnwidth}\raggedright
+Ctrl + Shift + Alt + G\strut
+\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
+Lock mouse position to nearest Guideline.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
 
 \hypertarget{config}{%
 \chapter{Configuration}\label{config}}
@@ -150,13 +210,29 @@ This will then display the \emph{Options window} where you can change the config
 Theme\\
 Allows you to change the \protect\hyperlink{themes}{theme} of the ruler.
 
-\hypertarget{location-1}{%
-\section{Location}\label{location-1}}
+\hypertarget{location}{%
+\section{Location}\label{location}}
 
 Configuration is stored in two locations depending on if you installed from the installer or from the chocolatey package.
 Configuration is in \emph{yaml}.
 
 Installer: \%appdata\%\textbackslash screenpixelruler\textbackslash app.cfg\\
 Chocolatey: \%chocolateyinstall\%\textbackslash lib\textbackslash screenpixelruler\textbackslash tools\textbackslash app.cfg
+
+\hypertarget{themes}{%
+\chapter{Themes}\label{themes}}
+
+Themes can change the ruler colour, size or even the size of the ruler notches.
+
+You can create your own themes for Screen Pixel Ruler.
+Themes have a \texttt{thm} file extension and are writtem in \emph{yaml}.
+
+\hypertarget{location-1}{%
+\section{Location}\label{location-1}}
+
+Themes are stored in the two locations, depending on if you installed from the installer or from the chocolatey package.
+
+Installer: \%appdata\%\textbackslash screenpixelruler\\
+Chocolatey: \%chocolateyinstall\%\textbackslash lib\textbackslash screenpixelruler\textbackslash tools
 
 \end{document}
