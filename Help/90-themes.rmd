@@ -3,7 +3,7 @@
 Themes can change the ruler colour, size or even the size of the ruler notches.
 
 You can create your own themes for Screen Pixel Ruler. 
-Themes have a `thm` file extension and are writtem in *yaml*.
+Themes have a `thm` file extension and are writtem in [yaml](https://yaml.org).
 
 ## Location
 

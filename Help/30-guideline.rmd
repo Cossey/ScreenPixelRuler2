@@ -5,8 +5,7 @@ Guidelines allow you to mark specific points on the ruler.
 ## Adding and Removing Guidelines
 
 You can add and remove guidelines by using the Ruler Menu > Guidelines submenu.
-
-Adding a guideline will add it in positio
+Adding a guideline will add a new guideline at the cursor position on the ruler.
 
 ## Clearing Guidelines
 

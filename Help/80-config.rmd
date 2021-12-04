@@ -3,15 +3,26 @@
 You can access the configuration by right clicking the ruler and selecting *Options*.
 This will then display the *Options window* where you can change the configuration.
 
+```{r, echo=FALSE, out.width="100%", fig.cap="The options window."}
+knitr::include_graphics("images/options.png")
+```
+
 ## Options
 
-Theme  
-Allows you to change the [theme](#themes) of the ruler. 
+### Theme
+
+Allows you to change the [theme](\#themes) of the ruler.
+
+### Primary Click, Middle Click, Button 4 Click, Button 5 Click
+
+Allows you to assign mouse button clicking the ruler to specific functionality.
+Pressing and holding the primary click will allow you to move the ruler.
+
+> The primary click is determined by the *Select your primary button* option in the *Mouse Settings* on Microsoft Windows.
 
 ## Location
 
 Configuration is stored in two locations depending on if you installed from the installer or from the chocolatey package.
-Configuration is in *yaml*.
 
 Installer: \%appdata\%\\screenpixelruler\\app.cfg  
 Chocolatey: \%chocolateyinstall\%\\lib\\screenpixelruler\\tools\\app.cfg  

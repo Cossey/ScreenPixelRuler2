@@ -1,6 +1,6 @@
 # Global Shortcuts {#keyboard}
 
-These shortcuts can be used even when the Screen Pixel Ruler is not focused.
+> These shortcuts can be used even when the Screen Pixel Ruler is not focused.
 
 | Keystroke               | Function                                                     |
 |:----------------------- |:------------------------------------------------------------ |

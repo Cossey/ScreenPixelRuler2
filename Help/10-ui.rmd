@@ -5,3 +5,10 @@ The user interface consists of a single ruler that can be displayed either horiz
 ```{r, echo=FALSE, out.width="100%", fig.cap="The Ruler user interface."}
 knitr::include_graphics("images/ruler.png")
 ```
+
+Pressing the secondary mouse button on the ruler will display a context menu called the *Ruler Menu*.
+The secondary button is usually the right mouse button.
+
+The ruler can be rotated using the `Ctrl + Shift + Alt + R` key combination or by the *Rotate* menu item in the *Ruler Menu*.
+
+> It is not possible to have both a vertical and a horizontal ruler displayed at the same time.
