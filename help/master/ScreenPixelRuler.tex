@@ -41,6 +41,46 @@
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -80,7 +120,7 @@
 
 \title{Screen Pixel Ruler {[}master{]}}
 \author{Stewart Cossey}
-\date{2021-12-04}
+\date{2021-12-06}
 
 \begin{document}
 \maketitle
@@ -257,10 +297,31 @@ Chocolatey: \%chocolateyinstall\%\textbackslash lib\textbackslash screenpixelrul
 \hypertarget{themes}{%
 \chapter{Themes}\label{themes}}
 
-Themes can change the ruler colour, size or even the size of the ruler notches.
+Themes can change the ruler colour, size or even the interval of the hatch marks.
+Screen Pixel Ruler comes with some supplied themes.
 
-You can create your own themes for Screen Pixel Ruler.
-Themes have a \texttt{thm} file extension and are writtem in \href{https://yaml.org}{yaml}.
+\hypertarget{supplied-themes}{%
+\section{Supplied Themes}\label{supplied-themes}}
+
+\hypertarget{default}{%
+\subsection{Default}\label{default}}
+
+A simple black and white theme with a thin ruler. Great contrasting for easy visibility.
+
+\hypertarget{panda}{%
+\subsection{Panda}\label{panda}}
+
+A dark themed and large ruler.
+
+\hypertarget{mioplanet-pixelruler}{%
+\subsection{MioPlanet PixelRuler}\label{mioplanet-pixelruler}}
+
+A blue ruled designed to mimic the MioPlanet PixelRuler software.
+
+\hypertarget{white-chocolate}{%
+\subsection{White Chocolate}\label{white-chocolate}}
+
+A white on brown coloured theme.
 
 \hypertarget{location-1}{%
 \section{Location}\label{location-1}}
@@ -269,5 +330,207 @@ Themes are stored in the two locations, depending on if you installed from the i
 
 Installer: \%appdata\%\textbackslash screenpixelruler\\
 Chocolatey: \%chocolateyinstall\%\textbackslash lib\textbackslash screenpixelruler\textbackslash tools
+
+\hypertarget{creating-a-theme}{%
+\section{Creating a Theme}\label{creating-a-theme}}
+
+You can create your own themes for Screen Pixel Ruler.
+Themes have a \texttt{thm} file extension and are writtem in \href{https://yaml.org}{yaml}.
+
+\hypertarget{objects}{%
+\subsection{Objects}\label{objects}}
+
+A string of text.
+
+Either \texttt{true} or \texttt{false}.
+
+A decimal number like \texttt{1.0} or \texttt{1.5}.
+
+A number like \texttt{1} or \texttt{15}.
+
+An array of objects.
+
+A colour value.
+Supported input types are:
+- \texttt{\textquotesingle{}\#RRGGBB\textquotesingle{}} Hex/HTML Colour
+- \texttt{RRR,\ GGG,\ BBB} Decimal (0-255)
+- \texttt{ColorName} Name
+
+An array of either one (\texttt{{[}\ \textless{}colour\textgreater{}\ {]}}) or two colour values (\texttt{{[}\ \textless{}colour\textgreater{},\ \textless{}colour\textgreater{}\ {]}}).
+If two colours are provided then the colour will be a gradient of both colours.
+
+\begin{quote}
+For a list of colour names see the \href{https://docs.microsoft.com/en-us/dotnet/api/system.drawing.knowncolor?view=netcore-3.1}{KnownColor Enum} reference.
+\end{quote}
+
+\hypertarget{file-format}{%
+\subsection{File Format}\label{file-format}}
+
+\hypertarget{fields}{%
+\subsubsection{Fields}\label{fields}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\AttributeTok{Name <string> *The name of the theme.*}
+\AttributeTok{Cursor *Cursor themeing.*}
+\AttributeTok{  Line <colour> *The cursor line colour.*}
+\AttributeTok{  Font *The font used for the cursor.*}
+\AttributeTok{    Family <string> *The font family.*}
+\AttributeTok{    Size <decimal> *The font size.*}
+\AttributeTok{    Bold <boolean> *Whether the font is bold.*}
+\AttributeTok{    Italic <boolean> *Whether the font is italicised.*}
+\AttributeTok{    Underline <boolean> *Whether the font is underlined.*}
+\AttributeTok{    Strikeout <boolean> *Whether the font is striked out.*}
+\AttributeTok{  Background <colours> *The background colours for the cursor.*}
+\AttributeTok{  Frozen *The frozen colours for the cursor.*}
+\AttributeTok{    Line <colour> *The frozen line colour.*}
+\AttributeTok{    Font *The font used for the frozen cursor.*}
+\AttributeTok{      Family <string> *The font family.*}
+\AttributeTok{      Size <decimal> *The font size.*}
+\AttributeTok{      Bold <boolean> *Whether the font is bold.*}
+\AttributeTok{      Italic <boolean> *Whether the font is italicised.*}
+\AttributeTok{      Underline <boolean> *Whether the font is underlined.*}
+\AttributeTok{      Strikeout <boolean> *Whether the font is striked out.*}
+\AttributeTok{    Background <colours> *The frozen background colours.*}
+\AttributeTok{  Locked *The guideline locked colours for the cursor.*}
+\AttributeTok{    Line <colour> *The locked line colour.*}
+\AttributeTok{    Font *The font used for the locked cursor.*}
+\AttributeTok{      Family <string> *The font family.*}
+\AttributeTok{      Size <decimal> *The font size.*}
+\AttributeTok{      Bold <boolean> *Whether the font is bold.*}
+\AttributeTok{      Italic <boolean> *Whether the font is italicised.*}
+\AttributeTok{      Underline <boolean> *Whether the font is underlined.*}
+\AttributeTok{      Strikeout <boolean> *Whether the font is striked out.*}
+\AttributeTok{    Background <colours> *The locked background colours.*}
+\AttributeTok{Ruler *Ruler themeing.*}
+\AttributeTok{  Size <number> *The size of the ruler in pixels.*}
+\AttributeTok{  Background <colours> *The background colour for the ruler.*}
+\AttributeTok{  Border}
+\AttributeTok{    Colour <colour> *The border colour.*}
+\AttributeTok{    Spacing <number> *The spacing between the border and the ruler.*}
+\AttributeTok{  Marks *The hatch marks.*}
+\AttributeTok{    Colour <colour> *The colour of the hatch marks.*}
+\AttributeTok{    Size}
+\AttributeTok{      Horizontal <number> *The size of the hatch marks when the ruler is horizontal.*}
+\AttributeTok{      Vertical <number> *The size of the hatch marks when the ruler is vertical.*}
+\AttributeTok{    Zero *The zero hatch mark.*}
+\AttributeTok{        NumberVisible <boolean> *Whether the number zero is displayed.*}
+\AttributeTok{        Size}
+\AttributeTok{          Horizontal <number> *The size of the zero hatch mark when the ruler is horizontal.*}
+\AttributeTok{          Vertical <number> *The size of the zero hatch mark when the ruler is vertical.*}
+\AttributeTok{    Sizes <array> *The sizes of the hatch marks.*}
+\AttributeTok{      Interval <number> *The interval of the hatch marks.*}
+\AttributeTok{      Colour <colour> *The colour of the hatch marks.*}
+\AttributeTok{      Size}
+\AttributeTok{        Horizontal <number> *The size of the hatch marks when the ruler is horizontal.*}
+\AttributeTok{        Vertical <number> *The size of the hatch marks when the ruler is vertical.*}
+\AttributeTok{  Numbers *The numbers on the ruler.*}
+\AttributeTok{    Padding}
+\AttributeTok{      Horizontal <number> *The padding on the left and right of the numbers.*}
+\AttributeTok{      Vertical <number> *The padding on the top and bottom of the numbers.*}
+\AttributeTok{    Colour <colour> *The colour of the numbers.*}
+\AttributeTok{    Font *The font used for the numbers.*}
+\AttributeTok{      Family <string> *The font family.*}
+\AttributeTok{      Size <decimal> *The font size.*}
+\AttributeTok{      Bold <boolean> *Whether the font is bold.*}
+\AttributeTok{      Italic <boolean> *Whether the font is italicised.*}
+\AttributeTok{      Underline <boolean> *Whether the font is underlined.*}
+\AttributeTok{      Strikeout <boolean> *Whether the font is striked out.*}
+\AttributeTok{    Display}
+\AttributeTok{      Interval <number> *The interval at which numbers should appear.*}
+\AttributeTok{  Guidelines}
+\AttributeTok{    Guideline *The guidelines.*}
+\AttributeTok{      Colour <colour> *The colour of the guidelines.*}
+\AttributeTok{      Size}
+\AttributeTok{        Horizontal <number> *The size of the guidelines when the ruler is horizontal.*}
+\AttributeTok{        Vertical <number> *The size of the guidelines when the ruler is vertical.*}
+\AttributeTok{    Locked *The guideline locked onto.}
+\AttributeTok{      Colour <colour> *The colour of the guideline that has been locked onto.*}
+\AttributeTok{      Size}
+\AttributeTok{        Horizontal <number> *The size of the guideline that has been locked onto when the ruler is horizontal.*}
+\AttributeTok{        Vertical <number> *The size of the guideline that has been locked onto when the ruler is vertical.*}
+\AttributeTok{    Nearest *The guideline nearest to the cursor.*}
+\AttributeTok{      Colour <colour> *The colour of the nearest guideline.*}
+\AttributeTok{      Size}
+\AttributeTok{        Horizontal <number> *The size of the nearest guideline when the ruler is horizontal.*}
+\AttributeTok{        Vertical <number> *The size of the nearest guideline when the ruler is vertical.*}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{visual-guide}{%
+\subsubsection{Visual Guide}\label{visual-guide}}
+
+\begin{figure}
+\centering
+\includegraphics{images/ruler-theme.png}
+\caption{\label{fig:unnamed-chunk-3}The Ruler user interface with theme elements highlighted.}
+\end{figure}
+
+\emph{Zero} is the \emph{Zero Mark} which is explained further below.
+
+\emph{Numbers} are configured in \texttt{Ruler\ →\ Number} secion.
+The \texttt{Ruler\ →\ Number\ →\ Display\ →\ Interval} determines how often the numbers appear.
+An interval of \texttt{50} means that numbers will appear at the 50th, 100th, 150th, etc hatch marks.
+The other properties under \texttt{Ruler\ →\ Number} determine the font, colour and size of the numbers.
+
+\emph{Cursor} is the position of the mouse cursor on screen.
+Fruther explaination below.
+
+\emph{Background} is the background colour of the ruler.
+This is set at \texttt{Ruler\ →\ Background} and can be a single colour or a gradient when two colours are provided.
+
+\begin{figure}
+\centering
+\includegraphics{images/ruler-cursor.png}
+\caption{\label{fig:unnamed-chunk-4}The cursor that appears in the ruler.}
+\end{figure}
+
+The above options are all configured in the \texttt{Ruler\ →\ Cursor} section.
+
+\begin{figure}
+\centering
+\includegraphics{images/ruler-hashmarks.png}
+\caption{\label{fig:unnamed-chunk-5}The ruler hatch marks.}
+\end{figure}
+
+\emph{Zero Mark} hatch mark is provided by the \texttt{Ruler\ →\ Marks\ →\ Zero\ →\ Size} property.
+You can also set the \texttt{Ruler\ →\ Marks\ →\ Zero\ →\ NumberVisible} property to \texttt{false} to omit the 0 number.
+
+\emph{Size interval 10} and \emph{Size Interval 50} hatch marks are provided by the \texttt{Ruler\ →\ Marks\ →\ Sizes} array.
+The 50 pixel interval hatch mark:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{...}
+\CommentTok{  Marks:}
+\CommentTok{    Sizes:}
+\CommentTok{      - Interval: 50}
+\CommentTok{        Colour: #000000}
+\CommentTok{        Size:}
+\CommentTok{          Horizontal: 20}
+\CommentTok{          Vertical: 40}
+\CommentTok{...}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Marks Size} hatch marks are provided by the \texttt{Ruler\ →\ Marks\ →\ Size} properties.
+The colour is provided by the \texttt{Ruler\ →\ Marks\ →\ Colour} property.
+
+\hypertarget{default-values}{%
+\subsubsection{Default Values}\label{default-values}}
+
+Font:
+Family: Courier New
+Size: 9
+Bold: false
+Italic: false
+Underline: false
+Strikeout: false
+
+Cursor → Locked:
+Cursor → Frozen
+
+Cursor → Frozen:
+Cursor
 
 \end{document}
