@@ -65,7 +65,7 @@ namespace ScreenPixelRuler2
 
         public static Theme LoadTheme(string filePath)
         {
-            using (StreamReader reader = new StreamReader(File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
+            using (StreamReader reader = new StreamReader(File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read)))
             {
                 IDeserializer deserializer = new DeserializerBuilder()
                     .WithNamingConvention(PascalCaseNamingConvention.Instance)

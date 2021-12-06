@@ -47,7 +47,7 @@ namespace ScreenPixelRuler2
                     Color.White
                 },
                 Size = 40,
-                Lines = new TLines
+                Marks = new TLines
                 {
                     Zero = new TZero
                     {
@@ -148,7 +148,7 @@ namespace ScreenPixelRuler2
         }
         public Pen GetGuidelinePen(bool locked, bool nearest)
         {
-            Color penColour = Ruler.Guidelines != null && Ruler.Guidelines.Guideline != null && !Ruler.Guidelines.Guideline.Colour.IsEmpty ? Ruler.Guidelines.Guideline.Colour : Ruler.Lines.Colour;
+            Color penColour = Ruler.Guidelines != null && Ruler.Guidelines.Guideline != null && !Ruler.Guidelines.Guideline.Colour.IsEmpty ? Ruler.Guidelines.Guideline.Colour : Ruler.Marks.Colour;
             if (nearest)
             {
                 penColour = Ruler.Guidelines != null && Ruler.Guidelines.Nearest != null && !Ruler.Guidelines.Nearest.Colour.IsEmpty ? Ruler.Guidelines.Nearest.Colour : penColour;
@@ -179,34 +179,36 @@ namespace ScreenPixelRuler2
 
         public Pen GetLinesPen(int count)
         {
-            List<TLineSizes> sorted = Ruler.Lines.Sizes.OrderByDescending(o => o.Interval).ToList();
+            List<TLineSizes> sorted = Ruler?.Marks?.Sizes?.OrderByDescending(o => o.Interval).ToList();
+            if (sorted == null) return null;
             TLineSizes lineSize = sorted.Find(f => count % f.Interval == GetBorderSpacing());
 
             if (lineSize != null)
             {
-                return new Pen(lineSize.Colour.IsEmpty ? Ruler.Lines.Colour : lineSize.Colour, 1);
+                return new Pen(lineSize.Colour.IsEmpty ? Ruler.Marks.Colour : lineSize.Colour, 1);
             }
             else
             {
-                return new Pen(Ruler.Lines.Colour, 1);
+                return new Pen(Ruler.Marks.Colour, 1);
             }
         }
 
         public int GetLinesSize(int count, bool vertical)
         {
-            List<TLineSizes> sorted = Ruler.Lines.Sizes.OrderByDescending(o => o.Interval).ToList();
+            List<TLineSizes> sorted = Ruler?.Marks?.Sizes?.OrderByDescending(o => o.Interval).ToList();
+            if (sorted == null) return 0;
             TLineSizes lineSize = sorted.Find(f => (count - GetBorderSpacing()) % f.Interval == 0);
 
             if (lineSize != null)
             {
-                return lineSize.Size.GetVH(vertical);
+                return lineSize.Size?.GetVH(vertical) ?? Ruler.Marks?.Size?.GetVH(vertical) ?? 0;
             }
-            return Ruler.Lines.Size.GetVH(vertical);
+            return Ruler.Marks.Size.GetVH(vertical);
         }
 
         public bool GetShowNumberZero()
         {
-            return Ruler.Lines != null && Ruler.Lines.Zero != null ? Ruler.Lines.Zero.NumberVisible : false;
+            return Ruler.Marks != null && Ruler.Marks.Zero != null ? Ruler.Marks.Zero.NumberVisible : false;
         }
 
         public Brush GetNumberBrush()
@@ -216,17 +218,17 @@ namespace ScreenPixelRuler2
 
         public int GetNumberPadding(bool vertical)
         {
-            return vertical ? Ruler.Numbers.Padding.Vertical : Ruler.Numbers.Padding.Horizontal;
+            return vertical ? Ruler.Numbers?.Padding?.Vertical ?? 0 : Ruler.Numbers?.Padding?.Horizontal ?? 0;
         }
 
         public Pen GetZeroPen()
         {
-            return new Pen(Ruler.Lines.Zero == null || Ruler.Lines.Zero.Colour.IsEmpty ? Ruler.Lines.Colour : Ruler.Lines.Zero.Colour, 1);
+            return new Pen(Ruler.Marks.Zero == null || Ruler.Marks.Zero.Colour.IsEmpty ? Ruler.Marks.Colour : Ruler.Marks.Zero.Colour, 1);
         }
 
         public int GetZeroLineSize(bool vertical)
         {
-            return Ruler.Lines.Zero == null ? Ruler.Lines.Size.GetVH(vertical) : Ruler.Lines.Zero.Size.GetVH(vertical);
+            return Ruler.Marks.Zero == null ? Ruler.Marks.Size.GetVH(vertical) : Ruler.Marks.Zero.Size.GetVH(vertical);
         }
 
         public int GetBorderSpacing()
@@ -239,35 +241,63 @@ namespace ScreenPixelRuler2
             return Ruler != null && Ruler.Border != null && !Ruler.Border.Colour.IsEmpty ? Ruler.Border.Colour : Color.Transparent;
         }
 
-        public Pen GetCursorLinePen()
+        public Pen GetCursorLinePen(bool frozen, bool locked)
         {
-            return new Pen(Cursor.Line, 1);
-        }
-
-        public Brush GetCursorFontBrush()
-        {
-            return new SolidBrush(Cursor.Font.Colour);
-        }
-
-        public Brush GetCursorBackground(Rectangle clientArea, bool verticality, bool direction)
-        {
-            if (Cursor.Background.Count == 0)
+            Color col = Cursor?.Line ?? Color.Transparent;
+            if (locked)
             {
-                return new SolidBrush(Color.Black);
+                col = Cursor?.Locked?.Line ?? Cursor?.Frozen?.Line ?? Cursor?.Line ?? Color.Transparent;
             }
-            else if (Cursor.Background.Count > 1)
+            if (frozen)
+            {
+                col = Cursor?.Frozen?.Line ?? Cursor?.Line ?? Color.Transparent;
+            }
+            return new Pen(col, 1);
+        }
+
+        public Brush GetCursorFontBrush(bool frozen, bool locked)
+        {
+            Color col = Cursor?.Font?.Colour ?? Color.Transparent;
+            if (locked)
+            {
+                col = Cursor?.Locked?.Font?.Colour ?? Cursor?.Frozen?.Font?.Colour ?? Cursor?.Font?.Colour ?? Color.Transparent;
+            }
+            if (frozen)
+            {
+                col = Cursor?.Frozen?.Font?.Colour ?? Cursor?.Font?.Colour ?? Color.Transparent;
+            }
+            return new SolidBrush(col);
+        }
+
+        public Brush GetCursorBackground(Rectangle clientArea, bool verticality, bool direction, bool frozen, bool locked)
+        {
+            List<Color> colors = Cursor.Background;
+            if (locked)
+            {
+                colors = Cursor?.Locked?.Background ?? Cursor?.Frozen?.Background ?? Cursor?.Background;
+            }
+            if (frozen)
+            {
+                colors = Cursor?.Frozen?.Background ?? Cursor?.Background;
+            }
+            if (colors.Count == 0)
+            {
+                return new SolidBrush(Color.Transparent);
+            }
+            else if (colors.Count > 1)
             {
                 LinearGradientMode gradientMode = verticality ? LinearGradientMode.Horizontal : LinearGradientMode.Vertical;
-                return new LinearGradientBrush(clientArea, direction ? Cursor.Background[0] : Cursor.Background[1], direction ? Cursor.Background[1] : Cursor.Background[0], gradientMode);
+                return new LinearGradientBrush(clientArea, direction ? colors[0] : colors[1], direction ? colors[1] : colors[0], gradientMode);
             }
             else
             {
-                return new SolidBrush(Cursor.Background[0]);
+                return new SolidBrush(colors[0]);
             }
         }
         public int GetRulerSize()
         {
-            return Ruler != null && Ruler.Size >= minSize && Ruler.Size <= maxSize ? Ruler.Size : (Ruler.Size < minSize ? minSize : maxSize);
+            int size = Ruler?.Size ?? 40;
+            return Ruler != null && size >= minSize && size <= maxSize ? size : (size < minSize ? minSize : maxSize);
         }
 
         #endregion
@@ -282,7 +312,7 @@ namespace ScreenPixelRuler2
     class TRuler
     {
         public int Size { get; set; }
-        public TLines Lines { get; set; }
+        public TLines Marks { get; set; }
         public TNumbers Numbers { get; set; }
         public TBorder Border { get; set; }
         public List<Color> Background { get; set; }
@@ -389,10 +419,16 @@ namespace ScreenPixelRuler2
         public int Spacing { get; set; }
     }
 
-    class TCursor
+    class TCursorAspect 
     {
         public Color Line { get; set; }
         public TTextAspect Font { get; set; }
         public List<Color> Background { get; set; }
+    }
+
+    class TCursor : TCursorAspect
+    {
+        public TCursorAspect Frozen { get; set; }
+        public TCursorAspect Locked { get; set; }
     }
 }

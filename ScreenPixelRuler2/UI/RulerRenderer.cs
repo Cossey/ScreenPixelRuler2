@@ -239,7 +239,7 @@ namespace ScreenPixelRuler2
                 int size = theme.GetLinesSize(i, Vertical);
 
                 //Display the number based off the interval theme setting
-                if (((i - theme.GetBorderSpacing()) % theme.Ruler.Numbers.Display.Interval == 0) && (theme.GetShowNumberZero() || i - theme.GetBorderSpacing() != 0))
+                if (((i - theme.GetBorderSpacing()) % theme.Ruler?.Numbers?.Display?.Interval == 0) && (theme.GetShowNumberZero() || i - theme.GetBorderSpacing() != 0))
                 {
                     SizeF measureSize = graphics.MeasureString((i - theme.GetBorderSpacing()).ToString(), theme.Ruler.Numbers.Font.GetFont());
                     Size textSize = new Size((int)Math.Ceiling(measureSize.Width), (int)Math.Ceiling(measureSize.Height));
@@ -275,11 +275,14 @@ namespace ScreenPixelRuler2
                     size = theme.GetZeroLineSize(Vertical);
                 }
 
-                graphics.DrawLine(pen,
-                    !Vertical ? i : (Direction ? size : form.Width - size),
-                    Vertical ? i : (Direction ? size : form.Height - size),
-                    !Vertical ? i : (Direction ? 0 : form.Height),
-                    Vertical ? i : (Direction ? 0 : form.Width));
+                if (pen != null)
+                {
+                    graphics.DrawLine(pen,
+                        !Vertical ? i : (Direction ? size : form.Width - size),
+                        Vertical ? i : (Direction ? size : form.Height - size),
+                        !Vertical ? i : (Direction ? 0 : form.Height),
+                        Vertical ? i : (Direction ? 0 : form.Width));
+                }
             }
         }
 
@@ -292,65 +295,84 @@ namespace ScreenPixelRuler2
                 pos = CursorLastPos;
             }
 
-            SizeF measureSize = graphics.MeasureString((pos - theme.GetBorderSpacing()).ToString(), theme.Cursor.Font.Font.GetFont());
-            Size textSize = new Size((int)Math.Ceiling(measureSize.Width), (int)Math.Ceiling(measureSize.Height));
 
-            if (pos >= (GetMinSize() - ((!Vertical ? (textSize.Width / 2) : 0) + theme.GetBorderSpacing())))
+            SizeF measureSize = SizeF.Empty;
+            Size textSize = Size.Empty;
+
+            if (theme.Cursor?.Font?.Font?.GetFont() != null)
             {
-                form.Size = form.MaximumSize = form.MinimumSize = new Size
-                {
-                    Width = Vertical ? form.Width : pos + (textSize.Width / 2) + theme.GetBorderSpacing(),
-                    Height = Vertical ? pos + theme.GetBorderSpacing() : form.Height
-                };
-            }
-            else
-            {
-                form.Size = form.MaximumSize = form.MinimumSize = new Size
-                {
-                    Width = Vertical ? form.Width : GetMinSize(),
-                    Height = Vertical ? GetMinSize() : form.Height
-                };
+                measureSize = graphics.MeasureString((pos - theme.GetBorderSpacing()).ToString(), theme.Cursor.Font.Font.GetFont());
+                textSize = new Size((int)Math.Ceiling(measureSize.Width), (int)Math.Ceiling(measureSize.Height));
             }
 
-            graphics.DrawLine(theme.GetCursorLinePen(),
+            if (!textSize.IsEmpty)
+            {
+                if (pos >= (GetMinSize() - ((!Vertical ? (textSize.Width / 2) : 0) + theme.GetBorderSpacing())))
+                {
+                    form.Size = form.MaximumSize = form.MinimumSize = new Size
+                    {
+                        Width = Vertical ? form.Width : pos + (textSize.Width / 2) + theme.GetBorderSpacing(),
+                        Height = Vertical ? pos + theme.GetBorderSpacing() : form.Height
+                    };
+                }
+                else
+                {
+                    form.Size = form.MaximumSize = form.MinimumSize = new Size
+                    {
+                        Width = Vertical ? form.Width : GetMinSize(),
+                        Height = Vertical ? GetMinSize() : form.Height
+                    };
+                }
+            }
+
+            graphics.DrawLine(theme.GetCursorLinePen(FreezePosition, guidelineLock),
                 Vertical ? form.Width : pos,
                 Vertical ? pos : form.Height,
                 Vertical ? 0 : pos,
                 Vertical ? pos : 0);
 
-            int padVertical = theme.Cursor.Font.Padding.Vertical;
-            int padHoriz = theme.Cursor.Font.Padding.Horizontal;
+            int padVertical = theme.Cursor?.Font?.Padding?.Vertical ?? 0;
+            int padHoriz = theme.Cursor?.Font?.Padding?.Horizontal ?? 0;
 
-            Rectangle cursorBackgroundArea = new Rectangle(
-                Vertical ?
-                    new Point( //Vertical
-                        Direction ?
-                            form.Width - (textSize.Width + padVertical) :
-                            padVertical,
-                        pos - textSize.Height) :
-                    new Point( //Horizontal
-                        pos - (textSize.Width / 2),
-                        Direction ?
-                            form.Height - (padHoriz + textSize.Height) :
-                            padHoriz),
-                textSize);
+            Rectangle cursorBackgroundArea = Rectangle.Empty;
+            if (!textSize.IsEmpty)
+            {
+                cursorBackgroundArea = new Rectangle(
+                    Vertical ?
+                        new Point( //Vertical
+                            Direction ?
+                                form.Width - (textSize.Width + padVertical) :
+                                padVertical,
+                            pos - textSize.Height) :
+                        new Point( //Horizontal
+                            pos - (textSize.Width / 2),
+                            Direction ?
+                                form.Height - (padHoriz + textSize.Height) :
+                                padHoriz),
+                    textSize);
+            }
+            if (!cursorBackgroundArea.IsEmpty)
+            {
+                graphics.FillRectangle(theme.GetCursorBackground(cursorBackgroundArea, Vertical, Direction, FreezePosition, guidelineLock), cursorBackgroundArea);
+            }
 
-            graphics.FillRectangle(theme.GetCursorBackground(cursorBackgroundArea, Vertical, Direction), cursorBackgroundArea);
+            if (!textSize.IsEmpty)
+            {
+                graphics.DrawString((pos - theme.GetBorderSpacing()).ToString(), theme.Cursor.Font.Font.GetFont(), theme.GetCursorFontBrush(FreezePosition, guidelineLock), new Rectangle(
+                    Vertical ?
+                        new Point( //Vertical
+                            Direction ?
+                                form.Width - (textSize.Width + padVertical) :
+                                padVertical,
+                            pos - textSize.Height) :
+                        new Point( //Horizontal
+                            pos - ((textSize.Width + padHoriz) / 2),
+                            Direction ?
+                                form.Height - (padHoriz + textSize.Height) :
+                                padHoriz),
+                    textSize), Vertical ? VerticalFormat : horizontalFormat);
 
-            graphics.DrawString((pos - theme.GetBorderSpacing()).ToString(), theme.Cursor.Font.Font.GetFont(), theme.GetCursorFontBrush(), new Rectangle(
-                Vertical ?
-                    new Point( //Vertical
-                        Direction ?
-                            form.Width - (textSize.Width + padVertical) :
-                            padVertical,
-                        pos - textSize.Height) :
-                    new Point( //Horizontal
-                        pos - ((textSize.Width + padHoriz) / 2),
-                        Direction ?
-                            form.Height - (padHoriz + textSize.Height) :
-                            padHoriz),
-                textSize), Vertical ? VerticalFormat : horizontalFormat);
-
+            }
             CursorLastPos = pos;
         }
 

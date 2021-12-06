@@ -13,7 +13,7 @@ Cursor:
 Ruler:
   Size: 70
   Background: [ '#000000' ]
-  Lines:
+  Marks:
     Zero:
       Size:
         Vertical: 70
