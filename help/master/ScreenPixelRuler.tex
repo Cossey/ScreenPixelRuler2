@@ -186,18 +186,63 @@ It is not possible to have both a vertical and a horizontal ruler displayed at t
 \chapter{Guidelines}\label{guidelines}}
 
 Guidelines allow you to mark specific points on the ruler.
+These points can then be \emph{locked on to} with the mouse and allow you to move the mouse along the locked axis.
 
 \hypertarget{adding-and-removing-guidelines}{%
 \section{Adding and Removing Guidelines}\label{adding-and-removing-guidelines}}
 
-You can add and remove guidelines by using the Ruler Menu \textgreater{} Guidelines submenu.
-Adding a guideline will add a new guideline at the cursor position on the ruler.
+Add and remove Guidelines by using the \texttt{Ruler\ Menu\ →\ Guidelines}submenu or via the \emph{Guidelines} dialog.
+Adding a Guideline will add a new guideline at the current cursor position on the ruler.
+Removing a Guideline will remove the nearest guideline to the current cursor position.
+
+\begin{quote}
+Both these functions can be assigned to a mouse button.
+\end{quote}
 
 \hypertarget{clearing-guidelines}{%
 \section{Clearing Guidelines}\label{clearing-guidelines}}
 
+All the Guidelines can be cleared by using the \texttt{Ruler\ Menu\ →\ Guidelines\ →\ Clear\ All} submenu or via the \emph{Guidelines} dialog.
+Guidelines are also cleared before Import.
+
+\hypertarget{locking-to-guidelines}{%
+\section{Locking to Guidelines}\label{locking-to-guidelines}}
+
 \hypertarget{importing-and-exporting-guidelines}{%
 \section{Importing and Exporting Guidelines}\label{importing-and-exporting-guidelines}}
+
+You can import and export Guidelines by using the \texttt{Ruler\ Menu\ →\ Guidelines\ →\ Import} or the \texttt{Ruler\ Menu\ →\ Guidelines\ →\ Export} submenus or via the \emph{Guidelines} dialog.
+Either of these options will display a File dialog so that you can select the file to load or save.
+
+\begin{quote}
+Importing Guidelines will overwrite any existing Guidelines on the ruler.
+\end{quote}
+
+\hypertarget{guideline-file-format}{%
+\subsection{Guideline File Format}\label{guideline-file-format}}
+
+Guidelines can be exported to/imported from a simple text file.
+The file contains a list of numbers which denote the Guideline pixel position on the ruler.
+These files have no preferred extension.
+
+\begin{verbatim}
+20
+100
+150
+620
+\end{verbatim}
+
+\hypertarget{guideline-dialog}{%
+\section{Guideline dialog}\label{guideline-dialog}}
+
+\begin{figure}
+\centering
+\includegraphics{images/guideline-dialog.png}
+\caption{\label{fig:unnamed-chunk-2}The Guideline dialog.}
+\end{figure}
+
+The Guideline dialog can be accessed via the \texttt{Ruler\ Menu\ →\ Guidelines\ →\ Edit\ Guidelines} submenu.
+This Dialog accepts manual input of Guideline positions and can remove specific Guidelines from the list or clear all Guidelines.
 
 \hypertarget{keyboard}{%
 \chapter{Global Shortcuts}\label{keyboard}}
@@ -265,7 +310,7 @@ You can access the configuration by right clicking the ruler and selecting \emph
 This will then display the \emph{Options window} where you can change the configuration.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{images/options} \caption{The options window.}\label{fig:unnamed-chunk-2}
+\includegraphics[width=1\linewidth]{images/options} \caption{The options window.}\label{fig:unnamed-chunk-3}
 \end{figure}
 
 \hypertarget{options}{%
@@ -340,23 +385,23 @@ Themes have a \texttt{thm} file extension and are writtem in \href{https://yaml.
 \hypertarget{objects}{%
 \subsection{Objects}\label{objects}}
 
-A string of text.
+\texttt{\textless{}string\textgreater{}} A string of text.
 
-Either \texttt{true} or \texttt{false}.
+\texttt{\textless{}boolean\textgreater{}} Either \texttt{true} or \texttt{false}.
 
-A decimal number like \texttt{1.0} or \texttt{1.5}.
+\texttt{\textless{}decimal\textgreater{}} A decimal number like \texttt{1.0} or \texttt{1.5}.
 
-A number like \texttt{1} or \texttt{15}.
+\texttt{\textless{}number\textgreater{}} A number like \texttt{1} or \texttt{15}.
 
-An array of objects.
+\texttt{\textless{}array\textgreater{}} An array of objects.
 
-A colour value.
+\texttt{\textless{}colour\textgreater{}} A colour value.
 Supported input types are:
 - \texttt{\textquotesingle{}\#RRGGBB\textquotesingle{}} Hex/HTML Colour
 - \texttt{RRR,\ GGG,\ BBB} Decimal (0-255)
 - \texttt{ColorName} Name
 
-An array of either one (\texttt{{[}\ \textless{}colour\textgreater{}\ {]}}) or two colour values (\texttt{{[}\ \textless{}colour\textgreater{},\ \textless{}colour\textgreater{}\ {]}}).
+\texttt{\textless{}colours\textgreater{}} An array of either one (\texttt{{[}\ \textless{}colour\textgreater{}\ {]}}) or two colour values (\texttt{{[}\ \textless{}colour\textgreater{},\ \textless{}colour\textgreater{}\ {]}}).
 If two colours are provided then the colour will be a gradient of both colours.
 
 \begin{quote}
@@ -369,93 +414,91 @@ For a list of colour names see the \href{https://docs.microsoft.com/en-us/dotnet
 \hypertarget{fields}{%
 \subsubsection{Fields}\label{fields}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\AttributeTok{Name <string> *The name of the theme.*}
-\AttributeTok{Cursor *Cursor themeing.*}
-\AttributeTok{  Line <colour> *The cursor line colour.*}
-\AttributeTok{  Font *The font used for the cursor.*}
-\AttributeTok{    Family <string> *The font family.*}
-\AttributeTok{    Size <decimal> *The font size.*}
-\AttributeTok{    Bold <boolean> *Whether the font is bold.*}
-\AttributeTok{    Italic <boolean> *Whether the font is italicised.*}
-\AttributeTok{    Underline <boolean> *Whether the font is underlined.*}
-\AttributeTok{    Strikeout <boolean> *Whether the font is striked out.*}
-\AttributeTok{  Background <colours> *The background colours for the cursor.*}
-\AttributeTok{  Frozen *The frozen colours for the cursor.*}
-\AttributeTok{    Line <colour> *The frozen line colour.*}
-\AttributeTok{    Font *The font used for the frozen cursor.*}
-\AttributeTok{      Family <string> *The font family.*}
-\AttributeTok{      Size <decimal> *The font size.*}
-\AttributeTok{      Bold <boolean> *Whether the font is bold.*}
-\AttributeTok{      Italic <boolean> *Whether the font is italicised.*}
-\AttributeTok{      Underline <boolean> *Whether the font is underlined.*}
-\AttributeTok{      Strikeout <boolean> *Whether the font is striked out.*}
-\AttributeTok{    Background <colours> *The frozen background colours.*}
-\AttributeTok{  Locked *The guideline locked colours for the cursor.*}
-\AttributeTok{    Line <colour> *The locked line colour.*}
-\AttributeTok{    Font *The font used for the locked cursor.*}
-\AttributeTok{      Family <string> *The font family.*}
-\AttributeTok{      Size <decimal> *The font size.*}
-\AttributeTok{      Bold <boolean> *Whether the font is bold.*}
-\AttributeTok{      Italic <boolean> *Whether the font is italicised.*}
-\AttributeTok{      Underline <boolean> *Whether the font is underlined.*}
-\AttributeTok{      Strikeout <boolean> *Whether the font is striked out.*}
-\AttributeTok{    Background <colours> *The locked background colours.*}
-\AttributeTok{Ruler *Ruler themeing.*}
-\AttributeTok{  Size <number> *The size of the ruler in pixels.*}
-\AttributeTok{  Background <colours> *The background colour for the ruler.*}
-\AttributeTok{  Border}
-\AttributeTok{    Colour <colour> *The border colour.*}
-\AttributeTok{    Spacing <number> *The spacing between the border and the ruler.*}
-\AttributeTok{  Marks *The hatch marks.*}
-\AttributeTok{    Colour <colour> *The colour of the hatch marks.*}
-\AttributeTok{    Size}
-\AttributeTok{      Horizontal <number> *The size of the hatch marks when the ruler is horizontal.*}
-\AttributeTok{      Vertical <number> *The size of the hatch marks when the ruler is vertical.*}
-\AttributeTok{    Zero *The zero hatch mark.*}
-\AttributeTok{        NumberVisible <boolean> *Whether the number zero is displayed.*}
-\AttributeTok{        Size}
-\AttributeTok{          Horizontal <number> *The size of the zero hatch mark when the ruler is horizontal.*}
-\AttributeTok{          Vertical <number> *The size of the zero hatch mark when the ruler is vertical.*}
-\AttributeTok{    Sizes <array> *The sizes of the hatch marks.*}
-\AttributeTok{      Interval <number> *The interval of the hatch marks.*}
-\AttributeTok{      Colour <colour> *The colour of the hatch marks.*}
-\AttributeTok{      Size}
-\AttributeTok{        Horizontal <number> *The size of the hatch marks when the ruler is horizontal.*}
-\AttributeTok{        Vertical <number> *The size of the hatch marks when the ruler is vertical.*}
-\AttributeTok{  Numbers *The numbers on the ruler.*}
-\AttributeTok{    Padding}
-\AttributeTok{      Horizontal <number> *The padding on the left and right of the numbers.*}
-\AttributeTok{      Vertical <number> *The padding on the top and bottom of the numbers.*}
-\AttributeTok{    Colour <colour> *The colour of the numbers.*}
-\AttributeTok{    Font *The font used for the numbers.*}
-\AttributeTok{      Family <string> *The font family.*}
-\AttributeTok{      Size <decimal> *The font size.*}
-\AttributeTok{      Bold <boolean> *Whether the font is bold.*}
-\AttributeTok{      Italic <boolean> *Whether the font is italicised.*}
-\AttributeTok{      Underline <boolean> *Whether the font is underlined.*}
-\AttributeTok{      Strikeout <boolean> *Whether the font is striked out.*}
-\AttributeTok{    Display}
-\AttributeTok{      Interval <number> *The interval at which numbers should appear.*}
-\AttributeTok{  Guidelines}
-\AttributeTok{    Guideline *The guidelines.*}
-\AttributeTok{      Colour <colour> *The colour of the guidelines.*}
-\AttributeTok{      Size}
-\AttributeTok{        Horizontal <number> *The size of the guidelines when the ruler is horizontal.*}
-\AttributeTok{        Vertical <number> *The size of the guidelines when the ruler is vertical.*}
-\AttributeTok{    Locked *The guideline locked onto.}
-\AttributeTok{      Colour <colour> *The colour of the guideline that has been locked onto.*}
-\AttributeTok{      Size}
-\AttributeTok{        Horizontal <number> *The size of the guideline that has been locked onto when the ruler is horizontal.*}
-\AttributeTok{        Vertical <number> *The size of the guideline that has been locked onto when the ruler is vertical.*}
-\AttributeTok{    Nearest *The guideline nearest to the cursor.*}
-\AttributeTok{      Colour <colour> *The colour of the nearest guideline.*}
-\AttributeTok{      Size}
-\AttributeTok{        Horizontal <number> *The size of the nearest guideline when the ruler is horizontal.*}
-\AttributeTok{        Vertical <number> *The size of the nearest guideline when the ruler is vertical.*}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+Name: <string> The name of the theme.
+Cursor: Cursor themeing.
+  Line: <colour> The cursor line colour.
+  Font: The font used for the cursor.
+    Family: <string> The font family.
+    Size: <decimal> The font size.
+    Bold: <boolean> Whether the font is bold.
+    Italic: <boolean> Whether the font is italicised.
+    Underline: <boolean> Whether the font is underlined.
+    Strikeout: <boolean> Whether the font is striked out.
+  Background: <colours> The background colours for the cursor.
+  Frozen: The frozen colours for the cursor.
+    Line: <colour> The frozen line colour.
+    Font: The font used for the frozen cursor.
+      Family: <string> The font family.
+      Size: <decimal> The font size.
+      Bold: <boolean> Whether the font is bold.
+      Italic: <boolean> Whether the font is italicised.
+      Underline: <boolean> Whether the font is underlined.
+      Strikeout: <boolean> Whether the font is striked out.
+    Background: <colours> The frozen background colours.
+  Locked: The guideline locked colours for the cursor.
+    Line: <colour> The locked line colour.
+    Font: The font used for the locked cursor.
+      Family: <string> The font family.
+      Size: <decimal> The font size.
+      Bold: <boolean> Whether the font is bold.
+      Italic: <boolean> Whether the font is italicised.
+      Underline: <boolean> Whether the font is underlined.
+      Strikeout: <boolean> Whether the font is striked out.
+    Background: <colours> The locked background colours.
+Ruler: Ruler themeing.
+  Size: <number> The size of the ruler in pixels.
+  Background: <colours> The background colour for the ruler.
+  Border:
+    Colour: <colour> The border colour.
+    Spacing: <number> The spacing between the border and the ruler.
+  Marks: The hatch marks.
+    Colour: <colour> The colour of the hatch marks.
+    Size:
+      Horizontal: <number> The size of the hatch marks when horizontal.
+      Vertical: <number> The size of the hatch marks when vertical.
+    Zero: The zero hatch mark.
+        NumberVisible: <boolean> Whether the number zero is displayed.
+        Size:
+          Horizontal: <number> The size of the zero hatch mark when horizontal.
+          Vertical: <number> The size of the zero hatch mark when vertical.
+    Sizes: <array> The sizes of the hatch marks.
+      Interval: <number> The interval of the hatch marks.
+      Colour: <colour> The colour of the hatch marks.
+      Size:
+        Horizontal: <number> The size of the hatch marks when horizontal.
+        Vertical: <number> The size of the hatch marks when vertical.
+  Numbers: The numbers on the ruler.
+    Padding:
+      Horizontal: <number> The padding on the left and right of the numbers.
+      Vertical: <number> The padding on the top and bottom of the numbers.
+    Colour: <colour> The colour of the numbers.
+    Font: The font used for the numbers.
+      Family: <string> The font family.
+      Size: <decimal> The font size.
+      Bold: <boolean> Whether the font is bold.
+      Italic: <boolean> Whether the font is italicised.
+      Underline: <boolean> Whether the font is underlined.
+      Strikeout: <boolean> Whether the font is striked out.
+    Display:
+      Interval: <number> The interval at which numbers should appear.
+  Guidelines:
+    Guideline: The guidelines.
+      Colour: <colour> The colour of the guidelines.
+      Size:
+        Horizontal: <number> The size of the guidelines when horizontal.
+        Vertical: <number> The size of the guidelines when vertical.
+    Locked: The guideline locked onto.
+      Colour: <colour> The colour of the guideline that has been locked onto.
+      Size:
+        Horizontal: <number> The size of the guideline that has been locked onto when horizontal.
+        Vertical: <number> The size of the guideline that has been locked onto when vertical.
+    Nearest: The guideline nearest to the cursor.
+      Colour: <colour> The colour of the nearest guideline.
+      Size:
+        Horizontal: <number> The size of the nearest guideline when horizontal.
+        Vertical: <number> The size of the nearest guideline when vertical.
+\end{verbatim}
 
 \hypertarget{visual-guide}{%
 \subsubsection{Visual Guide}\label{visual-guide}}
@@ -463,26 +506,26 @@ For a list of colour names see the \href{https://docs.microsoft.com/en-us/dotnet
 \begin{figure}
 \centering
 \includegraphics{images/ruler-theme.png}
-\caption{\label{fig:unnamed-chunk-3}The Ruler user interface with theme elements highlighted.}
+\caption{\label{fig:unnamed-chunk-4}The Ruler user interface with theme elements highlighted.}
 \end{figure}
 
-\emph{Zero} is the \emph{Zero Mark} which is explained further below.
+Zero is the Zero Mark which is explained further below.
 
-\emph{Numbers} are configured in \texttt{Ruler\ →\ Number} secion.
+Numbers are configured in \texttt{Ruler\ →\ Number} secion.
 The \texttt{Ruler\ →\ Number\ →\ Display\ →\ Interval} determines how often the numbers appear.
 An interval of \texttt{50} means that numbers will appear at the 50th, 100th, 150th, etc hatch marks.
 The other properties under \texttt{Ruler\ →\ Number} determine the font, colour and size of the numbers.
 
-\emph{Cursor} is the position of the mouse cursor on screen.
+Cursor is the position of the mouse cursor on screen.
 Fruther explaination below.
 
-\emph{Background} is the background colour of the ruler.
+Background is the background colour of the ruler.
 This is set at \texttt{Ruler\ →\ Background} and can be a single colour or a gradient when two colours are provided.
 
 \begin{figure}
 \centering
 \includegraphics{images/ruler-cursor.png}
-\caption{\label{fig:unnamed-chunk-4}The cursor that appears in the ruler.}
+\caption{\label{fig:unnamed-chunk-5}The cursor that appears in the ruler.}
 \end{figure}
 
 The above options are all configured in the \texttt{Ruler\ →\ Cursor} section.
@@ -490,13 +533,13 @@ The above options are all configured in the \texttt{Ruler\ →\ Cursor} section.
 \begin{figure}
 \centering
 \includegraphics{images/ruler-hashmarks.png}
-\caption{\label{fig:unnamed-chunk-5}The ruler hatch marks.}
+\caption{\label{fig:unnamed-chunk-6}The ruler hatch marks.}
 \end{figure}
 
-\emph{Zero Mark} hatch mark is provided by the \texttt{Ruler\ →\ Marks\ →\ Zero\ →\ Size} property.
+Zero Mark hatch mark is provided by the \texttt{Ruler\ →\ Marks\ →\ Zero\ →\ Size} property.
 You can also set the \texttt{Ruler\ →\ Marks\ →\ Zero\ →\ NumberVisible} property to \texttt{false} to omit the 0 number.
 
-\emph{Size interval 10} and \emph{Size Interval 50} hatch marks are provided by the \texttt{Ruler\ →\ Marks\ →\ Sizes} array.
+Size interval 10 and Size Interval 50 hatch marks are provided by the \texttt{Ruler\ →\ Marks\ →\ Sizes} array.
 The 50 pixel interval hatch mark:
 
 \begin{Shaded}
@@ -513,24 +556,24 @@ The 50 pixel interval hatch mark:
 \end{Highlighting}
 \end{Shaded}
 
-\emph{Marks Size} hatch marks are provided by the \texttt{Ruler\ →\ Marks\ →\ Size} properties.
+Marks Size hatch marks are provided by the \texttt{Ruler\ →\ Marks\ →\ Size} properties.
 The colour is provided by the \texttt{Ruler\ →\ Marks\ →\ Colour} property.
 
 \hypertarget{default-values}{%
 \subsubsection{Default Values}\label{default-values}}
 
-Font:
-Family: Courier New
-Size: 9
-Bold: false
-Italic: false
-Underline: false
+Font:\\
+Family: Courier New\\
+Size: 9\\
+Bold: false\\
+Italic: false\\
+Underline: false\\
 Strikeout: false
 
-Cursor → Locked:
+Cursor → Locked:\\
 Cursor → Frozen
 
-Cursor → Frozen:
+Cursor → Frozen:\\
 Cursor
 
 \end{document}

@@ -145,7 +145,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html"><i class="fa fa-check"></i>Guidelines</a><ul>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#adding-and-removing-guidelines"><i class="fa fa-check"></i>Adding and Removing Guidelines</a></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#clearing-guidelines"><i class="fa fa-check"></i>Clearing Guidelines</a></li>
-<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#importing-and-exporting-guidelines"><i class="fa fa-check"></i>Importing and Exporting Guidelines</a></li>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#locking-to-guidelines"><i class="fa fa-check"></i>Locking to Guidelines</a></li>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#importing-and-exporting-guidelines"><i class="fa fa-check"></i>Importing and Exporting Guidelines</a><ul>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#guideline-file-format"><i class="fa fa-check"></i>Guideline File Format</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#guideline-dialog"><i class="fa fa-check"></i>Guideline dialog</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html"><i class="fa fa-check"></i>Global Shortcuts</a></li>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html"><i class="fa fa-check"></i>Configuration</a><ul>
@@ -190,17 +194,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="guidelines" class="section level1">
 <h1>Guidelines</h1>
-<p>Guidelines allow you to mark specific points on the ruler.</p>
+<p>Guidelines allow you to mark specific points on the ruler.
+These points can then be <em>locked on to</em> with the mouse and allow you to move the mouse along the locked axis.</p>
 <div id="adding-and-removing-guidelines" class="section level2">
 <h2>Adding and Removing Guidelines</h2>
-<p>You can add and remove guidelines by using the Ruler Menu &gt; Guidelines submenu.
-Adding a guideline will add a new guideline at the cursor position on the ruler.</p>
+<p>Add and remove Guidelines by using the <code>Ruler Menu → Guidelines</code>submenu or via the <em>Guidelines</em> dialog.
+Adding a Guideline will add a new guideline at the current cursor position on the ruler.
+Removing a Guideline will remove the nearest guideline to the current cursor position.</p>
+<blockquote>
+<p>Both these functions can be assigned to a mouse button.</p>
+</blockquote>
 </div>
 <div id="clearing-guidelines" class="section level2">
 <h2>Clearing Guidelines</h2>
+<p>All the Guidelines can be cleared by using the <code>Ruler Menu → Guidelines → Clear All</code> submenu or via the <em>Guidelines</em> dialog.
+Guidelines are also cleared before Import.</p>
+</div>
+<div id="locking-to-guidelines" class="section level2">
+<h2>Locking to Guidelines</h2>
 </div>
 <div id="importing-and-exporting-guidelines" class="section level2">
 <h2>Importing and Exporting Guidelines</h2>
+<p>You can import and export Guidelines by using the <code>Ruler Menu → Guidelines → Import</code> or the <code>Ruler Menu → Guidelines → Export</code> submenus or via the <em>Guidelines</em> dialog.
+Either of these options will display a File dialog so that you can select the file to load or save.</p>
+<blockquote>
+<p>Importing Guidelines will overwrite any existing Guidelines on the ruler.</p>
+</blockquote>
+<div id="guideline-file-format" class="section level3">
+<h3>Guideline File Format</h3>
+<p>Guidelines can be exported to/imported from a simple text file.
+The file contains a list of numbers which denote the Guideline pixel position on the ruler.
+These files have no preferred extension.</p>
+<pre><code>20
+100
+150
+620</code></pre>
+</div>
+</div>
+<div id="guideline-dialog" class="section level2">
+<h2>Guideline dialog</h2>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<img src="images/guideline-dialog.png" alt="The Guideline dialog."  />
+<p class="caption">
+Figure 2: The Guideline dialog.
+</p>
+</div>
+<p>The Guideline dialog can be accessed via the <code>Ruler Menu → Guidelines → Edit Guidelines</code> submenu.
+This Dialog accepts manual input of Guideline positions and can remove specific Guidelines from the list or clear all Guidelines.</p>
 
 </div>
 </div>
