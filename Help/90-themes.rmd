@@ -60,89 +60,91 @@ If two colours are provided then the colour will be a gradient of both colours.
 
 #### Fields
 
-- Name <string> *The name of the theme.*
-- Cursor *Cursor themeing.*
-  - Line <colour> *The cursor line colour.*
-  - Font *The font used for the cursor.*
-    - Family <string> *The font family.*
-    - Size <decimal> *The font size.*
-    - Bold <boolean> *Whether the font is bold.*
-    - Italic <boolean> *Whether the font is italicised.*
-    - Underline <boolean> *Whether the font is underlined.*
-    - Strikeout <boolean> *Whether the font is striked out.*
-  - Background <colours> *The background colours for the cursor.*
-  - Frozen *The frozen colours for the cursor.*
-    - Line <colour> *The frozen line colour.*
-    - Font *The font used for the frozen cursor.*
-      - Family <string> *The font family.*
-      - Size <decimal> *The font size.*
-      - Bold <boolean> *Whether the font is bold.*
-      - Italic <boolean> *Whether the font is italicised.*
-      - Underline <boolean> *Whether the font is underlined.*
-      - Strikeout <boolean> *Whether the font is striked out.*
-    - Background <colours> *The frozen background colours.*
-  - Locked *The guideline locked colours for the cursor.*
-    - Line <colour> *The locked line colour.*
-    - Font *The font used for the locked cursor.*
-      - Family <string> *The font family.*
-      - Size <decimal> *The font size.*
-      - Bold <boolean> *Whether the font is bold.*
-      - Italic <boolean> *Whether the font is italicised.*
-      - Underline <boolean> *Whether the font is underlined.*
-      - Strikeout <boolean> *Whether the font is striked out.*
-    - Background <colours> *The locked background colours.*
-- Ruler *Ruler themeing.*
-  - Size <number> *The size of the ruler in pixels.*
-  - Background <colours> *The background colour for the ruler.*
-  - Border
-    - Colour <colour> *The border colour.*
-    - Spacing <number> *The spacing between the border and the ruler.*
-  - Marks *The hatch marks.*
-    - Colour <colour> *The colour of the hatch marks.*
-    - Size
-      - Horizontal <number> *The size of the hatch marks when the ruler is horizontal.*
-      - Vertical <number> *The size of the hatch marks when the ruler is vertical.*
-    - Zero *The zero hatch mark.*
-        - NumberVisible <boolean> *Whether the number zero is displayed.*
-        - Size
-          - Horizontal <number> *The size of the zero hatch mark when the ruler is horizontal.*
-          - Vertical <number> *The size of the zero hatch mark when the ruler is vertical.*
-    - Sizes <array> *The sizes of the hatch marks.*
-      - Interval <number> *The interval of the hatch marks.*
-      - Colour <colour> *The colour of the hatch marks.*
-      - Size
-        - Horizontal <number> *The size of the hatch marks when the ruler is horizontal.*
-        - Vertical <number> *The size of the hatch marks when the ruler is vertical.*
-  - Numbers *The numbers on the ruler.*
-    - Padding
-      - Horizontal <number> *The padding on the left and right of the numbers.*
-      - Vertical <number> *The padding on the top and bottom of the numbers.*
-    - Colour <colour> *The colour of the numbers.*
-    - Font *The font used for the numbers.*
-      - Family <string> *The font family.*
-      - Size <decimal> *The font size.*
-      - Bold <boolean> *Whether the font is bold.*
-      - Italic <boolean> *Whether the font is italicised.*
-      - Underline <boolean> *Whether the font is underlined.*
-      - Strikeout <boolean> *Whether the font is striked out.*
-    - Display
-      - Interval <number> *The interval at which numbers should appear.*
-  - Guidelines
-    - Guideline *The guidelines.*
-      - Colour <colour> *The colour of the guidelines.*
-      - Size
-        - Horizontal <number> *The size of the guidelines when the ruler is horizontal.*
-        - Vertical <number> *The size of the guidelines when the ruler is vertical.*
-    - Locked *The guideline locked onto.
-      - Colour <colour> *The colour of the guideline that has been locked onto.*
-      - Size
-        - Horizontal <number> *The size of the guideline that has been locked onto when the ruler is horizontal.*
-        - Vertical <number> *The size of the guideline that has been locked onto when the ruler is vertical.*
-    - Nearest *The guideline nearest to the cursor.*
-      - Colour <colour> *The colour of the nearest guideline.*
-      - Size
-        - Horizontal <number> *The size of the nearest guideline when the ruler is horizontal.*
-        - Vertical <number> *The size of the nearest guideline when the ruler is vertical.*
+```yaml
+Name <string> *The name of the theme.*
+Cursor *Cursor themeing.*
+  Line <colour> *The cursor line colour.*
+  Font *The font used for the cursor.*
+    Family <string> *The font family.*
+    Size <decimal> *The font size.*
+    Bold <boolean> *Whether the font is bold.*
+    Italic <boolean> *Whether the font is italicised.*
+    Underline <boolean> *Whether the font is underlined.*
+    Strikeout <boolean> *Whether the font is striked out.*
+  Background <colours> *The background colours for the cursor.*
+  Frozen *The frozen colours for the cursor.*
+    Line <colour> *The frozen line colour.*
+    Font *The font used for the frozen cursor.*
+      Family <string> *The font family.*
+      Size <decimal> *The font size.*
+      Bold <boolean> *Whether the font is bold.*
+      Italic <boolean> *Whether the font is italicised.*
+      Underline <boolean> *Whether the font is underlined.*
+      Strikeout <boolean> *Whether the font is striked out.*
+    Background <colours> *The frozen background colours.*
+  Locked *The guideline locked colours for the cursor.*
+    Line <colour> *The locked line colour.*
+    Font *The font used for the locked cursor.*
+      Family <string> *The font family.*
+      Size <decimal> *The font size.*
+      Bold <boolean> *Whether the font is bold.*
+      Italic <boolean> *Whether the font is italicised.*
+      Underline <boolean> *Whether the font is underlined.*
+      Strikeout <boolean> *Whether the font is striked out.*
+    Background <colours> *The locked background colours.*
+Ruler *Ruler themeing.*
+  Size <number> *The size of the ruler in pixels.*
+  Background <colours> *The background colour for the ruler.*
+  Border
+    Colour <colour> *The border colour.*
+    Spacing <number> *The spacing between the border and the ruler.*
+  Marks *The hatch marks.*
+    Colour <colour> *The colour of the hatch marks.*
+    Size
+      Horizontal <number> *The size of the hatch marks when the ruler is horizontal.*
+      Vertical <number> *The size of the hatch marks when the ruler is vertical.*
+    Zero *The zero hatch mark.*
+        NumberVisible <boolean> *Whether the number zero is displayed.*
+        Size
+          Horizontal <number> *The size of the zero hatch mark when the ruler is horizontal.*
+          Vertical <number> *The size of the zero hatch mark when the ruler is vertical.*
+    Sizes <array> *The sizes of the hatch marks.*
+      Interval <number> *The interval of the hatch marks.*
+      Colour <colour> *The colour of the hatch marks.*
+      Size
+        Horizontal <number> *The size of the hatch marks when the ruler is horizontal.*
+        Vertical <number> *The size of the hatch marks when the ruler is vertical.*
+  Numbers *The numbers on the ruler.*
+    Padding
+      Horizontal <number> *The padding on the left and right of the numbers.*
+      Vertical <number> *The padding on the top and bottom of the numbers.*
+    Colour <colour> *The colour of the numbers.*
+    Font *The font used for the numbers.*
+      Family <string> *The font family.*
+      Size <decimal> *The font size.*
+      Bold <boolean> *Whether the font is bold.*
+      Italic <boolean> *Whether the font is italicised.*
+      Underline <boolean> *Whether the font is underlined.*
+      Strikeout <boolean> *Whether the font is striked out.*
+    Display
+      Interval <number> *The interval at which numbers should appear.*
+  Guidelines
+    Guideline *The guidelines.*
+      Colour <colour> *The colour of the guidelines.*
+      Size
+        Horizontal <number> *The size of the guidelines when the ruler is horizontal.*
+        Vertical <number> *The size of the guidelines when the ruler is vertical.*
+    Locked *The guideline locked onto.
+      Colour <colour> *The colour of the guideline that has been locked onto.*
+      Size
+        Horizontal <number> *The size of the guideline that has been locked onto when the ruler is horizontal.*
+        Vertical <number> *The size of the guideline that has been locked onto when the ruler is vertical.*
+    Nearest *The guideline nearest to the cursor.*
+      Colour <colour> *The colour of the nearest guideline.*
+      Size
+        Horizontal <number> *The size of the nearest guideline when the ruler is horizontal.*
+        Vertical <number> *The size of the nearest guideline when the ruler is vertical.*
+```
 
 #### Visual Guide
 
