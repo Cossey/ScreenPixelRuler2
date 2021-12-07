@@ -24,7 +24,7 @@
 <meta name="author" content="Stewart Cossey" />
 
 
-<meta name="date" content="2021-12-06" />
+<meta name="date" content="2021-12-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,8 +140,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#features"><i class="fa fa-check"></i>Features</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#providing-feedback"><i class="fa fa-check"></i>Providing feedback</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html"><i class="fa fa-check"></i>User Interface</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html"><i class="fa fa-check"></i>User Interface</a><ul>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#rotate"><i class="fa fa-check"></i>Rotating the ruler</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#flip"><i class="fa fa-check"></i>Flipping the ruler</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#freeze"><i class="fa fa-check"></i>Freezing the Cursor</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#exit"><i class="fa fa-check"></i>Exiting the software</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#help"><i class="fa fa-check"></i>Accessing this help</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html"><i class="fa fa-check"></i>Guidelines</a><ul>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#adding-and-removing-guidelines"><i class="fa fa-check"></i>Adding and Removing Guidelines</a></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#clearing-guidelines"><i class="fa fa-check"></i>Clearing Guidelines</a></li>
@@ -151,7 +158,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#guideline-dialog"><i class="fa fa-check"></i>Guideline dialog</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html"><i class="fa fa-check"></i>Global Shortcuts</a></li>
+<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html"><i class="fa fa-check"></i>Keyboard Shortcuts</a><ul>
+<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html#global-shortcuts"><i class="fa fa-check"></i>Global Shortcuts</a></li>
+<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html#local-shortcuts"><i class="fa fa-check"></i>Local Shortcuts</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html"><i class="fa fa-check"></i>Configuration</a><ul>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#options"><i class="fa fa-check"></i>Options</a><ul>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#theme"><i class="fa fa-check"></i>Theme</a></li>
@@ -195,12 +205,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="header">
 <h1 class="title">Screen Pixel Ruler [master]</h1>
 <p class="author"><em>Stewart Cossey</em></p>
-<p class="date"><em>2021-12-06</em></p>
+<p class="date"><em>2021-12-07</em></p>
 </div>
 <div id="overview" class="section level1">
 <h1>Overview</h1>
 <p>Screen Pixel Ruler is a on screen ruler that can assist in measuring elements from web pages, documents or software which does not implement a native ruler.
 Based on .NET Core 3.1 and inspired by MioPlanet PixelRuler, this software is supported on Windows 7 and higher.</p>
+<p>This software is free and open source; licensed under the <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-Clause License</a>.</p>
 <div id="features" class="section level2">
 <h2>Features</h2>
 <ul>
@@ -219,6 +230,11 @@ Based on .NET Core 3.1 and inspired by MioPlanet PixelRuler, this software is su
 <h2>Installation</h2>
 <p>Screen Pixel Ruler can be installed from either the <a href="https://github.com/Cossey/ScreenPixelRuler2/releases">Installer</a> or via <a href="https://chocolatey.org">Chocolatey Package Management</a> by running the command <code>choco install screenpixelruler</code>.
 Both the installer and package will install the .NET Core 3.1 runtime if it is not present.</p>
+</div>
+<div id="providing-feedback" class="section level2">
+<h2>Providing feedback</h2>
+<p>You can report bugs or request features by opening an issue on the <a href="https://github.com/Cossey/ScreenPixelRuler2">GitHub repository</a>.
+Any contributions are also welcome and can be done by creating a pull request.</p>
 
 </div>
 </div>
@@ -282,6 +298,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

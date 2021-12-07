@@ -24,7 +24,7 @@
 <meta name="author" content="Stewart Cossey" />
 
 
-<meta name="date" content="2021-12-06" />
+<meta name="date" content="2021-12-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,8 +140,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#features"><i class="fa fa-check"></i>Features</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#providing-feedback"><i class="fa fa-check"></i>Providing feedback</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html"><i class="fa fa-check"></i>User Interface</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html"><i class="fa fa-check"></i>User Interface</a><ul>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#rotate"><i class="fa fa-check"></i>Rotating the ruler</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#flip"><i class="fa fa-check"></i>Flipping the ruler</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#freeze"><i class="fa fa-check"></i>Freezing the Cursor</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#exit"><i class="fa fa-check"></i>Exiting the software</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#help"><i class="fa fa-check"></i>Accessing this help</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html"><i class="fa fa-check"></i>Guidelines</a><ul>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#adding-and-removing-guidelines"><i class="fa fa-check"></i>Adding and Removing Guidelines</a></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#clearing-guidelines"><i class="fa fa-check"></i>Clearing Guidelines</a></li>
@@ -151,7 +158,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#guideline-dialog"><i class="fa fa-check"></i>Guideline dialog</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html"><i class="fa fa-check"></i>Global Shortcuts</a></li>
+<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html"><i class="fa fa-check"></i>Keyboard Shortcuts</a><ul>
+<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html#global-shortcuts"><i class="fa fa-check"></i>Global Shortcuts</a></li>
+<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html#local-shortcuts"><i class="fa fa-check"></i>Local Shortcuts</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html"><i class="fa fa-check"></i>Configuration</a><ul>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#options"><i class="fa fa-check"></i>Options</a><ul>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#theme"><i class="fa fa-check"></i>Theme</a></li>
@@ -200,19 +210,24 @@ Screen Pixel Ruler comes with some supplied themes.</p>
 <h2>Supplied Themes</h2>
 <div id="default" class="section level3">
 <h3>Default</h3>
-<p>A simple black and white theme with a thin ruler. Great contrasting for easy visibility.</p>
+<p><img src="images/theme-default.png" /><!-- --></p>
+<p>A simple black and white theme with a thin ruler.
+The built-in default theme.</p>
 </div>
 <div id="panda" class="section level3">
 <h3>Panda</h3>
-<p>A dark themed and large ruler.</p>
+<p><img src="images/theme-panda.png" /><!-- --></p>
+<p>A high contrast theme with a thick ruler for easy visibility.</p>
 </div>
 <div id="mioplanet-pixelruler" class="section level3">
 <h3>MioPlanet PixelRuler</h3>
-<p>A blue ruled designed to mimic the MioPlanet PixelRuler software.</p>
+<p><img src="images/theme-mioplanet.png" /><!-- --></p>
+<p>A blue gradient ruled designed to mimic the look of the MioPlanet PixelRuler software.</p>
 </div>
 <div id="white-chocolate" class="section level3">
 <h3>White Chocolate</h3>
-<p>A white on brown coloured theme.</p>
+<p>A white on brown coloured theme.
+Simple pallet swap of the Default theme.</p>
 </div>
 </div>
 <div id="location-1" class="section level2">
@@ -333,10 +348,10 @@ Ruler: Ruler themeing.
 </div>
 <div id="visual-guide" class="section level4">
 <h4>Visual Guide</h4>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
 <img src="images/ruler-theme.png" alt="The Ruler user interface with theme elements highlighted."  />
 <p class="caption">
-Figure 4: The Ruler user interface with theme elements highlighted.
+Figure 5: The Ruler user interface with theme elements highlighted.
 </p>
 </div>
 <p>Zero is the Zero Mark which is explained further below.</p>
@@ -348,23 +363,24 @@ The other properties under <code>Ruler → Number</code> determine the font, col
 Fruther explaination below.</p>
 <p>Background is the background colour of the ruler.
 This is set at <code>Ruler → Background</code> and can be a single colour or a gradient when two colours are provided.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
 <img src="images/ruler-cursor.png" alt="The cursor that appears in the ruler."  />
 <p class="caption">
-Figure 5: The cursor that appears in the ruler.
+Figure 6: The cursor that appears in the ruler.
 </p>
 </div>
-<p>The above options are all configured in the <code>Ruler → Cursor</code> section.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<p>The above options are all configured in the <code>Cursor</code> section.
+<code>Cursor → Frozen</code> is used when the cursor is <a href="ui.html#freeze">frozen</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-10"></span>
 <img src="images/ruler-hashmarks.png" alt="The ruler hatch marks."  />
 <p class="caption">
-Figure 6: The ruler hatch marks.
+Figure 7: The ruler hatch marks.
 </p>
 </div>
-<p>Zero Mark hatch mark is provided by the <code>Ruler → Marks → Zero → Size</code> property.
+<p><em>Zero Mark</em> hatch mark is provided by the <code>Ruler → Marks → Zero → Size</code> property.
 You can also set the <code>Ruler → Marks → Zero → NumberVisible</code> property to <code>false</code> to omit the 0 number.</p>
 <p>Size interval 10 and Size Interval 50 hatch marks are provided by the <code>Ruler → Marks → Sizes</code> array.
-The 50 pixel interval hatch mark:</p>
+Below is an example of a 50 pixel interval hatch mark:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="themes.html#cb3-1"></a><span class="co">...</span></span>
 <span id="cb3-2"><a href="themes.html#cb3-2"></a><span class="co">  Marks:</span></span>
 <span id="cb3-3"><a href="themes.html#cb3-3"></a><span class="co">    Sizes:</span></span>
@@ -374,22 +390,34 @@ The 50 pixel interval hatch mark:</p>
 <span id="cb3-7"><a href="themes.html#cb3-7"></a><span class="co">          Horizontal: 20</span></span>
 <span id="cb3-8"><a href="themes.html#cb3-8"></a><span class="co">          Vertical: 40</span></span>
 <span id="cb3-9"><a href="themes.html#cb3-9"></a><span class="co">...</span></span></code></pre></div>
-<p>Marks Size hatch marks are provided by the <code>Ruler → Marks → Size</code> properties.
-The colour is provided by the <code>Ruler → Marks → Colour</code> property.</p>
+<p><em>Marks Size</em> hatch marks are provided by the <code>Ruler → Marks → Size</code> properties.
+The colour is provided by the <code>Ruler → Marks → Colour</code> property.
+Every even pixel on th ruler will have a hatch mark provided by this value.
+Set the size to <code>0</code> to omit the hatch marks.</p>
 </div>
 <div id="default-values" class="section level4">
 <h4>Default Values</h4>
-<p>Font:<br />
-Family: Courier New<br />
-Size: 9<br />
-Bold: false<br />
-Italic: false<br />
-Underline: false<br />
-Strikeout: false</p>
-<p>Cursor → Locked:<br />
-Cursor → Frozen</p>
-<p>Cursor → Frozen:<br />
-Cursor</p>
+<div class="line-block">Font<br />
+    Family: Courier New<br />
+    Size: 9<br />
+    Bold: false<br />
+    Italic: false<br />
+    Underline: false<br />
+    Strikeout: false</div>
+<div class="line-block">Cursor → Locked<br />
+    Cursor → Frozen</div>
+<div class="line-block">Cursor → Frozen<br />
+    Cursor</div>
+<div class="line-block">Ruler → Background: <span class="math display">\[ White \]</span></div>
+<div class="line-block">Ruler → Marks → Zero → NumberVisible: false</div>
+<div class="line-block">Ruler → Guidelines → Nearest<br />
+    Ruler → Guidelines → Guideline</div>
+<div class="line-block">Ruler → Guidelines → Locked<br />
+    Ruler → Guidelines → Guideline</div>
+<div class="line-block">Ruler → Guideline → Guideline → Size<br />
+     Ruler → Size</div>
+<div class="line-block">Ruler → Guideline → Guideline → Colour<br />
+     Ruler → Marks → Colour</div>
 
 </div>
 </div>
@@ -455,6 +483,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
