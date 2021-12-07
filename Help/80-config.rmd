@@ -16,9 +16,19 @@ Allows you to change the [theme](\#themes) of the ruler.
 ### Primary Click, Middle Click, Button 4 Click, Button 5 Click
 
 Allows you to assign mouse button clicking the ruler to specific functionality.
-Pressing and holding the primary click will allow you to move the ruler.
+The following functions are assignable:
+- None *Do nothing for the mouse button.*
+- Rotate *Rotates the ruler.*
+- Flip *Flips the ruler.*
+- Add Guide *Adds a guideline to the ruler.*
+- Toggle Guide *Toggles the guideline at the current cursor position.*
+- Remove Nearest Guide *Removes the nearest guideline to the cursor.*
+- Remove All Guides *Removes all guidelines.*
+- Lock to Nearest Guide *Locks the mouse to the nearest guideline to the cursor.*
 
-> The primary click is determined by the *Select your primary button* option in the *Mouse Settings* on Microsoft Windows.
+> Pressing and holding the primary click will always allow you to move the ruler.
+
+> The primary click is determined by the *Select your primary button* option in the *Mouse Settings* in Microsoft Windows.
 
 ## Location
 

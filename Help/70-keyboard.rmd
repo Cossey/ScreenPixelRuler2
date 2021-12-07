@@ -1,6 +1,8 @@
-# Global Shortcuts {#keyboard}
+# Keyboard Shortcuts {#keyboard}
 
-> These shortcuts can be used even when the Screen Pixel Ruler is not focused.
+## Global Shortcuts
+
+These shortcuts can be used even when the Screen Pixel Ruler is not focused.
 
 | Keystroke               | Function                                                     |
 |:----------------------- |:------------------------------------------------------------ |
@@ -12,3 +14,11 @@
 | Ctrl + Shift + Alt + A  | Add Guideline at current position on the ruler.              |
 | Ctrl + Shift + Alt + D  | Delete nearest Guideline from current position on the ruler. |
 | Ctrl + Shift + Alt + G  | Lock mouse position to nearest Guideline.                    |
+
+## Local Shortcuts
+
+These shortcuts only work when the Screen Pixel Ruler has focus.
+
+| Keystroke               | Function                                                     |
+|:----------------------- |:------------------------------------------------------------ |
+| F1                      | Opens this help guide.                                       |
