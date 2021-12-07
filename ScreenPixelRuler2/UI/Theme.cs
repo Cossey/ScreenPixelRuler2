@@ -135,27 +135,27 @@ namespace ScreenPixelRuler2
 
         public int GetGuidelineSize(bool vertical, bool locked, bool nearest)
         {
-            int size = Ruler.Guidelines != null && Ruler.Guidelines.Guideline != null && Ruler.Guidelines.Guideline.Size != null ? Ruler.Guidelines.Guideline.Size.GetVH(vertical) : Ruler.Size;
+            int size = Ruler?.Guidelines?.Guideline?.Size?.GetVH(vertical) ?? Ruler.Size;
             if (nearest)
             {
-                size = Ruler.Guidelines != null && Ruler.Guidelines.Nearest != null && Ruler.Guidelines.Nearest.Size != null ? Ruler.Guidelines.Nearest.Size.GetVH(vertical) : size;
+                size = Ruler?.Guidelines?.Nearest?.Size?.GetVH(vertical) ?? size;
             }
             if (locked)
             {
-                size = Ruler.Guidelines != null && Ruler.Guidelines.Locked != null && Ruler.Guidelines.Locked.Size != null ? Ruler.Guidelines.Locked.Size.GetVH(vertical) : size;
+                size = Ruler?.Guidelines?.Locked?.Size?.GetVH(vertical) ?? size;
             }
             return size;
         }
         public Pen GetGuidelinePen(bool locked, bool nearest)
         {
-            Color penColour = Ruler.Guidelines != null && Ruler.Guidelines.Guideline != null && !Ruler.Guidelines.Guideline.Colour.IsEmpty ? Ruler.Guidelines.Guideline.Colour : Ruler.Marks.Colour;
+            Color penColour = Ruler?.Guidelines?.Guideline?.Colour.IsEmpty ?? true ? Ruler.Marks.Colour : Ruler.Guidelines.Guideline.Colour;
             if (nearest)
             {
-                penColour = Ruler.Guidelines != null && Ruler.Guidelines.Nearest != null && !Ruler.Guidelines.Nearest.Colour.IsEmpty ? Ruler.Guidelines.Nearest.Colour : penColour;
+                penColour = Ruler?.Guidelines?.Nearest?.Colour.IsEmpty ?? true ? penColour : Ruler.Guidelines.Nearest.Colour;
             }
             if (locked)
             {
-                penColour = Ruler.Guidelines != null && Ruler.Guidelines.Locked != null && !Ruler.Guidelines.Locked.Colour.IsEmpty ? Ruler.Guidelines.Locked.Colour : penColour;
+                penColour = Ruler?.Guidelines?.Locked?.Colour.IsEmpty ?? true ? penColour : Ruler.Guidelines.Locked.Colour;
             }
             return new Pen(penColour, 1);
         }
@@ -168,8 +168,7 @@ namespace ScreenPixelRuler2
             }
             else if (Ruler.Background.Count > 1)
             {
-                LinearGradientMode gradientMode = verticality ? LinearGradientMode.Horizontal : LinearGradientMode.Vertical;
-                return new LinearGradientBrush(clientArea, direction ? Ruler.Background[0] : Ruler.Background[1], direction ? Ruler.Background[1] : Ruler.Background[0], gradientMode);
+                return new LinearGradientBrush(clientArea, direction ? Ruler.Background[0] : Ruler.Background[1], direction ? Ruler.Background[1] : Ruler.Background[0], verticality ? LinearGradientMode.Horizontal : LinearGradientMode.Vertical);
             }
             else
             {
@@ -208,7 +207,7 @@ namespace ScreenPixelRuler2
 
         public bool GetShowNumberZero()
         {
-            return Ruler.Marks != null && Ruler.Marks.Zero != null ? Ruler.Marks.Zero.NumberVisible : false;
+            return Ruler?.Marks?.Zero?.NumberVisible ?? false;
         }
 
         public Brush GetNumberBrush()
@@ -218,27 +217,27 @@ namespace ScreenPixelRuler2
 
         public int GetNumberPadding(bool vertical)
         {
-            return vertical ? Ruler.Numbers?.Padding?.Vertical ?? 0 : Ruler.Numbers?.Padding?.Horizontal ?? 0;
+            return Ruler?.Numbers?.Padding?.GetVH(vertical) ?? 0;
         }
 
         public Pen GetZeroPen()
         {
-            return new Pen(Ruler.Marks.Zero == null || Ruler.Marks.Zero.Colour.IsEmpty ? Ruler.Marks.Colour : Ruler.Marks.Zero.Colour, 1);
+            return new Pen(Ruler?.Marks?.Zero?.Colour.IsEmpty ?? true ? Ruler?.Marks?.Colour ?? Color.Transparent : Ruler.Marks.Zero.Colour, 1);
         }
 
         public int GetZeroLineSize(bool vertical)
         {
-            return Ruler.Marks.Zero == null ? Ruler.Marks.Size.GetVH(vertical) : Ruler.Marks.Zero.Size.GetVH(vertical);
+            return Ruler?.Marks?.Zero?.Size?.GetVH(vertical) ?? Ruler?.Marks?.Size?.GetVH(vertical) ?? 0;
         }
 
         public int GetBorderSpacing()
         {
-            return Ruler != null && Ruler.Border != null ? Ruler.Border.Spacing : 15;
+            return Ruler?.Border?.Spacing ?? 15;
         }
 
         public Color GetBorderColour()
         {
-            return Ruler != null && Ruler.Border != null && !Ruler.Border.Colour.IsEmpty ? Ruler.Border.Colour : Color.Transparent;
+            return Ruler?.Border?.Colour.IsEmpty ?? true ? Color.Transparent : Ruler.Border.Colour;
         }
 
         public Pen GetCursorLinePen(bool frozen, bool locked)
@@ -286,14 +285,14 @@ namespace ScreenPixelRuler2
             }
             else if (colors.Count > 1)
             {
-                LinearGradientMode gradientMode = verticality ? LinearGradientMode.Horizontal : LinearGradientMode.Vertical;
-                return new LinearGradientBrush(clientArea, direction ? colors[0] : colors[1], direction ? colors[1] : colors[0], gradientMode);
+                return new LinearGradientBrush(clientArea, direction ? colors[0] : colors[1], direction ? colors[1] : colors[0], verticality ? LinearGradientMode.Horizontal : LinearGradientMode.Vertical);
             }
             else
             {
                 return new SolidBrush(colors[0]);
             }
         }
+
         public int GetRulerSize()
         {
             int size = Ruler?.Size ?? 40;
