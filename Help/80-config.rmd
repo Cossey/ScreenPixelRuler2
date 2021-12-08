@@ -13,9 +13,10 @@ knitr::include_graphics("images/options.png")
 
 Allows you to change the [theme](\#themes) of the ruler.
 
-### Primary Click, Middle Click, Button 4 Click, Button 5 Click
+### Mouse button clicks
 
 Allows you to assign mouse button clicking the ruler to specific functionality.
+Supports the Primary, Middle, Button 4, and Button 5 mouse buttons.
 The following functions are assignable:
 - None *Do nothing for the mouse button.*
 - Rotate *Rotates the ruler.*
@@ -26,9 +27,9 @@ The following functions are assignable:
 - Remove All Guides *Removes all guidelines.*
 - Lock to Nearest Guide *Locks the mouse to the nearest guideline to the cursor.*
 
-> Pressing and holding the primary click will always allow you to move the ruler.
+> Pressing and holding the primary mouse button will always allow you to move the ruler.
 
-> The primary click is determined by the *Select your primary button* option in the *Mouse Settings* in Microsoft Windows.
+> The primary mouse button is determined by the *Select your primary button* option in the *Mouse Settings* in Microsoft Windows.
 
 ## Location
 

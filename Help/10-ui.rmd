@@ -14,7 +14,7 @@ The ruler will stay extended if the cursor is frozen or if a Guideline has been 
 Guidelines are covered in further detail in the [Guidelines](\#guidelines) section.
 
 > The primary mouse button is determined by the *Select your primary button* option in the *Mouse Settings* in Microsoft Windows.
-> Normally, it is the left mouse button.
+> Typically it is the left mouse button.
 
 ## Rotating the ruler {#rotate}
 
@@ -32,6 +32,12 @@ knitr::include_graphics("images/ruler-flipped.png")
 The hatch marks on the ruler can be flipped to be displayed on the opposite side of the ruler.
 This is done by pressing the `Ctrl + Shift + Alt + E` key combination or by the `Ruler Menu → Flip Direction` menu item.
 This is assignable to a mouse button click via the `Flip` function.
+
+## Shifting to the cursor {#shifttocursor}
+
+The ruler can be shifted to the cursor position using the `Ctrl + Shift + Alt + S` key combination.
+This will shift the ruler along its current axis and position the 0 on the ruler to the cursor position.
+Holding down the key will continuously shift the ruler to the cursor position.
 
 ## Freezing the Cursor {#freeze}
 

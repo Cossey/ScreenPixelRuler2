@@ -45,9 +45,11 @@ Chocolatey: \%chocolateyinstall\%\\lib\\screenpixelruler\\tools
 ## Creating a Theme
 
 You can create your own themes for Screen Pixel Ruler. 
-Themes have a `thm` file extension and are writtem in [yaml](https://yaml.org).
+Themes have a `thm` file extension and are written in [yaml](https://yaml.org).
 
 ### Objects
+
+Below are objects and explainations of them that can be used in the theme file.
 
 `<string>` A string of text.
 
@@ -66,11 +68,13 @@ Supported input types are:
 - `ColorName` Name
 
 `<colours>` An array of either one (`[ <colour> ]`) or two colour values (`[ <colour>, <colour> ]`).
-If two colours are provided then the colour will be a gradient of both colours.
+If two colours are provided then the colour will be a gradient.
 
 > For a list of colour names see the [KnownColor Enum](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.knowncolor?view=netcore-3.1) reference. 
 
 ### File Format
+
+The rendering order of the elements are `Background ← Border ← Hatch Marks ← Guidelines ← Cursor`.
 
 #### Fields
 
@@ -210,37 +214,43 @@ Below is an example of a 50 pixel interval hatch mark:
 
 *Marks Size* hatch marks are provided by the `Ruler → Marks → Size` properties.
 The colour is provided by the `Ruler → Marks → Colour` property.
-Every even pixel on th ruler will have a hatch mark provided by this value.
-Set the size to `0` to omit the hatch marks.
+Every even pixel on the ruler will have a hatch mark provided by this value.
+Set the size to `0` to omit the default hatch marks.
 
 #### Default Values
 
 | Font
-|     Family: Courier New
-|     Size: 9
-|     Bold: false
-|     Italic: false
-|     Underline: false
-|     Strikeout: false
-
+|     Family: `Courier New`
+|     Size: `9`
+|     Bold: `false`
+|     Italic: `false`
+|     Underline: `false`
+|     Strikeout: `false`
+|
 | Cursor → Locked
 |     Cursor → Frozen
-
+|
 | Cursor → Frozen
 |     Cursor
-
-| Ruler → Background: \[ White \]
-
-| Ruler → Marks → Zero → NumberVisible: false
-
+|
+| Ruler → Background
+|      `White`
+|
+| Ruler → Marks → Zero → NumberVisible
+|     `false`
+|
+| Ruler → Marks → Zero → Colour
+|     Ruler → Marks → Colour
+|         `Transparent`
+|
 | Ruler → Guidelines → Nearest
 |     Ruler → Guidelines → Guideline
-
+|
 | Ruler → Guidelines → Locked
 |     Ruler → Guidelines → Guideline
-
+|
 | Ruler → Guideline → Guideline → Size
 |      Ruler → Size
-
+|
 | Ruler → Guideline → Guideline → Colour
 |      Ruler → Marks → Colour
