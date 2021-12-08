@@ -120,7 +120,7 @@
 
 \title{Screen Pixel Ruler {[}master{]}}
 \author{Stewart Cossey}
-\date{2021-12-07}
+\date{2021-12-08}
 
 \begin{document}
 \maketitle
@@ -192,7 +192,7 @@ Guidelines are covered in further detail in the \protect\hyperlink{guidelines}{G
 
 \begin{quote}
 The primary mouse button is determined by the \emph{Select your primary button} option in the \emph{Mouse Settings} in Microsoft Windows.
-Normally, it is the left mouse button.
+Typically it is the left mouse button.
 \end{quote}
 
 \hypertarget{rotate}{%
@@ -215,6 +215,13 @@ When rotating the ruler, the axis changes but any \protect\hyperlink{guidelines}
 The hatch marks on the ruler can be flipped to be displayed on the opposite side of the ruler.
 This is done by pressing the \texttt{Ctrl\ +\ Shift\ +\ Alt\ +\ E} key combination or by the \texttt{Ruler\ Menu\ →\ Flip\ Direction} menu item.
 This is assignable to a mouse button click via the \texttt{Flip} function.
+
+\hypertarget{shifttocursor}{%
+\section{Shifting to the cursor}\label{shifttocursor}}
+
+The ruler can be shifted to the cursor position using the \texttt{Ctrl\ +\ Shift\ +\ Alt\ +\ S} key combination.
+This will shift the ruler along its current axis and position the 0 on the ruler to the cursor position.
+Holding down the key will continuously shift the ruler to the cursor position.
 
 \hypertarget{freeze}{%
 \section{Freezing the Cursor}\label{freeze}}
@@ -386,10 +393,11 @@ This will then display the \emph{Options window} where you can change the config
 
 Allows you to change the \protect\hyperlink{themes}{theme} of the ruler.
 
-\hypertarget{primary-click-middle-click-button-4-click-button-5-click}{%
-\subsection{Primary Click, Middle Click, Button 4 Click, Button 5 Click}\label{primary-click-middle-click-button-4-click-button-5-click}}
+\hypertarget{mouse-button-clicks}{%
+\subsection{Mouse button clicks}\label{mouse-button-clicks}}
 
 Allows you to assign mouse button clicking the ruler to specific functionality.
+Supports the Primary, Middle, Button 4, and Button 5 mouse buttons.
 The following functions are assignable:
 - None \emph{Do nothing for the mouse button.}
 - Rotate \emph{Rotates the ruler.}
@@ -401,11 +409,11 @@ The following functions are assignable:
 - Lock to Nearest Guide \emph{Locks the mouse to the nearest guideline to the cursor.}
 
 \begin{quote}
-Pressing and holding the primary click will always allow you to move the ruler.
+Pressing and holding the primary mouse button will always allow you to move the ruler.
 \end{quote}
 
 \begin{quote}
-The primary click is determined by the \emph{Select your primary button} option in the \emph{Mouse Settings} in Microsoft Windows.
+The primary mouse button is determined by the \emph{Select your primary button} option in the \emph{Mouse Settings} in Microsoft Windows.
 \end{quote}
 
 \hypertarget{location}{%
@@ -465,10 +473,12 @@ Chocolatey: \%chocolateyinstall\%\textbackslash lib\textbackslash screenpixelrul
 \section{Creating a Theme}\label{creating-a-theme}}
 
 You can create your own themes for Screen Pixel Ruler.
-Themes have a \texttt{thm} file extension and are writtem in \href{https://yaml.org}{yaml}.
+Themes have a \texttt{thm} file extension and are written in \href{https://yaml.org}{yaml}.
 
 \hypertarget{objects}{%
 \subsection{Objects}\label{objects}}
+
+Below are objects and explainations of them that can be used in the theme file.
 
 \texttt{\textless{}string\textgreater{}} A string of text.
 
@@ -487,7 +497,7 @@ Supported input types are:
 - \texttt{ColorName} Name
 
 \texttt{\textless{}colours\textgreater{}} An array of either one (\texttt{{[}\ \textless{}colour\textgreater{}\ {]}}) or two colour values (\texttt{{[}\ \textless{}colour\textgreater{},\ \textless{}colour\textgreater{}\ {]}}).
-If two colours are provided then the colour will be a gradient of both colours.
+If two colours are provided then the colour will be a gradient.
 
 \begin{quote}
 For a list of colour names see the \href{https://docs.microsoft.com/en-us/dotnet/api/system.drawing.knowncolor?view=netcore-3.1}{KnownColor Enum} reference.
@@ -495,6 +505,8 @@ For a list of colour names see the \href{https://docs.microsoft.com/en-us/dotnet
 
 \hypertarget{file-format}{%
 \subsection{File Format}\label{file-format}}
+
+The rendering order of the elements are \texttt{Background\ ←\ Border\ ←\ Hatch\ Marks\ ←\ Guidelines\ ←\ Cursor}.
 
 \hypertarget{fields}{%
 \subsubsection{Fields}\label{fields}}
@@ -644,39 +656,45 @@ Below is an example of a 50 pixel interval hatch mark:
 
 \emph{Marks Size} hatch marks are provided by the \texttt{Ruler\ →\ Marks\ →\ Size} properties.
 The colour is provided by the \texttt{Ruler\ →\ Marks\ →\ Colour} property.
-Every even pixel on th ruler will have a hatch mark provided by this value.
-Set the size to \texttt{0} to omit the hatch marks.
+Every even pixel on the ruler will have a hatch mark provided by this value.
+Set the size to \texttt{0} to omit the default hatch marks.
 
 \hypertarget{default-values}{%
 \subsubsection{Default Values}\label{default-values}}
 
 Font\\
-\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Family: Courier New\\
-\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Size: 9\\
-\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Bold: false\\
-\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Italic: false\\
-\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Underline: false\\
-\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Strikeout: false
-
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Family: \texttt{Courier\ New}\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Size: \texttt{9}\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Bold: \texttt{false}\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Italic: \texttt{false}\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Underline: \texttt{false}\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Strikeout: \texttt{false}\\
+~\\
 Cursor → Locked\\
-\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Cursor → Frozen
-
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Cursor → Frozen\\
+~\\
 Cursor → Frozen\\
-\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Cursor
-
-Ruler → Background: \[ White \]
-
-Ruler → Marks → Zero → NumberVisible: false
-
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Cursor\\
+~\\
+Ruler → Background\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\texttt{White}\\
+~\\
+Ruler → Marks → Zero → NumberVisible\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\texttt{false}\\
+~\\
+Ruler → Marks → Zero → Colour\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Ruler → Marks → Colour\\
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\texttt{Transparent}\\
+~\\
 Ruler → Guidelines → Nearest\\
-\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Ruler → Guidelines → Guideline
-
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Ruler → Guidelines → Guideline\\
+~\\
 Ruler → Guidelines → Locked\\
-\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Ruler → Guidelines → Guideline
-
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Ruler → Guidelines → Guideline\\
+~\\
 Ruler → Guideline → Guideline → Size\\
-\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Ruler → Size
-
+\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Ruler → Size\\
+~\\
 Ruler → Guideline → Guideline → Colour\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Ruler → Marks → Colour
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Stewart Cossey" />
 
 
-<meta name="date" content="2021-12-07" />
+<meta name="date" content="2021-12-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -145,6 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html"><i class="fa fa-check"></i>User Interface</a><ul>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#rotate"><i class="fa fa-check"></i>Rotating the ruler</a></li>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#flip"><i class="fa fa-check"></i>Flipping the ruler</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#shifttocursor"><i class="fa fa-check"></i>Shifting to the cursor</a></li>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#freeze"><i class="fa fa-check"></i>Freezing the Cursor</a></li>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#exit"><i class="fa fa-check"></i>Exiting the software</a></li>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#help"><i class="fa fa-check"></i>Accessing this help</a></li>
@@ -165,7 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html"><i class="fa fa-check"></i>Configuration</a><ul>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#options"><i class="fa fa-check"></i>Options</a><ul>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#theme"><i class="fa fa-check"></i>Theme</a></li>
-<li class="chapter" data-level="" data-path="config.html"><a href="config.html#primary-click-middle-click-button-4-click-button-5-click"><i class="fa fa-check"></i>Primary Click, Middle Click, Button 4 Click, Button 5 Click</a></li>
+<li class="chapter" data-level="" data-path="config.html"><a href="config.html#mouse-button-clicks"><i class="fa fa-check"></i>Mouse button clicks</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#location"><i class="fa fa-check"></i>Location</a></li>
 </ul></li>
@@ -218,9 +219,10 @@ Figure 4: The options window.
 <h3>Theme</h3>
 <p>Allows you to change the <a href="themes.html#themes">theme</a> of the ruler.</p>
 </div>
-<div id="primary-click-middle-click-button-4-click-button-5-click" class="section level3">
-<h3>Primary Click, Middle Click, Button 4 Click, Button 5 Click</h3>
+<div id="mouse-button-clicks" class="section level3">
+<h3>Mouse button clicks</h3>
 <p>Allows you to assign mouse button clicking the ruler to specific functionality.
+Supports the Primary, Middle, Button 4, and Button 5 mouse buttons.
 The following functions are assignable:
 - None <em>Do nothing for the mouse button.</em>
 - Rotate <em>Rotates the ruler.</em>
@@ -231,10 +233,10 @@ The following functions are assignable:
 - Remove All Guides <em>Removes all guidelines.</em>
 - Lock to Nearest Guide <em>Locks the mouse to the nearest guideline to the cursor.</em></p>
 <blockquote>
-<p>Pressing and holding the primary click will always allow you to move the ruler.</p>
+<p>Pressing and holding the primary mouse button will always allow you to move the ruler.</p>
 </blockquote>
 <blockquote>
-<p>The primary click is determined by the <em>Select your primary button</em> option in the <em>Mouse Settings</em> in Microsoft Windows.</p>
+<p>The primary mouse button is determined by the <em>Select your primary button</em> option in the <em>Mouse Settings</em> in Microsoft Windows.</p>
 </blockquote>
 </div>
 </div>
@@ -306,20 +308,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
