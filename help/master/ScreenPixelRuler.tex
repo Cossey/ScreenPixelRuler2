@@ -4,10 +4,10 @@
 %
 \documentclass[
 ]{book}
+\usepackage{amsmath,amssymb}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
@@ -81,7 +81,8 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{longtable,booktabs}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
 \makeatletter
@@ -90,7 +91,7 @@
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -115,12 +116,15 @@
   \thm@postskip=\thm@preskip
 }
 \makeatother
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 \usepackage[]{natbib}
 \bibliographystyle{plainnat}
 
 \title{Screen Pixel Ruler {[}master{]}}
 \author{Stewart Cossey}
-\date{2021-12-08}
+\date{2021-12-12}
 
 \begin{document}
 \maketitle
@@ -309,55 +313,25 @@ This Dialog accepts manual input of Guideline positions and can remove specific 
 
 These shortcuts can be used even when the Screen Pixel Ruler is not focused.
 
-\begin{longtable}[]{@{}ll@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2824}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7176}}@{}}
 \toprule
-\begin{minipage}[b]{0.27\columnwidth}\raggedright
-Keystroke\strut
-\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright
-Function\strut
-\end{minipage}\tabularnewline
+\begin{minipage}[b]{\linewidth}\raggedright
+Keystroke
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Function
+\end{minipage} \\
 \midrule
 \endhead
-\begin{minipage}[t]{0.27\columnwidth}\raggedright
-Ctrl + Shift + Alt + R\strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
-Change ruler rotation.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.27\columnwidth}\raggedright
-Ctrl + Shift + Alt + E\strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
-Flip ruler notch direction.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.27\columnwidth}\raggedright
-Ctrl + Shift + Alt + F\strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
-Freeze the position marker on the ruler.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.27\columnwidth}\raggedright
-Ctrl + Shift + Alt + S\strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
-Move position 0 of the ruler to the current mouse position.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.27\columnwidth}\raggedright
-Ctrl + Shift + Alt + X\strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
-Exit Screen Pixel Ruler 2.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.27\columnwidth}\raggedright
-Ctrl + Shift + Alt + A\strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
-Add Guideline at current position on the ruler.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.27\columnwidth}\raggedright
-Ctrl + Shift + Alt + D\strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
-Delete nearest Guideline from current position on the ruler.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.27\columnwidth}\raggedright
-Ctrl + Shift + Alt + G\strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright
-Lock mouse position to nearest Guideline.\strut
-\end{minipage}\tabularnewline
+Ctrl + Shift + Alt + R & Change ruler rotation. \\
+Ctrl + Shift + Alt + E & Flip ruler notch direction. \\
+Ctrl + Shift + Alt + F & Freeze the position marker on the ruler. \\
+Ctrl + Shift + Alt + S & Move position 0 of the ruler to the current mouse position. \\
+Ctrl + Shift + Alt + X & Exit Screen Pixel Ruler 2. \\
+Ctrl + Shift + Alt + A & Add Guideline at current position on the ruler. \\
+Ctrl + Shift + Alt + D & Delete nearest Guideline from current position on the ruler. \\
+Ctrl + Shift + Alt + G & Lock mouse position to nearest Guideline. \\
 \bottomrule
 \end{longtable}
 
@@ -368,10 +342,10 @@ These shortcuts only work when the Screen Pixel Ruler has focus.
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
-Keystroke & Function\tabularnewline
+Keystroke & Function \\
 \midrule
 \endhead
-F1 & Opens this help guide.\tabularnewline
+F1 & Opens this help guide. \\
 \bottomrule
 \end{longtable}
 
@@ -399,14 +373,26 @@ Allows you to change the \protect\hyperlink{themes}{theme} of the ruler.
 Allows you to assign mouse button clicking the ruler to specific functionality.
 Supports the Primary, Middle, Button 4, and Button 5 mouse buttons.
 The following functions are assignable:
-- None \emph{Do nothing for the mouse button.}
-- Rotate \emph{Rotates the ruler.}
-- Flip \emph{Flips the ruler.}
-- Add Guide \emph{Adds a guideline to the ruler.}
-- Toggle Guide \emph{Toggles the guideline at the current cursor position.}
-- Remove Nearest Guide \emph{Removes the nearest guideline to the cursor.}
-- Remove All Guides \emph{Removes all guidelines.}
-- Lock to Nearest Guide \emph{Locks the mouse to the nearest guideline to the cursor.}
+
+\begin{itemize}
+\tightlist
+\item
+  None \emph{Do nothing for the mouse button.}
+\item
+  Rotate \emph{Rotates the ruler.}
+\item
+  Flip \emph{Flips the ruler.}
+\item
+  Add Guide \emph{Adds a guideline to the ruler.}
+\item
+  Toggle Guide \emph{Toggles the guideline at the current cursor position.}
+\item
+  Remove Nearest Guide \emph{Removes the nearest guideline to the cursor.}
+\item
+  Remove All Guides \emph{Removes all guidelines.}
+\item
+  Lock to Nearest Guide \emph{Locks the mouse to the nearest guideline to the cursor.}
+\end{itemize}
 
 \begin{quote}
 Pressing and holding the primary mouse button will always allow you to move the ruler.
@@ -433,13 +419,14 @@ Screen Pixel Ruler comes with some supplied themes.
 \hypertarget{supplied-themes}{%
 \section{Supplied Themes}\label{supplied-themes}}
 
-\hypertarget{default}{%
-\subsection{Default}\label{default}}
+\hypertarget{system}{%
+\subsection{System}\label{system}}
 
 \includegraphics{images/theme-default.png}
 
-A simple black and white theme with a thin ruler.
-The built-in default theme.
+The built-in default theme for Screen Pixel Ruler.
+This theme adjusts to your Windows 10/11 theme.
+On older operating systems, the theme is black text on white, with red highlighting.
 
 \hypertarget{panda}{%
 \subsection{Panda}\label{panda}}
@@ -474,6 +461,7 @@ Chocolatey: \%chocolateyinstall\%\textbackslash lib\textbackslash screenpixelrul
 
 You can create your own themes for Screen Pixel Ruler.
 Themes have a \texttt{thm} file extension and are written in \href{https://yaml.org}{yaml}.
+Looking at the existing themes can help you understand how to create your own.
 
 \hypertarget{objects}{%
 \subsection{Objects}\label{objects}}
@@ -489,6 +477,12 @@ Below are objects and explainations of them that can be used in the theme file.
 \texttt{\textless{}number\textgreater{}} A number like \texttt{1} or \texttt{15}.
 
 \texttt{\textless{}array\textgreater{}} An array of objects.
+
+\texttt{\textless{}align\textgreater{}} Text alignment.
+Supported values are:
+- \texttt{Near}/\texttt{0} Align text to the left/top
+- \texttt{Center}/\texttt{1} Align text to the center
+- \texttt{Far}/\texttt{2} Align text to the right/bottom
 
 \texttt{\textless{}colour\textgreater{}} A colour value.
 Supported input types are:
@@ -566,9 +560,15 @@ Ruler: Ruler themeing.
         Horizontal: <number> The size of the hatch marks when horizontal.
         Vertical: <number> The size of the hatch marks when vertical.
   Numbers: The numbers on the ruler.
-    Padding:
-      Horizontal: <number> The padding on the left and right of the numbers.
-      Vertical: <number> The padding on the top and bottom of the numbers.
+    Padding: Padding from the nearest edge to the numbers.
+      Horizontal: <number> Padding when ruler is Horizontal.
+      Vertical: <number> Padding when ruler is Vertical.
+    OppositeOffsetPadding: Additional padding when the ruler hatch marks a flipped.
+      Horizontal: <number> Padding when ruler is Horizontal.
+      Vertical: <number> Padding when ruler is Vertical.
+    Offset: Adds additional padding from the cursor background to the number.
+      Horizontal: <number> Offset when ruler is Horizontal.
+      Vertical: <number> Offset when ruler is Vertical.
     Colour: <colour> The colour of the numbers.
     Font: The font used for the numbers.
       Family: <string> The font family.
@@ -579,6 +579,12 @@ Ruler: Ruler themeing.
       Strikeout: <boolean> Whether the font is striked out.
     Display:
       Interval: <number> The interval at which numbers should appear.
+      Vertical: Settings for when the ruler is vertical.
+        Rotate: <boolean> Whether the numbers should be rotated by 90 degrees.
+        Alignment: <align> How the numbers should be aligned.
+      Horizontal: Settings for when the ruler is horizontal.
+        Rotate: <boolean> Whether the numbers should be rotated by 90 degrees.
+        Alignment: <align> How the numbers should be aligned.
   Guidelines:
     Guideline: The guidelines.
       Colour: <colour> The colour of the guidelines.
@@ -597,8 +603,10 @@ Ruler: Ruler themeing.
         Vertical: <number> The size of the nearest guideline when vertical.
 \end{verbatim}
 
-\hypertarget{visual-guide}{%
-\subsubsection{Visual Guide}\label{visual-guide}}
+\hypertarget{ui-theme-elements}{%
+\subsubsection{UI Theme Elements}\label{ui-theme-elements}}
+
+This section helps explains the user interface theme elements.
 
 \begin{figure}
 \centering
@@ -613,8 +621,7 @@ The \texttt{Ruler\ →\ Number\ →\ Display\ →\ Interval} determines how ofte
 An interval of \texttt{50} means that numbers will appear at the 50th, 100th, 150th, etc hatch marks.
 The other properties under \texttt{Ruler\ →\ Number} determine the font, colour and size of the numbers.
 
-Cursor is the position of the mouse cursor on screen.
-Fruther explaination below.
+Cursor is explained further below.
 
 Background is the background colour of the ruler.
 This is set at \texttt{Ruler\ →\ Background} and can be a single colour or a gradient when two colours are provided.
@@ -625,8 +632,19 @@ This is set at \texttt{Ruler\ →\ Background} and can be a single colour or a g
 \caption{\label{fig:unnamed-chunk-9}The cursor that appears in the ruler.}
 \end{figure}
 
+The cursor is displayed at the position of the mouse cursor on screen, relative to the ruler.
+If the cursor is to the far top or far left to the ruler, the it does not appear.
+
 The above options are all configured in the \texttt{Cursor} section.
 \texttt{Cursor\ →\ Frozen} is used when the cursor is \protect\hyperlink{freeze}{frozen}.
+\texttt{Cursor\ →\ Locked} is used when the cursor is \protect\hyperlink{guideline-locked}{locked to a guideline}.
+
+\emph{Offset} \texttt{Ruler\ →\ Cursor\ →\ Offset} is used to add additional padding between the cursor number and the cursor background square.
+The padding is added to the top of the number unless the number is rotated, if rotated then it is added to the right side.
+
+\emph{Cursor Background} \texttt{Cursor\ →\ Background} is used to set the background colour of the cursor square.
+
+\emph{Cursor Line} \texttt{Cursor\ →\ Line} is used to set the colour of the line of the cursor.
 
 \begin{figure}
 \centering
@@ -645,8 +663,8 @@ Below is an example of a 50 pixel interval hatch mark:
 \CommentTok{...}
 \CommentTok{  Marks:}
 \CommentTok{    Sizes:}
-\CommentTok{      - Interval: 50}
-\CommentTok{        Colour: #000000}
+\CommentTok{      {-} Interval: 50}
+\CommentTok{        Colour: \#000000}
 \CommentTok{        Size:}
 \CommentTok{          Horizontal: 20}
 \CommentTok{          Vertical: 40}
@@ -659,6 +677,18 @@ The colour is provided by the \texttt{Ruler\ →\ Marks\ →\ Colour} property.
 Every even pixel on the ruler will have a hatch mark provided by this value.
 Set the size to \texttt{0} to omit the default hatch marks.
 
+\includegraphics{images/ruler-vertical.png}
+\emph{Padding} from the \texttt{Ruler\ →\ Numbers\ →\ Padding} property, applies padding to the numbers from the nearest edge.
+
+\emph{Opposite Offset Padding} under the \texttt{Ruler\ →\ Numbers\ →\ OppositeOffsetPadding}) property is the additional padding that is applied when the ruler is flipped to the opposite default direction.
+This is applied in addition to any padding that is applied via \texttt{Ruler\ →\ Numbers\ →\ Padding} property.
+
+\emph{Vertical Rotate} (the \texttt{Ruler\ →\ Numbers\ →\ Display\ →\ Vertical\ →\ Rotate} and \texttt{Ruler\ →\ Numbers\ →\ Display\ →\ Horizontal\ →\ Rotate} properties) rotates the numbers 90 degrees.
+
+\begin{quote}
+Note: The direction of the rotated numbers cannot be changed.
+\end{quote}
+
 \hypertarget{default-values}{%
 \subsubsection{Default Values}\label{default-values}}
 
@@ -669,32 +699,32 @@ Font\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Italic: \texttt{false}\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Underline: \texttt{false}\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Strikeout: \texttt{false}\\
-~\\
+\strut \\
 Cursor → Locked\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Cursor → Frozen\\
-~\\
+\strut \\
 Cursor → Frozen\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Cursor\\
-~\\
+\strut \\
 Ruler → Background\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\texttt{White}\\
-~\\
+\strut \\
 Ruler → Marks → Zero → NumberVisible\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\texttt{false}\\
-~\\
+\strut \\
 Ruler → Marks → Zero → Colour\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Ruler → Marks → Colour\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\texttt{Transparent}\\
-~\\
+\strut \\
 Ruler → Guidelines → Nearest\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Ruler → Guidelines → Guideline\\
-~\\
+\strut \\
 Ruler → Guidelines → Locked\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Ruler → Guidelines → Guideline\\
-~\\
+\strut \\
 Ruler → Guideline → Guideline → Size\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Ruler → Size\\
-~\\
+\strut \\
 Ruler → Guideline → Guideline → Colour\\
 \hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}\hspace*{0.333em}Ruler → Marks → Colour
 

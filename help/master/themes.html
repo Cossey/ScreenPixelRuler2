@@ -24,7 +24,7 @@
 <meta name="author" content="Stewart Cossey" />
 
 
-<meta name="date" content="2021-12-08" />
+<meta name="date" content="2021-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="config.html"/>
 
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,24 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -137,12 +137,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Screen Pixel Ruler</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#features"><i class="fa fa-check"></i>Features</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i>Installation</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#providing-feedback"><i class="fa fa-check"></i>Providing feedback</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html"><i class="fa fa-check"></i>User Interface</a><ul>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html"><i class="fa fa-check"></i>User Interface</a>
+<ul>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#rotate"><i class="fa fa-check"></i>Rotating the ruler</a></li>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#flip"><i class="fa fa-check"></i>Flipping the ruler</a></li>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#shifttocursor"><i class="fa fa-check"></i>Shifting to the cursor</a></li>
@@ -150,35 +152,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#exit"><i class="fa fa-check"></i>Exiting the software</a></li>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#help"><i class="fa fa-check"></i>Accessing this help</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html"><i class="fa fa-check"></i>Guidelines</a><ul>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html"><i class="fa fa-check"></i>Guidelines</a>
+<ul>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#adding-and-removing-guidelines"><i class="fa fa-check"></i>Adding and Removing Guidelines</a></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#clearing-guidelines"><i class="fa fa-check"></i>Clearing Guidelines</a></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#locking-to-guidelines"><i class="fa fa-check"></i>Locking to Guidelines</a></li>
-<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#importing-and-exporting-guidelines"><i class="fa fa-check"></i>Importing and Exporting Guidelines</a><ul>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#importing-and-exporting-guidelines"><i class="fa fa-check"></i>Importing and Exporting Guidelines</a>
+<ul>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#guideline-file-format"><i class="fa fa-check"></i>Guideline File Format</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#guideline-dialog"><i class="fa fa-check"></i>Guideline dialog</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html"><i class="fa fa-check"></i>Keyboard Shortcuts</a><ul>
+<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html"><i class="fa fa-check"></i>Keyboard Shortcuts</a>
+<ul>
 <li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html#global-shortcuts"><i class="fa fa-check"></i>Global Shortcuts</a></li>
 <li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html#local-shortcuts"><i class="fa fa-check"></i>Local Shortcuts</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="config.html"><a href="config.html"><i class="fa fa-check"></i>Configuration</a><ul>
-<li class="chapter" data-level="" data-path="config.html"><a href="config.html#options"><i class="fa fa-check"></i>Options</a><ul>
+<li class="chapter" data-level="" data-path="config.html"><a href="config.html"><i class="fa fa-check"></i>Configuration</a>
+<ul>
+<li class="chapter" data-level="" data-path="config.html"><a href="config.html#options"><i class="fa fa-check"></i>Options</a>
+<ul>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#theme"><i class="fa fa-check"></i>Theme</a></li>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#mouse-button-clicks"><i class="fa fa-check"></i>Mouse button clicks</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#location"><i class="fa fa-check"></i>Location</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html"><i class="fa fa-check"></i>Themes</a><ul>
-<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#supplied-themes"><i class="fa fa-check"></i>Supplied Themes</a><ul>
-<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#default"><i class="fa fa-check"></i>Default</a></li>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html"><i class="fa fa-check"></i>Themes</a>
+<ul>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#supplied-themes"><i class="fa fa-check"></i>Supplied Themes</a>
+<ul>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#system"><i class="fa fa-check"></i>System</a></li>
 <li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#panda"><i class="fa fa-check"></i>Panda</a></li>
 <li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#mioplanet-pixelruler"><i class="fa fa-check"></i>MioPlanet PixelRuler</a></li>
 <li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#white-chocolate"><i class="fa fa-check"></i>White Chocolate</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#location-1"><i class="fa fa-check"></i>Location</a></li>
-<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#creating-a-theme"><i class="fa fa-check"></i>Creating a Theme</a><ul>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#creating-a-theme"><i class="fa fa-check"></i>Creating a Theme</a>
+<ul>
 <li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#objects"><i class="fa fa-check"></i>Objects</a></li>
 <li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#file-format"><i class="fa fa-check"></i>File Format</a></li>
 </ul></li>
@@ -209,11 +219,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Screen Pixel Ruler comes with some supplied themes.</p>
 <div id="supplied-themes" class="section level2">
 <h2>Supplied Themes</h2>
-<div id="default" class="section level3">
-<h3>Default</h3>
+<div id="system" class="section level3">
+<h3>System</h3>
 <p><img src="images/theme-default.png" /><!-- --></p>
-<p>A simple black and white theme with a thin ruler.
-The built-in default theme.</p>
+<p>The built-in default theme for Screen Pixel Ruler.
+This theme adjusts to your Windows 10/11 theme.
+On older operating systems, the theme is black text on white, with red highlighting.</p>
 </div>
 <div id="panda" class="section level3">
 <h3>Panda</h3>
@@ -240,7 +251,8 @@ Chocolatey: %chocolateyinstall%\lib\screenpixelruler\tools</p>
 <div id="creating-a-theme" class="section level2">
 <h2>Creating a Theme</h2>
 <p>You can create your own themes for Screen Pixel Ruler.
-Themes have a <code>thm</code> file extension and are written in <a href="https://yaml.org">yaml</a>.</p>
+Themes have a <code>thm</code> file extension and are written in <a href="https://yaml.org">yaml</a>.
+Looking at the existing themes can help you understand how to create your own.</p>
 <div id="objects" class="section level3">
 <h3>Objects</h3>
 <p>Below are objects and explainations of them that can be used in the theme file.</p>
@@ -249,6 +261,11 @@ Themes have a <code>thm</code> file extension and are written in <a href="https:
 <p><code>&lt;decimal&gt;</code> A decimal number like <code>1.0</code> or <code>1.5</code>.</p>
 <p><code>&lt;number&gt;</code> A number like <code>1</code> or <code>15</code>.</p>
 <p><code>&lt;array&gt;</code> An array of objects.</p>
+<p><code>&lt;align&gt;</code> Text alignment.
+Supported values are:
+- <code>Near</code>/<code>0</code> Align text to the left/top
+- <code>Center</code>/<code>1</code> Align text to the center
+- <code>Far</code>/<code>2</code> Align text to the right/bottom</p>
 <p><code>&lt;colour&gt;</code> A colour value.
 Supported input types are:
 - <code>'#RRGGBB'</code> Hex/HTML Colour
@@ -319,9 +336,15 @@ Ruler: Ruler themeing.
         Horizontal: &lt;number&gt; The size of the hatch marks when horizontal.
         Vertical: &lt;number&gt; The size of the hatch marks when vertical.
   Numbers: The numbers on the ruler.
-    Padding:
-      Horizontal: &lt;number&gt; The padding on the left and right of the numbers.
-      Vertical: &lt;number&gt; The padding on the top and bottom of the numbers.
+    Padding: Padding from the nearest edge to the numbers.
+      Horizontal: &lt;number&gt; Padding when ruler is Horizontal.
+      Vertical: &lt;number&gt; Padding when ruler is Vertical.
+    OppositeOffsetPadding: Additional padding when the ruler hatch marks a flipped.
+      Horizontal: &lt;number&gt; Padding when ruler is Horizontal.
+      Vertical: &lt;number&gt; Padding when ruler is Vertical.
+    Offset: Adds additional padding from the cursor background to the number.
+      Horizontal: &lt;number&gt; Offset when ruler is Horizontal.
+      Vertical: &lt;number&gt; Offset when ruler is Vertical.
     Colour: &lt;colour&gt; The colour of the numbers.
     Font: The font used for the numbers.
       Family: &lt;string&gt; The font family.
@@ -332,6 +355,12 @@ Ruler: Ruler themeing.
       Strikeout: &lt;boolean&gt; Whether the font is striked out.
     Display:
       Interval: &lt;number&gt; The interval at which numbers should appear.
+      Vertical: Settings for when the ruler is vertical.
+        Rotate: &lt;boolean&gt; Whether the numbers should be rotated by 90 degrees.
+        Alignment: &lt;align&gt; How the numbers should be aligned.
+      Horizontal: Settings for when the ruler is horizontal.
+        Rotate: &lt;boolean&gt; Whether the numbers should be rotated by 90 degrees.
+        Alignment: &lt;align&gt; How the numbers should be aligned.
   Guidelines:
     Guideline: The guidelines.
       Colour: &lt;colour&gt; The colour of the guidelines.
@@ -349,8 +378,9 @@ Ruler: Ruler themeing.
         Horizontal: &lt;number&gt; The size of the nearest guideline when horizontal.
         Vertical: &lt;number&gt; The size of the nearest guideline when vertical.</code></pre>
 </div>
-<div id="visual-guide" class="section level4">
-<h4>Visual Guide</h4>
+<div id="ui-theme-elements" class="section level4">
+<h4>UI Theme Elements</h4>
+<p>This section helps explains the user interface theme elements.</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
 <img src="images/ruler-theme.png" alt="The Ruler user interface with theme elements highlighted."  />
 <p class="caption">
@@ -362,8 +392,7 @@ Figure 5: The Ruler user interface with theme elements highlighted.
 The <code>Ruler → Number → Display → Interval</code> determines how often the numbers appear.
 An interval of <code>50</code> means that numbers will appear at the 50th, 100th, 150th, etc hatch marks.
 The other properties under <code>Ruler → Number</code> determine the font, colour and size of the numbers.</p>
-<p>Cursor is the position of the mouse cursor on screen.
-Fruther explaination below.</p>
+<p>Cursor is explained further below.</p>
 <p>Background is the background colour of the ruler.
 This is set at <code>Ruler → Background</code> and can be a single colour or a gradient when two colours are provided.</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
@@ -372,8 +401,15 @@ This is set at <code>Ruler → Background</code> and can be a single colour or a
 Figure 6: The cursor that appears in the ruler.
 </p>
 </div>
+<p>The cursor is displayed at the position of the mouse cursor on screen, relative to the ruler.
+If the cursor is to the far top or far left to the ruler, the it does not appear.</p>
 <p>The above options are all configured in the <code>Cursor</code> section.
-<code>Cursor → Frozen</code> is used when the cursor is <a href="ui.html#freeze">frozen</a>.</p>
+<code>Cursor → Frozen</code> is used when the cursor is <a href="ui.html#freeze">frozen</a>.
+<code>Cursor → Locked</code> is used when the cursor is <a href="#guideline-locked">locked to a guideline</a>.</p>
+<p><em>Offset</em> <code>Ruler → Cursor → Offset</code> is used to add additional padding between the cursor number and the cursor background square.
+The padding is added to the top of the number unless the number is rotated, if rotated then it is added to the right side.</p>
+<p><em>Cursor Background</em> <code>Cursor → Background</code> is used to set the background colour of the cursor square.</p>
+<p><em>Cursor Line</em> <code>Cursor → Line</code> is used to set the colour of the line of the cursor.</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-10"></span>
 <img src="images/ruler-hashmarks.png" alt="The ruler hatch marks."  />
 <p class="caption">
@@ -384,19 +420,32 @@ Figure 7: The ruler hatch marks.
 You can also set the <code>Ruler → Marks → Zero → NumberVisible</code> property to <code>false</code> to omit the 0 number.</p>
 <p>Size interval 10 and Size Interval 50 hatch marks are provided by the <code>Ruler → Marks → Sizes</code> array.
 Below is an example of a 50 pixel interval hatch mark:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="themes.html#cb3-1"></a><span class="co">...</span></span>
-<span id="cb3-2"><a href="themes.html#cb3-2"></a><span class="co">  Marks:</span></span>
-<span id="cb3-3"><a href="themes.html#cb3-3"></a><span class="co">    Sizes:</span></span>
-<span id="cb3-4"><a href="themes.html#cb3-4"></a><span class="co">      - Interval: 50</span></span>
-<span id="cb3-5"><a href="themes.html#cb3-5"></a><span class="co">        Colour: #000000</span></span>
-<span id="cb3-6"><a href="themes.html#cb3-6"></a><span class="co">        Size:</span></span>
-<span id="cb3-7"><a href="themes.html#cb3-7"></a><span class="co">          Horizontal: 20</span></span>
-<span id="cb3-8"><a href="themes.html#cb3-8"></a><span class="co">          Vertical: 40</span></span>
-<span id="cb3-9"><a href="themes.html#cb3-9"></a><span class="co">...</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="themes.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">...</span></span>
+<span id="cb3-2"><a href="themes.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">  Marks:</span></span>
+<span id="cb3-3"><a href="themes.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Sizes:</span></span>
+<span id="cb3-4"><a href="themes.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">      - Interval: 50</span></span>
+<span id="cb3-5"><a href="themes.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">        Colour: #000000</span></span>
+<span id="cb3-6"><a href="themes.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">        Size:</span></span>
+<span id="cb3-7"><a href="themes.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">          Horizontal: 20</span></span>
+<span id="cb3-8"><a href="themes.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">          Vertical: 40</span></span>
+<span id="cb3-9"><a href="themes.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">...</span></span></code></pre></div>
 <p><em>Marks Size</em> hatch marks are provided by the <code>Ruler → Marks → Size</code> properties.
 The colour is provided by the <code>Ruler → Marks → Colour</code> property.
 Every even pixel on the ruler will have a hatch mark provided by this value.
 Set the size to <code>0</code> to omit the default hatch marks.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="images/ruler-vertical.png" alt="Vertical ruler."  />
+<p class="caption">
+Figure 8: Vertical ruler.
+</p>
+</div>
+<p><em>Padding</em> from the <code>Ruler → Numbers → Padding</code> property, applies padding to the numbers from the nearest edge.</p>
+<p><em>Opposite Offset Padding</em> under the <code>Ruler → Numbers → OppositeOffsetPadding</code>) property is the additional padding that is applied when the ruler is flipped to the opposite default direction.
+This is applied in addition to any padding that is applied via <code>Ruler → Numbers → Padding</code> property.</p>
+<p><em>Vertical Rotate</em> (the <code>Ruler → Numbers → Display → Vertical → Rotate</code> and <code>Ruler → Numbers → Display → Horizontal → Rotate</code> properties) rotates the numbers 90 degrees.</p>
+<blockquote>
+<p>Note: The direction of the rotated numbers cannot be changed.</p>
+</blockquote>
 </div>
 <div id="default-values" class="section level4">
 <h4>Default Values</h4>

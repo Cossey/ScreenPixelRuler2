@@ -24,7 +24,7 @@
 <meta name="author" content="Stewart Cossey" />
 
 
-<meta name="date" content="2021-12-08" />
+<meta name="date" content="2021-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,6 +33,7 @@
   
 <link rel="prev" href="index.html"/>
 <link rel="next" href="guidelines.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,24 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -137,12 +137,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Screen Pixel Ruler</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#features"><i class="fa fa-check"></i>Features</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i>Installation</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#providing-feedback"><i class="fa fa-check"></i>Providing feedback</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html"><i class="fa fa-check"></i>User Interface</a><ul>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html"><i class="fa fa-check"></i>User Interface</a>
+<ul>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#rotate"><i class="fa fa-check"></i>Rotating the ruler</a></li>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#flip"><i class="fa fa-check"></i>Flipping the ruler</a></li>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#shifttocursor"><i class="fa fa-check"></i>Shifting to the cursor</a></li>
@@ -150,35 +152,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#exit"><i class="fa fa-check"></i>Exiting the software</a></li>
 <li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#help"><i class="fa fa-check"></i>Accessing this help</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html"><i class="fa fa-check"></i>Guidelines</a><ul>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html"><i class="fa fa-check"></i>Guidelines</a>
+<ul>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#adding-and-removing-guidelines"><i class="fa fa-check"></i>Adding and Removing Guidelines</a></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#clearing-guidelines"><i class="fa fa-check"></i>Clearing Guidelines</a></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#locking-to-guidelines"><i class="fa fa-check"></i>Locking to Guidelines</a></li>
-<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#importing-and-exporting-guidelines"><i class="fa fa-check"></i>Importing and Exporting Guidelines</a><ul>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#importing-and-exporting-guidelines"><i class="fa fa-check"></i>Importing and Exporting Guidelines</a>
+<ul>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#guideline-file-format"><i class="fa fa-check"></i>Guideline File Format</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#guideline-dialog"><i class="fa fa-check"></i>Guideline dialog</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html"><i class="fa fa-check"></i>Keyboard Shortcuts</a><ul>
+<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html"><i class="fa fa-check"></i>Keyboard Shortcuts</a>
+<ul>
 <li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html#global-shortcuts"><i class="fa fa-check"></i>Global Shortcuts</a></li>
 <li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html#local-shortcuts"><i class="fa fa-check"></i>Local Shortcuts</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="config.html"><a href="config.html"><i class="fa fa-check"></i>Configuration</a><ul>
-<li class="chapter" data-level="" data-path="config.html"><a href="config.html#options"><i class="fa fa-check"></i>Options</a><ul>
+<li class="chapter" data-level="" data-path="config.html"><a href="config.html"><i class="fa fa-check"></i>Configuration</a>
+<ul>
+<li class="chapter" data-level="" data-path="config.html"><a href="config.html#options"><i class="fa fa-check"></i>Options</a>
+<ul>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#theme"><i class="fa fa-check"></i>Theme</a></li>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#mouse-button-clicks"><i class="fa fa-check"></i>Mouse button clicks</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="config.html"><a href="config.html#location"><i class="fa fa-check"></i>Location</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html"><i class="fa fa-check"></i>Themes</a><ul>
-<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#supplied-themes"><i class="fa fa-check"></i>Supplied Themes</a><ul>
-<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#default"><i class="fa fa-check"></i>Default</a></li>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html"><i class="fa fa-check"></i>Themes</a>
+<ul>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#supplied-themes"><i class="fa fa-check"></i>Supplied Themes</a>
+<ul>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#system"><i class="fa fa-check"></i>System</a></li>
 <li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#panda"><i class="fa fa-check"></i>Panda</a></li>
 <li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#mioplanet-pixelruler"><i class="fa fa-check"></i>MioPlanet PixelRuler</a></li>
 <li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#white-chocolate"><i class="fa fa-check"></i>White Chocolate</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#location-1"><i class="fa fa-check"></i>Location</a></li>
-<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#creating-a-theme"><i class="fa fa-check"></i>Creating a Theme</a><ul>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#creating-a-theme"><i class="fa fa-check"></i>Creating a Theme</a>
+<ul>
 <li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#objects"><i class="fa fa-check"></i>Objects</a></li>
 <li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#file-format"><i class="fa fa-check"></i>File Format</a></li>
 </ul></li>
