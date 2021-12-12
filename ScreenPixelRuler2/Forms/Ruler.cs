@@ -1,4 +1,4 @@
-﻿using ScreenPixelRuler2.Forms;
+using ScreenPixelRuler2.Forms;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -45,7 +45,7 @@ namespace ScreenPixelRuler2
 
         private void RestoreConfiguration()
         {
-            renderer.UseTheme(Theming.GetThemeByName(Program.appConfig.Theme));
+            renderer.UseTheme(Theming.Instance.GetThemeByName(Program.appConfig.Theme));
 
             if (Program.appConfig.Direction)
             {
@@ -412,7 +412,7 @@ namespace ScreenPixelRuler2
                 renderer.DialogDisplay();
                 if (options.ShowDialog() == DialogResult.OK)
                 {
-                    renderer.UseTheme(Theming.GetThemeByName(Program.appConfig.Theme));
+                    renderer.UseTheme(Theming.Instance.GetThemeByName(Program.appConfig.Theme));
                 }
                 renderer.NoDialogDisplay();
             }

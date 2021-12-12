@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,10 +9,19 @@ using YamlDotNet.Serialization.NamingConventions;
 namespace ScreenPixelRuler2
 {
 
-    static class Theming
+    class Theming
     {
-        public const string DefaultTheme = "<Default>";
-        public static List<Theme> LoadThemes()
+        private static Theming instance;
+        public static Theming Instance => instance ?? new Theming();
+
+        public const string DefaultTheme = "<System>";
+
+        private Theming()
+        {
+            instance = this;
+        }
+
+        public List<Theme> LoadThemes()
         {
             string userPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
@@ -42,7 +51,7 @@ namespace ScreenPixelRuler2
             return themes;
         }
 
-        public static Theme GetThemeByName(List<Theme> themes, string name)
+        public Theme GetThemeByName(List<Theme> themes, string name)
         {
             if (name.Equals(DefaultTheme))
             {
@@ -57,13 +66,13 @@ namespace ScreenPixelRuler2
             return theme;
         }
 
-        public static Theme GetThemeByName(string name)
+        public Theme GetThemeByName(string name)
         {
             List<Theme> themes = LoadThemes();
             return GetThemeByName(themes, name);
         }
 
-        public static Theme LoadTheme(string filePath)
+        public Theme LoadTheme(string filePath)
         {
             using (StreamReader reader = new StreamReader(File.Open(filePath, FileMode.Open, FileAccess.Read, FileShare.Read)))
             {

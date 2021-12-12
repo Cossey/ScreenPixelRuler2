@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -13,16 +14,20 @@ namespace ScreenPixelRuler2
         readonly int maxSize = 100;
         public Theme()
         {
+            bool dark = IsDark();
+            Color highlight = W10Accent().IsEmpty ? (dark ? Color.White : Color.Black) : W10Accent();
+            Color tintHighlight = W10Accent(3).IsEmpty ? Color.Red : W10Accent(4);
+
             Name = Theming.DefaultTheme;
             Cursor = new TCursor
             {
                 Font = new TTextAspect
                 {
-                    Colour = Color.White,
+                    Colour = dark ? Color.Black : Color.White,
                     Padding = new TVertHoriz
                     {
                         Horizontal = 2,
-                        Vertical = 0
+                        Vertical = 2
                     },
                     Font = new TFont
                     {
@@ -34,17 +39,25 @@ namespace ScreenPixelRuler2
                         Size = 9
                     }
                 },
-                Line = Color.Black,
+                Line = highlight,
                 Background = new List<Color>
                 {
-                    Color.Black
+                    highlight
+                },
+                Frozen = new TCursorAspect
+                {
+                    Background = new List<Color>
+                    {
+                        tintHighlight
+                    },
+                    Line = tintHighlight
                 }
             };
             Ruler = new TRuler
             {
                 Background = new List<Color>
                 {
-                    Color.White
+                    dark ? Color.Black : Color.White
                 },
                 Size = 40,
                 Marks = new TLines
@@ -54,11 +67,11 @@ namespace ScreenPixelRuler2
                         Size = new TVertHoriz
                         {
                             Horizontal = 20,
-                            Vertical = 40
+                            Vertical = 20
                         },
                         NumberVisible = true
                     },
-                    Colour = Color.Black,
+                    Colour = dark ? Color.White : Color.Black,
                     Size = new TVertHoriz
                     {
                         Horizontal = 8,
@@ -68,7 +81,7 @@ namespace ScreenPixelRuler2
                     {
                         new TLineSizes
                         {
-                            Colour = Color.Black,
+                            Colour = dark ? Color.White : Color.Black,
                             Interval = 10,
                             Size = new TVertHoriz
                             {
@@ -78,23 +91,23 @@ namespace ScreenPixelRuler2
                         },
                         new TLineSizes
                         {
-                            Colour = Color.Black,
+                            Colour = dark ? Color.White : Color.Black,
                             Interval = 50,
                             Size = new TVertHoriz
                             {
                                 Horizontal = 20,
-                                Vertical = 40
+                                Vertical = 20
                             }
                         }
                     }
                 },
                 Numbers = new TNumbers
                 {
-                    Colour = Color.Black,
+                    Colour = dark ? Color.White : Color.Black,
                     Padding = new TVertHoriz
                     {
                         Horizontal = 2,
-                        Vertical = 0
+                        Vertical = 2
                     },
                     Font = new TFont
                     {
@@ -107,15 +120,82 @@ namespace ScreenPixelRuler2
                     },
                     Display = new TNumberDisplay
                     {
-                        Interval = 50
+                        Interval = 50,
+                        Vertical = new TNumberDisplayArrangement
+                        {
+                            Rotate = true,
+                            Alignment = StringAlignment.Center
+                        },
+                        Horizontal = new TNumberDisplayArrangement
+                        {
+                            Rotate = false,
+                            Alignment = StringAlignment.Center
+                        }
+                    },
+                    OppositeOffsetPadding = new TVertHoriz
+                    {
+                        Horizontal = 0,
+                        Vertical = 2
                     }
                 },
                 Border = new TBorder
                 {
                     Spacing = 15,
-                    Colour = Color.Black
+                    Colour = dark ? Color.White : Color.Black
+                },
+                Guidelines = new TGuidelines
+                {
+                    Nearest = new SizeAndColour
+                    {
+                        Colour = highlight
+                    },
+                    Guideline = new SizeAndColour
+                    {
+                        Colour = tintHighlight
+                    }
                 }
             };
+        }
+
+        private bool IsDark()
+        {
+            string appsUseLightThemePath = @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize";
+            string appsUseDarkThemeKey = "AppsUseLightTheme";
+            int value = (int)Microsoft.Win32.Registry.GetValue(appsUseLightThemePath, appsUseDarkThemeKey, 1);
+            return value == 0 ? true : false;
+        }
+
+        private Color W10Accent(int index = 0)
+        {
+            string accentPath = @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Accent";
+            string key = "AccentColorMenu";
+            byte[] rawHex = new byte[4];
+            int textColour;
+            int red;
+            int green;
+            int blue;
+
+            if (index != 0)
+            {
+                key = "AccentPalette";
+                byte[] vals = (byte[])Microsoft.Win32.Registry.GetValue(accentPath, key, Color.Empty);
+                Buffer.BlockCopy(vals, (index - 1) * 4, rawHex, 0, 4);
+                textColour = (int)rawHex[3];
+                red = (int)rawHex[0];
+                green = (int)rawHex[1];
+                blue = (int)rawHex[2];
+            }
+            else
+            {
+                rawHex = BitConverter.GetBytes((int)Microsoft.Win32.Registry.GetValue(accentPath, key, Color.Empty));
+                textColour = (int)rawHex[3];
+                red = (int)rawHex[0];
+                green = (int)rawHex[1];
+                blue = (int)rawHex[2];
+            }
+
+            //Will return Empty Colour if no Accent specified or if non-W10
+            return Color.FromArgb(red, green, blue);
         }
 
         public override string ToString()
@@ -215,9 +295,9 @@ namespace ScreenPixelRuler2
             return new SolidBrush(Ruler.Numbers.Colour);
         }
 
-        public int GetNumberPadding(bool vertical)
+        public int GetNumberPadding(bool vertical, bool direction)
         {
-            return Ruler?.Numbers?.Padding?.GetVH(vertical) ?? 0;
+            return (Ruler?.Numbers?.Padding?.GetVH(vertical) ?? 0) + (direction ? Ruler?.Numbers?.OppositeOffsetPadding?.GetVH(vertical) ?? 0 : 0);
         }
 
         public Pen GetZeroPen()
@@ -306,6 +386,18 @@ namespace ScreenPixelRuler2
     class TNumberDisplay
     {
         public int Interval { get; set; }
+ 
+        public TNumberDisplayArrangement Vertical { get; set; }
+
+        public TNumberDisplayArrangement Horizontal { get; set; }
+    }
+
+    class TNumberDisplayArrangement
+    {
+        [DefaultValue(false)]
+        public bool Rotate { get; set; }
+        [DefaultValue(StringAlignment.Center)]
+        public StringAlignment Alignment { get; set; }
     }
 
     class TRuler
@@ -365,6 +457,10 @@ namespace ScreenPixelRuler2
     {
         [DefaultValue(100)]
         public TNumberDisplay Display { get; set; }
+
+        public TVertHoriz OppositeOffsetPadding { get; set; }
+
+        public TVertHoriz Offset { get; set; }
     }
 
     class TFont

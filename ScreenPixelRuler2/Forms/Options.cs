@@ -17,11 +17,11 @@ namespace ScreenPixelRuler2
 
             try
             {
-                List<Theme> themes = Theming.LoadThemes();
+                List<Theme> themes = Theming.Instance.LoadThemes();
                 comboTheme.DisplayMember = "ToString";
                 comboTheme.DataSource = themes;
 
-                comboTheme.SelectedItem = Theming.GetThemeByName(themes, appConfig.Theme);
+                comboTheme.SelectedItem = Theming.Instance.GetThemeByName(themes, appConfig.Theme);
             }
             catch (System.IO.DirectoryNotFoundException) //No Config folder
             {

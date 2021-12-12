@@ -10,6 +10,10 @@ Cursor:
       Size: 14
       Family: Courier New
   Background: [ '#FFFFFF' ]
+  Frozen:
+    Line: Gray
+    Font:
+      Colour: Gray
 Ruler:
   Size: 70
   Background: [ '#000000' ]
@@ -26,8 +30,8 @@ Ruler:
       - Interval: 20
         Colour: '#FFFFFF'
         Size: 
-          Vertical: 15
-          Horizontal: 15
+          Vertical: 20
+          Horizontal: 20
       - Interval: 100
         Colour: '#FFFFFF'
         Size:
@@ -40,11 +44,15 @@ Ruler:
     Colour: '#FFFFFF'
     Padding: 
       Horizontal: 3
-      Vertical: 1
+      Vertical: 3
+    Offset:
+      Horizontal: 2
+      Vertical: 2
     Display: 
       Interval: 100
-      Vertical: Middle
-      Horizontal: Left
+      Vertical:
+        Rotate: true
+        Alignment: Near
   Border:
     Colour: '#FFFFFF'
     Spacing: 15

@@ -44,5 +44,8 @@ Ruler:
       Vertical: 0
     Display: 
       Interval: 100
+  Guidelines:
+    Nearest:
+      Colour: '#FFFFFF'
   Border:
     Spacing: 10

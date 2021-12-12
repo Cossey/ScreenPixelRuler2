@@ -19,10 +19,21 @@ namespace ScreenPixelRuler2
         {
             this.form = form;
 
+            Microsoft.Win32.SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
+
             this.theme = new Theme(); //Set default theme
 
             redrawer.Elapsed += Redrawer_Elapsed;
             redrawer.Start();
+        }
+
+        //Reload the Default theme if the User has potentially changed their Colour theme
+        private void SystemEvents_UserPreferenceChanged(object sender, Microsoft.Win32.UserPreferenceChangedEventArgs e)
+        {
+            if (theme?.Name == Theming.DefaultTheme)
+            {
+                UseTheme(null);
+            }
         }
 
         public void UseTheme(Theme theme)
@@ -98,11 +109,18 @@ namespace ScreenPixelRuler2
         int guidelineNearestPos = 0;
         public void LockToNearestGuideline()
         {
+            //Don't enable lock when there are no guidelines.
+            if (Guidelines.Count == 0)
+            {
+                System.Media.SystemSounds.Beep.Play();
+                return;
+            };
+
             guidelineLock = !guidelineLock;
 
             Point cursor = form.PointToClient(Cursor.Position);
             guidelineNearestPos = Vertical ? Guidelines.ClosestTo(cursor.Y) : Guidelines.ClosestTo(cursor.X);
-
+            
             if (!guidelineLock)
             {
                 Cursor.Clip = Rectangle.Empty;
@@ -219,17 +237,65 @@ namespace ScreenPixelRuler2
             graphics.DrawRectangle(new Pen(theme.GetBorderColour(), 1), new Rectangle(0, 0, form.Width - 1, form.Height - 1));
         }
 
-        readonly StringFormat horizontalFormat = new StringFormat
+        private StringFormat HorizontalFormat => new StringFormat
         {
             Alignment = StringAlignment.Center,
-            LineAlignment = StringAlignment.Center
+            LineAlignment = StringAlignment.Center,
+            FormatFlags = !theme.Ruler?.Numbers?.Display?.Horizontal?.Rotate ?? true ? 0 : StringFormatFlags.DirectionVertical
         };
 
         private StringFormat VerticalFormat => new StringFormat
         {
-            Alignment = Direction ? StringAlignment.Far : StringAlignment.Near,
-            LineAlignment = StringAlignment.Far
+            Alignment = StringAlignment.Center,
+            LineAlignment = StringAlignment.Center,
+            FormatFlags = !theme.Ruler?.Numbers?.Display?.Vertical?.Rotate ?? true ? 0 : StringFormatFlags.DirectionVertical
         };
+
+        private TNumberDisplayArrangement defaultArrangement ()
+        {
+            return new TNumberDisplayArrangement() { Alignment = Vertical ? StringAlignment.Near : StringAlignment.Center, Rotate = false };
+        }
+
+        private int CalcOffset(int size, int number)
+        {
+            TNumberDisplayArrangement arrange = (Vertical ? theme.Ruler?.Numbers?.Display?.Vertical : theme.Ruler?.Numbers?.Display?.Horizontal) ?? defaultArrangement();
+            int position = number;
+            switch (arrange.Alignment)
+            {
+                case StringAlignment.Near:
+                    return position - size;
+
+                case StringAlignment.Center:
+                    return position - (size / 2);
+
+                case StringAlignment.Far:
+                    return position;
+            }
+            return 0;
+        }
+
+        private Rectangle CalcMarkText(Size textSize, int number)
+        {
+            Rectangle alignment = Rectangle.Empty;
+
+            TNumberDisplayArrangement arrange = (Vertical ? theme.Ruler?.Numbers?.Display?.Vertical : theme.Ruler?.Numbers?.Display?.Horizontal) ?? defaultArrangement();
+
+            alignment.Width = arrange.Rotate ? textSize.Height : textSize.Width;
+            alignment.Height = arrange.Rotate ? textSize.Width : textSize.Height;
+
+            if (Vertical)
+            {
+                alignment.X = Direction ? form.Width - (theme.GetNumberPadding(Vertical, Direction) + alignment.Width) : theme.GetNumberPadding(Vertical, Direction);
+                alignment.Y = CalcOffset(alignment.Height, number);
+            }
+            else
+            {
+                alignment.X = CalcOffset(alignment.Width, number);
+                alignment.Y = Direction ? form.Height - (theme.GetNumberPadding(Vertical, Direction) + alignment.Height) : theme.GetNumberPadding(Vertical, Direction);
+            }
+
+            return alignment;
+        }
 
         private void Markings(Graphics graphics)
         {
@@ -244,29 +310,9 @@ namespace ScreenPixelRuler2
                     SizeF measureSize = graphics.MeasureString((i - theme.GetBorderSpacing()).ToString(), theme.Ruler.Numbers.Font.GetFont());
                     Size textSize = new Size((int)Math.Ceiling(measureSize.Width), (int)Math.Ceiling(measureSize.Height));
 
-                    Rectangle numberDisplay;
+                    Rectangle numberDisplay = TextOffset(CalcMarkText(textSize, i));
 
-                    if (Vertical)
-                    {
-                        numberDisplay = new Rectangle(new Point(
-                            Direction ?
-                                form.Width - (theme.GetNumberPadding(Vertical) + textSize.Width) :
-                                theme.GetNumberPadding(Vertical),
-                            i - textSize.Height),
-                            textSize);
-                    }
-                    else
-                    {
-                        numberDisplay = new Rectangle(new Point(
-                            i - (textSize.Width / 2),
-                            Direction ?
-                                form.Height - (theme.GetNumberPadding(Vertical) + textSize.Height) :
-                                theme.GetNumberPadding(Vertical)),
-                            textSize);
-                    }
-
-                    graphics.DrawString((i - theme.GetBorderSpacing()).ToString(), theme.Ruler.Numbers.Font.GetFont(), theme.GetNumberBrush(),
-                        numberDisplay, Vertical ? VerticalFormat : horizontalFormat);
+                    graphics.DrawString((i - theme.GetBorderSpacing()).ToString(), theme.Ruler.Numbers.Font.GetFont(), theme.GetNumberBrush(), numberDisplay, Vertical ? VerticalFormat : HorizontalFormat);
                 }
 
                 if (i == theme.GetBorderSpacing())
@@ -286,6 +332,34 @@ namespace ScreenPixelRuler2
             }
         }
 
+        private Rectangle CalcCursor(Size textSize, int number)
+        {
+            int pad = theme.Cursor?.Font?.Padding?.GetVH(Vertical) ?? 0;
+
+            Rectangle alignment = Rectangle.Empty;
+
+            TNumberDisplayArrangement arrange = (Vertical ? theme.Ruler?.Numbers?.Display?.Vertical : theme.Ruler?.Numbers?.Display?.Horizontal) ?? defaultArrangement();
+
+            alignment.Width = arrange.Rotate ? textSize.Height : textSize.Width;
+            alignment.Height = arrange.Rotate ? textSize.Width : textSize.Height;
+
+            if (!textSize.IsEmpty)
+            {
+
+                if (Vertical)
+                {
+                    alignment.X = Direction ? form.Width - (alignment.Width + pad) : pad;
+                    alignment.Y = CalcOffset(alignment.Height, number);
+                }
+                else
+                {
+                    alignment.X = CalcOffset(alignment.Width, number);
+                    alignment.Y = Direction ? form.Height - (alignment.Height + pad) : pad;
+                }
+            }
+            return alignment;
+        }
+
         private void CursorPosition(Graphics graphics)
         {
             Point cursor = form.PointToClient(Cursor.Position);
@@ -303,6 +377,7 @@ namespace ScreenPixelRuler2
             {
                 measureSize = graphics.MeasureString((pos - theme.GetBorderSpacing()).ToString(), theme.Cursor.Font.Font.GetFont());
                 textSize = new Size((int)Math.Ceiling(measureSize.Width), (int)Math.Ceiling(measureSize.Height));
+
             }
 
             if (!textSize.IsEmpty)
@@ -331,49 +406,38 @@ namespace ScreenPixelRuler2
                 Vertical ? 0 : pos,
                 Vertical ? pos : 0);
 
-            int padVertical = theme.Cursor?.Font?.Padding?.Vertical ?? 0;
-            int padHoriz = theme.Cursor?.Font?.Padding?.Horizontal ?? 0;
+            Rectangle cursorBackgroundArea = CalcCursor(textSize, pos);
 
-            Rectangle cursorBackgroundArea = Rectangle.Empty;
-            if (!textSize.IsEmpty)
-            {
-                cursorBackgroundArea = new Rectangle(
-                    Vertical ?
-                        new Point( //Vertical
-                            Direction ?
-                                form.Width - (textSize.Width + padVertical) :
-                                padVertical,
-                            pos - textSize.Height) :
-                        new Point( //Horizontal
-                            pos - (textSize.Width / 2),
-                            Direction ?
-                                form.Height - (padHoriz + textSize.Height) :
-                                padHoriz),
-                    textSize);
-            }
             if (!cursorBackgroundArea.IsEmpty)
             {
                 graphics.FillRectangle(theme.GetCursorBackground(cursorBackgroundArea, Vertical, Direction, FreezePosition, guidelineLock), cursorBackgroundArea);
             }
 
+            Rectangle offsetText = TextOffset(cursorBackgroundArea);
+
             if (!textSize.IsEmpty)
             {
-                graphics.DrawString((pos - theme.GetBorderSpacing()).ToString(), theme.Cursor.Font.Font.GetFont(), theme.GetCursorFontBrush(FreezePosition, guidelineLock), new Rectangle(
-                    Vertical ?
-                        new Point( //Vertical
-                            Direction ?
-                                form.Width - (textSize.Width + padVertical) :
-                                padVertical,
-                            pos - textSize.Height) :
-                        new Point( //Horizontal
-                            pos - ((textSize.Width + padHoriz) / 2),
-                            Direction ?
-                                form.Height - (padHoriz + textSize.Height) :
-                                padHoriz),
-                    textSize), Vertical ? VerticalFormat : horizontalFormat);
-
+                graphics.DrawString((pos - theme.GetBorderSpacing()).ToString(), theme.Cursor.Font.Font.GetFont(), theme.GetCursorFontBrush(FreezePosition, guidelineLock),
+                    offsetText, Vertical ? VerticalFormat : HorizontalFormat);
             }
             CursorLastPos = pos;
+        }
+
+        private Rectangle TextOffset(Rectangle rect)
+        {
+            Rectangle offset = new Rectangle(rect.Location, rect.Size);
+            int textOffset = theme.Ruler?.Numbers?.Offset?.GetVH(Vertical) ?? 0;
+            bool rotated = Vertical ? (theme.Ruler?.Numbers?.Display?.Vertical?.Rotate ?? defaultArrangement().Rotate) : (theme.Ruler?.Numbers?.Display?.Horizontal?.Rotate ?? defaultArrangement().Rotate);
+
+            if (rotated)
+            {
+                offset.X -= textOffset;
+            }
+            else
+            {
+                offset.Y += textOffset;
+            }
+            return offset;
         }
 
         public void RenderAll(Graphics graphics)
