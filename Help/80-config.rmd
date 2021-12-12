@@ -18,6 +18,7 @@ Allows you to change the [theme](\#themes) of the ruler.
 Allows you to assign mouse button clicking the ruler to specific functionality.
 Supports the Primary, Middle, Button 4, and Button 5 mouse buttons.
 The following functions are assignable:
+
 - None *Do nothing for the mouse button.*
 - Rotate *Rotates the ruler.*
 - Flip *Flips the ruler.*

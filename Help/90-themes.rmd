@@ -5,14 +5,15 @@ Screen Pixel Ruler comes with some supplied themes.
 
 ## Supplied Themes
 
-### Default
+### System
 
 ```{r, echo=FALSE}
 knitr::include_graphics("images/theme-default.png")
 ```
 
-A simple black and white theme with a thin ruler. 
-The built-in default theme.
+The built-in default theme for Screen Pixel Ruler.
+This theme adjusts to your Windows 10/11 theme.
+On older operating systems, the theme is black text on white, with red highlighting.
 
 ### Panda
 
@@ -46,6 +47,7 @@ Chocolatey: \%chocolateyinstall\%\\lib\\screenpixelruler\\tools
 
 You can create your own themes for Screen Pixel Ruler. 
 Themes have a `thm` file extension and are written in [yaml](https://yaml.org).
+Looking at the existing themes can help you understand how to create your own.
 
 ### Objects
 
@@ -60,6 +62,12 @@ Below are objects and explainations of them that can be used in the theme file.
 `<number>` A number like `1` or `15`.
 
 `<array>` An array of objects.
+
+`<align>` Text alignment.
+Supported values are:
+- `Near`/`0` Align text to the left/top
+- `Center`/`1` Align text to the center
+- `Far`/`2` Align text to the right/bottom
 
 `<colour>` A colour value.
 Supported input types are:
@@ -133,9 +141,15 @@ Ruler: Ruler themeing.
         Horizontal: <number> The size of the hatch marks when horizontal.
         Vertical: <number> The size of the hatch marks when vertical.
   Numbers: The numbers on the ruler.
-    Padding:
-      Horizontal: <number> The padding on the left and right of the numbers.
-      Vertical: <number> The padding on the top and bottom of the numbers.
+    Padding: Padding from the nearest edge to the numbers.
+      Horizontal: <number> Padding when ruler is Horizontal.
+      Vertical: <number> Padding when ruler is Vertical.
+    OppositeOffsetPadding: Additional padding when the ruler hatch marks a flipped.
+      Horizontal: <number> Padding when ruler is Horizontal.
+      Vertical: <number> Padding when ruler is Vertical.
+    Offset: Adds additional padding from the cursor background to the number.
+      Horizontal: <number> Offset when ruler is Horizontal.
+      Vertical: <number> Offset when ruler is Vertical.
     Colour: <colour> The colour of the numbers.
     Font: The font used for the numbers.
       Family: <string> The font family.
@@ -146,6 +160,12 @@ Ruler: Ruler themeing.
       Strikeout: <boolean> Whether the font is striked out.
     Display:
       Interval: <number> The interval at which numbers should appear.
+      Vertical: Settings for when the ruler is vertical.
+        Rotate: <boolean> Whether the numbers should be rotated by 90 degrees.
+        Alignment: <align> How the numbers should be aligned.
+      Horizontal: Settings for when the ruler is horizontal.
+        Rotate: <boolean> Whether the numbers should be rotated by 90 degrees.
+        Alignment: <align> How the numbers should be aligned.
   Guidelines:
     Guideline: The guidelines.
       Colour: <colour> The colour of the guidelines.
@@ -164,7 +184,9 @@ Ruler: Ruler themeing.
         Vertical: <number> The size of the nearest guideline when vertical.
 ```
 
-#### Visual Guide
+#### UI Theme Elements
+
+This section helps explains the user interface theme elements.
 
 ```{r, echo=FALSE, fig.cap="The Ruler user interface with theme elements highlighted."}
 knitr::include_graphics("images/ruler-theme.png")
@@ -177,8 +199,7 @@ The `Ruler → Number → Display → Interval` determines how often the numbers
 An interval of `50` means that numbers will appear at the 50th, 100th, 150th, etc hatch marks.
 The other properties under `Ruler → Number` determine the font, colour and size of the numbers.
 
-Cursor is the position of the mouse cursor on screen.
-Fruther explaination below.
+Cursor is explained further below.
 
 Background is the background colour of the ruler.
 This is set at `Ruler → Background` and can be a single colour or a gradient when two colours are provided.
@@ -187,8 +208,19 @@ This is set at `Ruler → Background` and can be a single colour or a gradient w
 knitr::include_graphics("images/ruler-cursor.png")
 ```
 
+The cursor is displayed at the position of the mouse cursor on screen, relative to the ruler.
+If the cursor is to the far top or far left to the ruler, the it does not appear.
+
 The above options are all configured in the `Cursor` section.
 `Cursor → Frozen` is used when the cursor is [frozen](\#freeze).
+`Cursor → Locked` is used when the cursor is [locked to a guideline](\#guideline-locked).
+
+*Offset* `Ruler → Cursor → Offset` is used to add additional padding between the cursor number and the cursor background square.
+The padding is added to the top of the number unless the number is rotated, if rotated then it is added to the right side.
+
+*Cursor Background* `Cursor → Background` is used to set the background colour of the cursor square.
+
+*Cursor Line* `Cursor → Line` is used to set the colour of the line of the cursor.
 
 ```{r, echo=FALSE, fig.cap="The ruler hatch marks."}
 knitr::include_graphics("images/ruler-hashmarks.png")
@@ -216,6 +248,18 @@ Below is an example of a 50 pixel interval hatch mark:
 The colour is provided by the `Ruler → Marks → Colour` property.
 Every even pixel on the ruler will have a hatch mark provided by this value.
 Set the size to `0` to omit the default hatch marks.
+
+```{r, echo=FALSE, fig.cap="Vertical ruler."}
+knitr::include_graphics("images/ruler-vertical.png")
+```
+*Padding* from the `Ruler → Numbers → Padding` property, applies padding to the numbers from the nearest edge.
+
+*Opposite Offset Padding* under the `Ruler → Numbers → OppositeOffsetPadding`) property is the additional padding that is applied when the ruler is flipped to the opposite default direction.
+This is applied in addition to any padding that is applied via `Ruler → Numbers → Padding` property.
+
+*Vertical Rotate* (the `Ruler → Numbers → Display → Vertical → Rotate` and `Ruler → Numbers → Display → Horizontal → Rotate` properties) rotates the numbers 90 degrees.
+
+> Note: The direction of the rotated numbers cannot be changed.
 
 #### Default Values
 
