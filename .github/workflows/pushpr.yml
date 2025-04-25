@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
@@ -27,7 +27,7 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
 
     - name: Upload Build
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: app-files
         path: ScreenPixelRuler2/bin/Release/**/
@@ -41,7 +41,7 @@ jobs:
         .\installer.exe /SP- /VERYSILENT /SUPPRESSMSGBOXES /LOG=".\install.log"
   
     - name: Upload Install log
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: install-log
         path: Deployment\Installer\Output\install.log
@@ -52,7 +52,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
       - name: Setup Pandoc
@@ -74,7 +74,7 @@ jobs:
           cd Help
           Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book', clean_envir = FALSE, params = list(version = '[${{ github.ref_name }}]'))"
       - name: Upload help files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: help-files
           path: Help/_book/
@@ -87,9 +87,9 @@ jobs:
     timeout-minutes: 1
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Download help files
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: help-files
           path: Help/_book/
