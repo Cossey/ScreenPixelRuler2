@@ -13,10 +13,11 @@ params:
 
 # Overview
 
-Screen Pixel Ruler is a on screen ruler that can assist in measuring elements from web pages, documents or software which does not implement a native ruler.
-Based on .NET Core 3.1 and inspired by MioPlanet PixelRuler, this software is supported on Windows 7 and higher.
+Screen Pixel Ruler is an on-screen tool that helps you measure elements on web pages, documents, or software that don't have a built-in ruler.
+It's built on .NET Core 3.1 and inspired by MioPlanet PixelRuler.
+The software works on Windows 7 and later.
 
-This software is free and open source; licensed under the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause).
+Free and open source, it's licensed under the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause).
 
 ## Features
 

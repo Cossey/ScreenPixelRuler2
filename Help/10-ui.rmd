@@ -6,15 +6,18 @@ The user interface consists of a single ruler that can be displayed either horiz
 knitr::include_graphics("images/ruler.png")
 ```
 
-Holding down the primary mouse button on the ruler will allow you to drag the ruler around the screen.
-Pressing the secondary mouse button on the ruler will display a context menu called the *Ruler Menu*.
+Hold down the primary mouse button on the ruler to drag it around the screen.
+Click the secondary mouse button on the ruler to open a context menu called the Ruler Menu.
 
-If the mouse cursor moves past the right or bottom edge of the ruler, it will automatically extend.
-The ruler will stay extended if the cursor is frozen or if a Guideline has been set beyond the default size.
-Guidelines are covered in further detail in the [Guidelines](\#guidelines) section.
+If the mouse cursor moves beyond the right or bottom edge of the ruler, it will automatically extend.
+The ruler will stay extended if:
+- the cursor is frozen, or
+- a Guideline is set beyond the default size.
 
-> The primary mouse button is determined by the *Select your primary button* option in the *Mouse Settings* in Microsoft Windows.
-> Typically it is the left mouse button.
+(Guidelines are explained in more detail in the [Guidelines](\#guidelines) section.)
+
+> The primary mouse button is set in your Mouse Settings in Microsoft Windows.
+> By default, this is usually the left mouse button.
 
 ## Rotating the ruler {#rotate}
 
@@ -50,4 +53,4 @@ Exit the software by pressing the `Ctrl + Shift + Alt + X` key combination or vi
 
 ## Accessing this help {#help}
 
-You can access this help guide by pressing `F1` when the ruler is focused or vua the `Ruler Menu → Help` menu item.
+You can access this help guide by pressing `F1` when the ruler is focused or via the `Ruler Menu → Help` menu item.
