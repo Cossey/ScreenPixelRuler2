@@ -11,6 +11,7 @@ Click the secondary mouse button on the ruler to open a context menu called the 
 
 If the mouse cursor moves beyond the right or bottom edge of the ruler, it will automatically extend.
 The ruler will stay extended if:
+
 - the cursor is frozen, or
 - a Guideline is set beyond the default size.
 
