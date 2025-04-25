@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Guidelines | Screen Pixel Ruler [master]</title>
   <meta name="description" content="Help documentation for Screen Pixel Ruler." />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Guidelines | Screen Pixel Ruler [master]" />
   <meta property="og:type" content="book" />
-  
   
   <meta property="og:description" content="Help documentation for Screen Pixel Ruler." />
   <meta name="github-repo" content="cossey/screenpixelruler2" />
@@ -24,7 +23,7 @@
 <meta name="author" content="Stewart Cossey" />
 
 
-<meta name="date" content="2021-12-12" />
+<meta name="date" content="2025-04-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +32,6 @@
   
 <link rel="prev" href="ui.html"/>
 <link rel="next" href="keyboard.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,13 +49,14 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -120,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -213,12 +216,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="guidelines" class="section level1">
-<h1>Guidelines</h1>
+<div id="guidelines" class="section level1 hasAnchor">
+<h1>Guidelines<a href="guidelines.html#guidelines" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Guidelines allow you to mark specific points on the ruler.
 These points can then be <em>locked on to</em> with the mouse and allow you to move the mouse along the locked axis.</p>
-<div id="adding-and-removing-guidelines" class="section level2">
-<h2>Adding and Removing Guidelines</h2>
+<div id="adding-and-removing-guidelines" class="section level2 hasAnchor">
+<h2>Adding and Removing Guidelines<a href="guidelines.html#adding-and-removing-guidelines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Add and remove Guidelines by using the <code>Ruler Menu → Guidelines</code>submenu or via the <em>Guidelines</em> dialog.
 Adding a Guideline will add a new guideline at the current cursor position on the ruler.
 Removing a Guideline will remove the nearest guideline to the current cursor position.</p>
@@ -226,23 +229,23 @@ Removing a Guideline will remove the nearest guideline to the current cursor pos
 <p>Both these functions can be assigned to a mouse button.</p>
 </blockquote>
 </div>
-<div id="clearing-guidelines" class="section level2">
-<h2>Clearing Guidelines</h2>
+<div id="clearing-guidelines" class="section level2 hasAnchor">
+<h2>Clearing Guidelines<a href="guidelines.html#clearing-guidelines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>All the Guidelines can be cleared by using the <code>Ruler Menu → Guidelines → Clear All</code> submenu or via the <em>Guidelines</em> dialog.
 Guidelines are also cleared before Import.</p>
 </div>
-<div id="locking-to-guidelines" class="section level2">
-<h2>Locking to Guidelines</h2>
+<div id="locking-to-guidelines" class="section level2 hasAnchor">
+<h2>Locking to Guidelines<a href="guidelines.html#locking-to-guidelines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="importing-and-exporting-guidelines" class="section level2">
-<h2>Importing and Exporting Guidelines</h2>
+<div id="importing-and-exporting-guidelines" class="section level2 hasAnchor">
+<h2>Importing and Exporting Guidelines<a href="guidelines.html#importing-and-exporting-guidelines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>You can import and export Guidelines by using the <code>Ruler Menu → Guidelines → Import</code> or the <code>Ruler Menu → Guidelines → Export</code> submenus or via the <em>Guidelines</em> dialog.
 Either of these options will display a File dialog so that you can select the file to load or save.</p>
 <blockquote>
 <p>Importing Guidelines will overwrite any existing Guidelines on the ruler.</p>
 </blockquote>
-<div id="guideline-file-format" class="section level3">
-<h3>Guideline File Format</h3>
+<div id="guideline-file-format" class="section level3 hasAnchor">
+<h3>Guideline File Format<a href="guidelines.html#guideline-file-format" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Guidelines can be exported to/imported from a simple text file.
 The file contains a list of numbers which denote the Guideline pixel position on the ruler.
 These files have no preferred extension.</p>
@@ -252,8 +255,8 @@ These files have no preferred extension.</p>
 620</code></pre>
 </div>
 </div>
-<div id="guideline-dialog" class="section level2">
-<h2>Guideline dialog</h2>
+<div id="guideline-dialog" class="section level2 hasAnchor">
+<h2>Guideline dialog<a href="guidelines.html#guideline-dialog" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
 <img src="images/guideline-dialog.png" alt="The Guideline dialog."  />
 <p class="caption">
@@ -285,42 +288,42 @@ This Dialog accepts manual input of Guideline positions and can remove specific 
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/Cossey/screenpixelruler2/edit/master/Help/30-guideline.rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["ScreenPixelRuler.pdf", "ScreenPixelRuler.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/Cossey/screenpixelruler2/edit/master/Help/30-guideline.rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["ScreenPixelRuler.pdf", "ScreenPixelRuler.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
 });
 });
 </script>
