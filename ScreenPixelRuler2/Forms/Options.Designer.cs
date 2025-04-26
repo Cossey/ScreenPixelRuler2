@@ -28,207 +28,216 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.comboTheme = new System.Windows.Forms.ComboBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.PrimaryClick = new System.Windows.Forms.ComboBox();
-            this.MiddleClick = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.X1Click = new System.Windows.Forms.ComboBox();
-            this.X2Click = new System.Windows.Forms.ComboBox();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
+            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            buttonCancel = new System.Windows.Forms.Button();
+            buttonSave = new System.Windows.Forms.Button();
+            comboTheme = new System.Windows.Forms.ComboBox();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            PrimaryClick = new System.Windows.Forms.ComboBox();
+            MiddleClick = new System.Windows.Forms.ComboBox();
+            label4 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            X1Click = new System.Windows.Forms.ComboBox();
+            X2Click = new System.Windows.Forms.ComboBox();
+            tableLayoutPanel2.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            SuspendLayout();
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.AutoSize = true;
-            this.tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel2, 2);
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.buttonCancel, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonSave, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(94, 156);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(188, 33);
-            this.tableLayoutPanel2.TabIndex = 0;
+            tableLayoutPanel2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            tableLayoutPanel2.AutoSize = true;
+            tableLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel1.SetColumnSpan(tableLayoutPanel2, 2);
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel2.Controls.Add(buttonCancel, 1, 0);
+            tableLayoutPanel2.Controls.Add(buttonSave, 0, 0);
+            tableLayoutPanel2.Location = new System.Drawing.Point(136, 208);
+            tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel2.Size = new System.Drawing.Size(214, 44);
+            tableLayoutPanel2.TabIndex = 0;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(97, 3);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(88, 27);
-            this.buttonCancel.TabIndex = 1;
-            this.buttonCancel.Text = "&Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            buttonCancel.Location = new System.Drawing.Point(110, 4);
+            buttonCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new System.Drawing.Size(101, 36);
+            buttonCancel.TabIndex = 1;
+            buttonCancel.Text = "&Cancel";
+            buttonCancel.UseVisualStyleBackColor = true;
             // 
             // buttonSave
             // 
-            this.buttonSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonSave.Location = new System.Drawing.Point(3, 3);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(88, 27);
-            this.buttonSave.TabIndex = 0;
-            this.buttonSave.Text = "&Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            buttonSave.DialogResult = System.Windows.Forms.DialogResult.OK;
+            buttonSave.Location = new System.Drawing.Point(3, 4);
+            buttonSave.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Size = new System.Drawing.Size(101, 36);
+            buttonSave.TabIndex = 0;
+            buttonSave.Text = "&Save";
+            buttonSave.UseVisualStyleBackColor = true;
+            buttonSave.Click += buttonSave_Click;
             // 
             // comboTheme
             // 
-            this.comboTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboTheme.FormattingEnabled = true;
-            this.comboTheme.Location = new System.Drawing.Point(93, 3);
-            this.comboTheme.Name = "comboTheme";
-            this.comboTheme.Size = new System.Drawing.Size(185, 23);
-            this.comboTheme.TabIndex = 0;
+            comboTheme.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboTheme.FormattingEnabled = true;
+            comboTheme.Location = new System.Drawing.Point(135, 4);
+            comboTheme.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            comboTheme.Name = "comboTheme";
+            comboTheme.Size = new System.Drawing.Size(211, 28);
+            comboTheme.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.comboTheme, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.PrimaryClick, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.MiddleClick, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.X1Click, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.X2Click, 1, 4);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 7;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(282, 189);
-            this.tableLayoutPanel1.TabIndex = 0;
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 132F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(comboTheme, 1, 0);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 6);
+            tableLayoutPanel1.Controls.Add(label1, 0, 0);
+            tableLayoutPanel1.Controls.Add(label2, 0, 1);
+            tableLayoutPanel1.Controls.Add(label3, 0, 2);
+            tableLayoutPanel1.Controls.Add(PrimaryClick, 1, 1);
+            tableLayoutPanel1.Controls.Add(MiddleClick, 1, 2);
+            tableLayoutPanel1.Controls.Add(label4, 0, 3);
+            tableLayoutPanel1.Controls.Add(label5, 0, 4);
+            tableLayoutPanel1.Controls.Add(X1Click, 1, 3);
+            tableLayoutPanel1.Controls.Add(X2Click, 1, 4);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 7;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel1.Size = new System.Drawing.Size(350, 252);
+            tableLayoutPanel1.TabIndex = 0;
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Theme";
+            label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(3, 8);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(54, 20);
+            label1.TabIndex = 1;
+            label1.Text = "Theme";
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 36);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Primary Click";
+            label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(3, 44);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(94, 20);
+            label2.TabIndex = 2;
+            label2.Text = "Primary Click";
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 65);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(73, 15);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Middle Click";
+            label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(3, 80);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(91, 20);
+            label3.TabIndex = 3;
+            label3.Text = "Middle Click";
             // 
             // PrimaryClick
             // 
-            this.PrimaryClick.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.PrimaryClick.FormattingEnabled = true;
-            this.PrimaryClick.Location = new System.Drawing.Point(93, 32);
-            this.PrimaryClick.Name = "PrimaryClick";
-            this.PrimaryClick.Size = new System.Drawing.Size(185, 23);
-            this.PrimaryClick.TabIndex = 4;
+            PrimaryClick.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            PrimaryClick.FormattingEnabled = true;
+            PrimaryClick.Location = new System.Drawing.Point(135, 40);
+            PrimaryClick.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            PrimaryClick.Name = "PrimaryClick";
+            PrimaryClick.Size = new System.Drawing.Size(211, 28);
+            PrimaryClick.TabIndex = 4;
             // 
             // MiddleClick
             // 
-            this.MiddleClick.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.MiddleClick.FormattingEnabled = true;
-            this.MiddleClick.Location = new System.Drawing.Point(93, 61);
-            this.MiddleClick.Name = "MiddleClick";
-            this.MiddleClick.Size = new System.Drawing.Size(185, 23);
-            this.MiddleClick.TabIndex = 5;
+            MiddleClick.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            MiddleClick.FormattingEnabled = true;
+            MiddleClick.Location = new System.Drawing.Point(135, 76);
+            MiddleClick.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            MiddleClick.Name = "MiddleClick";
+            MiddleClick.Size = new System.Drawing.Size(211, 28);
+            MiddleClick.TabIndex = 5;
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 94);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(81, 15);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Button 4 Click";
+            label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(3, 116);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(100, 20);
+            label4.TabIndex = 6;
+            label4.Text = "Button 4 Click";
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 123);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(81, 15);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Button 5 Click";
+            label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(3, 152);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(100, 20);
+            label5.TabIndex = 7;
+            label5.Text = "Button 5 Click";
             // 
             // X1Click
             // 
-            this.X1Click.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.X1Click.FormattingEnabled = true;
-            this.X1Click.Location = new System.Drawing.Point(93, 90);
-            this.X1Click.Name = "X1Click";
-            this.X1Click.Size = new System.Drawing.Size(185, 23);
-            this.X1Click.TabIndex = 8;
+            X1Click.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            X1Click.FormattingEnabled = true;
+            X1Click.Location = new System.Drawing.Point(135, 112);
+            X1Click.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            X1Click.Name = "X1Click";
+            X1Click.Size = new System.Drawing.Size(211, 28);
+            X1Click.TabIndex = 8;
             // 
             // X2Click
             // 
-            this.X2Click.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.X2Click.FormattingEnabled = true;
-            this.X2Click.Location = new System.Drawing.Point(93, 119);
-            this.X2Click.Name = "X2Click";
-            this.X2Click.Size = new System.Drawing.Size(185, 23);
-            this.X2Click.TabIndex = 9;
+            X2Click.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            X2Click.FormattingEnabled = true;
+            X2Click.Location = new System.Drawing.Point(135, 148);
+            X2Click.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            X2Click.Name = "X2Click";
+            X2Click.Size = new System.Drawing.Size(211, 28);
+            X2Click.TabIndex = 9;
             // 
             // Options
             // 
-            this.AcceptButton = this.buttonSave;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(282, 189);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "Options";
-            this.ShowIcon = false;
-            this.Text = "Options";
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.ResumeLayout(false);
+            AcceptButton = buttonSave;
+            AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            CancelButton = buttonCancel;
+            ClientSize = new System.Drawing.Size(350, 252);
+            Controls.Add(tableLayoutPanel1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "Options";
+            ShowIcon = false;
+            Text = "Options";
+            tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            ResumeLayout(false);
 
         }
 
