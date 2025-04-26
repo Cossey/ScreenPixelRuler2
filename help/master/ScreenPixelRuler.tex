@@ -127,7 +127,7 @@
 
 \title{Screen Pixel Ruler {[}master{]}}
 \author{Stewart Cossey}
-\date{2025-04-25}
+\date{2025-04-26}
 
 \begin{document}
 \maketitle
@@ -200,11 +200,10 @@ The ruler will stay extended if:
   a Guideline is set beyond the default size.
 \end{itemize}
 
-(Guidelines are explained in more detail in the \hyperref[guidelines]{Guidelines} section.)
+Guidelines are explained in more detail in the \hyperref[guidelines]{Guidelines} section.
 
 \begin{quote}
-The primary mouse button is set in your Mouse Settings in Microsoft Windows.
-By default, this is usually the left mouse button.
+The primary mouse button is determined by the \emph{Select your primary button} option in the \emph{Mouse Settings} in Microsoft Windows.
 \end{quote}
 
 \section{Rotating the ruler}\label{rotate}
@@ -252,9 +251,9 @@ These points can then be \emph{locked on to} with the mouse and allow you to mov
 
 \section{Adding and Removing Guidelines}\label{adding-and-removing-guidelines}
 
-Add and remove Guidelines by using the \texttt{Ruler\ Menu\ →\ Guidelines}submenu or via the \emph{Guidelines} dialog.
-Adding a Guideline will add a new guideline at the current cursor position on the ruler.
-Removing a Guideline will remove the nearest guideline to the current cursor position.
+Add and remove Guidelines by using the \texttt{Ruler\ Menu\ →\ Guidelines} submenu, keyboard shortcuts or via the \emph{Guidelines} dialog.
+Adding a Guideline (keyboard shortcut \texttt{Ctrl\ +\ Shift\ +\ Alt\ +\ A}) will add a new guideline at the current cursor position on the ruler.
+Removing a Guideline (keyboard shortcut \texttt{Ctrl\ +\ Shift\ +\ Alt\ +\ D}) will remove the nearest guideline to the current cursor position.
 
 \begin{quote}
 Both these functions can be assigned to a mouse button.
@@ -263,9 +262,13 @@ Both these functions can be assigned to a mouse button.
 \section{Clearing Guidelines}\label{clearing-guidelines}
 
 All the Guidelines can be cleared by using the \texttt{Ruler\ Menu\ →\ Guidelines\ →\ Clear\ All} submenu or via the \emph{Guidelines} dialog.
-Guidelines are also cleared before Import.
+Guidelines are also cleared before Importing Guidelines.
 
 \section{Locking to Guidelines}\label{locking-to-guidelines}
+
+Creating a Guideline will allow you to lock the mouse to that Guideline.
+Locking the mouse to a Guideline will allow you to move the mouse only along the locked axis.
+This is done by using the \texttt{Ctrl\ +\ Shift\ +\ Alt\ +\ G} key combination.
 
 \section{Importing and Exporting Guidelines}\label{importing-and-exporting-guidelines}
 
@@ -325,7 +328,7 @@ Ctrl + Shift + Alt + F & Freeze the position marker on the ruler. \\
 Ctrl + Shift + Alt + S & Move position 0 of the ruler to the current mouse position. \\
 Ctrl + Shift + Alt + X & Exit Screen Pixel Ruler 2. \\
 Ctrl + Shift + Alt + A & Add Guideline at current position on the ruler. \\
-Ctrl + Shift + Alt + D & Delete nearest Guideline from current position on the ruler. \\
+Ctrl + Shift + Alt + D & Remove nearest Guideline from current position on the ruler. \\
 Ctrl + Shift + Alt + G & Lock mouse position to nearest Guideline. \\
 \end{longtable}
 
@@ -351,7 +354,7 @@ F1 & Opens this help guide. \\
 
 \chapter{Configuration}\label{config}
 
-You can access the configuration by right clicking the ruler and selecting \emph{Options}.
+You can access the configuration by secondary clicking the ruler and selecting \emph{Options}.
 This will then display the \emph{Options window} where you can change the configuration.
 
 \begin{figure}
@@ -389,14 +392,6 @@ The following functions are assignable:
 \item
   Lock to Nearest Guide \emph{Locks the mouse to the nearest guideline to the cursor.}
 \end{itemize}
-
-\begin{quote}
-Pressing and holding the primary mouse button will always allow you to move the ruler.
-\end{quote}
-
-\begin{quote}
-The primary mouse button is determined by the \emph{Select your primary button} option in the \emph{Mouse Settings} in Microsoft Windows.
-\end{quote}
 
 \section{Location}\label{location}
 
