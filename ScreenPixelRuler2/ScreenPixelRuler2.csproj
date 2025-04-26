@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <Version>2.0.0.0</Version>
     <Product>Screen Pixel Ruler</Product>
@@ -12,7 +12,7 @@
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <RepositoryUrl>https://github.com/Cossey/ScreenPixelRuler2</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Copyright>2020 Stewart Cossey</Copyright>
+    <Copyright>2025 Stewart Cossey</Copyright>
     <ApplicationIcon>Application.ico</ApplicationIcon>
     <AssemblyName>ScreenPixelRuler</AssemblyName>
   </PropertyGroup>

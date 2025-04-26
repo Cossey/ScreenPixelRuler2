@@ -78,7 +78,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ""AS IS"" AN
 
         #region Assembly Attribute Accessors
 
-        public string AssemblyTitle
+        public static string AssemblyTitle
         {
             get
             {
@@ -91,13 +91,13 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ""AS IS"" AN
                         return titleAttribute.Title;
                     }
                 }
-                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
+                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
             }
         }
 
-        public string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        public static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-        public string AssemblyDescription
+        public static string AssemblyDescription
         {
             get
             {
@@ -110,7 +110,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ""AS IS"" AN
             }
         }
 
-        public string AssemblyProduct
+        public static string AssemblyProduct
         {
             get
             {

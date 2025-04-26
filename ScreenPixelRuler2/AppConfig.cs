@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -50,7 +50,7 @@ namespace ScreenPixelRuler2
 
         public static bool IsPackageDeployed()
         {
-            //Current directory
+            //Current directory - checks for a package.yes file
             return File.Exists(string.Format(@"{0}\package.yes", AppLocation()));
         }
 
@@ -67,7 +67,7 @@ namespace ScreenPixelRuler2
                 configPath = string.Format(@"{0}\{1}", AppLocation(), ConfigFileName);
             }
 
-            AppConfig def = new AppConfig
+            AppConfig def = new()
             {
                 Vertical = false,
                 Position = new CPoint
@@ -80,7 +80,7 @@ namespace ScreenPixelRuler2
 
             try
             {
-                using (StreamReader reader = new StreamReader(File.Open(configPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
+                using (StreamReader reader = new(File.Open(configPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
                 {
                     IDeserializer deserializer = new DeserializerBuilder()
                         .WithNamingConvention(PascalCaseNamingConvention.Instance)
@@ -124,7 +124,7 @@ namespace ScreenPixelRuler2
                 .WithNamingConvention(PascalCaseNamingConvention.Instance)
                 .Build();
 
-            using (StreamWriter writer = new StreamWriter(File.Open(configPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)))
+            using (StreamWriter writer = new(File.Open(configPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)))
             {
 
                 //writer.Write(JsonSerializer.Serialize<AppConfig>(appConfig));
