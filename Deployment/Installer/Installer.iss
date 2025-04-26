@@ -1,11 +1,11 @@
 #define RootPath "..\..\"
-#define AppPath RootPath + "ScreenPixelRuler2\bin\Release\netcoreapp3.1\"
+#define AppPath RootPath + "ScreenPixelRuler2\bin\Release\net8.0-windows7.0\"
 
-#define ApplicationVersion GetFileVersion(AppPath + 'ScreenPixelRuler.dll')
+#define ApplicationVersion GetVersionNumbersString(AppPath + 'ScreenPixelRuler.dll')
 
 [Setup]
 AppId=91F2F59D-F956-4226-B263-1DCE83C12DE0
-AppCopyright=2020 Stewart Cossey
+AppCopyright=2025 Stewart Cossey
 AppName=Screen Pixel Ruler
 AppVersion={#ApplicationVersion}
 VersionInfoVersion={#ApplicationVersion}
@@ -25,9 +25,7 @@ Source: "{#RootPath}\README.md"; DestDir: "{app}";  Flags: ignoreversion
 Name: "{commonprograms}\Screen Pixel Ruler"; Filename: "{app}\screenpixelruler.exe"; WorkingDir: "{app}"; Comment: "A pixel perfect on screen ruler."
 
 [CustomMessages]
-#include "depend\lang\english.iss"
-#include "depend\products.iss"
-#include "depend\products\dotnetcore319.iss"
+#include "CodeDependencies.iss"
 
 [Code]
 function IsUpgrade: Boolean;
@@ -54,6 +52,6 @@ end;
 
 function InitializeSetup(): boolean;
 begin
-  dotnetcore319desktop();
+  Dependency_AddDotNet80Desktop;
   Result := true;
 end;
