@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -26,19 +26,19 @@ namespace ScreenPixelRuler2
         {
             [Description("None")]
             None = 0,
-            [Description("Rotate")]
+            [Description("Rotate Ruler")]
             Rotate,
-            [Description("Flip")]
+            [Description("Flip Direction")]
             Flip,
-            [Description("Add Guide")]
+            [Description("Add Guideline")]
             AddGuide,
-            [Description("Toggle Guide")]
+            [Description("Toggle Guideline")]
             ToggleGuide,
-            [Description("Remove Nearest Guide")]
+            [Description("Remove Nearest Guideline")]
             RemoveNearestGuide,
-            [Description("Remove All Guides")]
+            [Description("Remove All Guidelines")]
             RemoveAllGuides,
-            [Description("Lock to Nearest Guide")]
+            [Description("Lock to Nearest Guideline")]
             LockToNearestGuide
         }
 
