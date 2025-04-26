@@ -22,20 +22,20 @@ jobs:
         dotnet-version: 8.0
 
     - name: Setup msbuild
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v2
 
     - name: Compile code
       run: msbuild -r -p:Version=${{ github.event.milestone.title }} -p:Configuration=Release
 
     - name: Remove unrequired files
-      run: Remove-Item ScreenPixelRuler2/bin/Release/netcoreapp3.1/* -include *.pdb
+      run: Remove-Item ScreenPixelRuler2/bin/Release/net8.0-windows7.0/* -include *.pdb
       shell: pwsh
 
     - name: Upload compiled artifacts
       uses: actions/upload-artifact@v4
       with:
         name: compiled-files
-        path: ScreenPixelRuler2/bin/Release/netcoreapp3.1
+        path: ScreenPixelRuler2/bin/Release/net8.0-windows7.0
 
     - name: Compile installer
       run: iscc Deployment\Installer\Installer.iss
