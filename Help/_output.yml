@@ -3,10 +3,9 @@ bookdown::gitbook:
   css: style.css
   config:
     toc:
-      before: |
-        <li><a href="./">Screen Pixel Ruler</a></li>
       after: |
-        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+        <li><a href="https://github.com/Cossey/ScreenPixelRuler2/issues/new" target="blank">Submit an Issue</a></li>
+        <li><a href="https://github.com/Cossey/ScreenPixelRuler2/releases/latest" target="blank">Get Latest Version</a></li>
     edit: https://github.com/Cossey/screenpixelruler2/edit/master/Help/%s
     download: ["pdf", "epub"]
 bookdown::pdf_book:
