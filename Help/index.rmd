@@ -21,12 +21,12 @@ Free and open source, it's licensed under the [BSD 3-Clause License](https://ope
 
 ## Features
 
-- Global hotkeys to trigger functionality when other software is in focus.
-- Rotatable vertical or horizontal ruler. `Ctrl + Shift + Alt + R`
-- Customizable ruler themes.
-- Freezable position. `Ctrl + Shift + Alt + F`
-- Guideline system that can lock the mouse cursor horizontally or vertically
-- Position 0 of the ruler to the current cursor location. `Ctrl + Shift + Alt + S`
+* Global hotkeys to trigger functionality when other software is in focus.
+* Rotatable vertical or horizontal ruler. `Ctrl + Shift + Alt + R`
+* Customizable ruler themes.
+* Freezable position. `Ctrl + Shift + Alt + F`
+* Guideline system that can lock the mouse cursor horizontally or vertically
+* Position 0 of the ruler to the current cursor location. `Ctrl + Shift + Alt + S`
 
 > A list of all shorcuts can be found [here](\#keyboard).
 

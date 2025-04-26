@@ -12,7 +12,7 @@ These shortcuts can be used even when the Screen Pixel Ruler is not focused.
 | Ctrl + Shift + Alt + S  | Move position 0 of the ruler to the current mouse position.  |
 | Ctrl + Shift + Alt + X  | Exit Screen Pixel Ruler 2.                                   |
 | Ctrl + Shift + Alt + A  | Add Guideline at current position on the ruler.              |
-| Ctrl + Shift + Alt + D  | Delete nearest Guideline from current position on the ruler. |
+| Ctrl + Shift + Alt + D  | Remove nearest Guideline from current position on the ruler. |
 | Ctrl + Shift + Alt + G  | Lock mouse position to nearest Guideline.                    |
 
 ## Local Shortcuts

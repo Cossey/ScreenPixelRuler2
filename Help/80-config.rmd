@@ -1,6 +1,6 @@
 # Configuration {#config}
 
-You can access the configuration by right clicking the ruler and selecting *Options*.
+You can access the configuration by secondary clicking the ruler and selecting *Options*.
 This will then display the *Options window* where you can change the configuration.
 
 ```{r, echo=FALSE, out.width="100%", fig.cap="The options window."}
@@ -19,18 +19,14 @@ Allows you to assign mouse button clicking the ruler to specific functionality.
 Supports the Primary, Middle, Button 4, and Button 5 mouse buttons.
 The following functions are assignable:
 
-- None *Do nothing for the mouse button.*
-- Rotate *Rotates the ruler.*
-- Flip *Flips the ruler.*
-- Add Guide *Adds a guideline to the ruler.*
-- Toggle Guide *Toggles the guideline at the current cursor position.*
-- Remove Nearest Guide *Removes the nearest guideline to the cursor.*
-- Remove All Guides *Removes all guidelines.*
-- Lock to Nearest Guide *Locks the mouse to the nearest guideline to the cursor.*
-
-> Pressing and holding the primary mouse button will always allow you to move the ruler.
-
-> The primary mouse button is determined by the *Select your primary button* option in the *Mouse Settings* in Microsoft Windows.
+* None *Do nothing for the mouse button.*
+* Rotate *Rotates the ruler.*
+* Flip *Flips the ruler.*
+* Add Guide *Adds a guideline to the ruler.*
+* Toggle Guide *Toggles the guideline at the current cursor position.*
+* Remove Nearest Guide *Removes the nearest guideline to the cursor.*
+* Remove All Guides *Removes all guidelines.*
+* Lock to Nearest Guide *Locks the mouse to the nearest guideline to the cursor.*
 
 ## Location
 

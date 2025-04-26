@@ -15,10 +15,9 @@ The ruler will stay extended if:
 * the cursor is frozen, or
 * a Guideline is set beyond the default size.
 
-(Guidelines are explained in more detail in the [Guidelines](\#guidelines) section.)
+Guidelines are explained in more detail in the [Guidelines](\#guidelines) section.
 
-> The primary mouse button is set in your Mouse Settings in Microsoft Windows.
-> By default, this is usually the left mouse button.
+> The primary mouse button is determined by the *Select your primary button* option in the *Mouse Settings* in Microsoft Windows.
 
 ## Rotating the ruler {#rotate}
 

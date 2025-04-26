@@ -5,20 +5,22 @@ These points can then be *locked on to* with the mouse and allow you to move the
 
 ## Adding and Removing Guidelines
 
-Add and remove Guidelines by using the `Ruler Menu → Guidelines`submenu or via the *Guidelines* dialog.
-Adding a Guideline will add a new guideline at the current cursor position on the ruler.
-Removing a Guideline will remove the nearest guideline to the current cursor position.
+Add and remove Guidelines by using the `Ruler Menu → Guidelines` submenu, keyboard shortcuts or via the *Guidelines* dialog.
+Adding a Guideline (keyboard shortcut `Ctrl + Shift + Alt + A`) will add a new guideline at the current cursor position on the ruler.
+Removing a Guideline (keyboard shortcut `Ctrl + Shift + Alt + D`) will remove the nearest guideline to the current cursor position.
 
 > Both these functions can be assigned to a mouse button. 
 
 ## Clearing Guidelines
 
 All the Guidelines can be cleared by using the `Ruler Menu → Guidelines → Clear All` submenu or via the *Guidelines* dialog.
-Guidelines are also cleared before Import.
+Guidelines are also cleared before Importing Guidelines.
 
 ## Locking to Guidelines
 
-
+Creating a Guideline will allow you to lock the mouse to that Guideline.
+Locking the mouse to a Guideline will allow you to move the mouse only along the locked axis.
+This is done by using the `Ctrl + Shift + Alt + G` key combination.
 
 ## Importing and Exporting Guidelines
 
