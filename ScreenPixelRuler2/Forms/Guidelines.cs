@@ -60,7 +60,10 @@ namespace ScreenPixelRuler2.Forms
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            GuidelineList.Items.Remove((int)GuidelineList.SelectedItem);
+            if (GuidelineList.SelectedIndex != -1)
+            {
+                GuidelineList.Items.Remove((int)GuidelineList.SelectedItem);
+            }
         }
 
         private void AddButton_Click(object sender, EventArgs e)
