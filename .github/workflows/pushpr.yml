@@ -64,15 +64,15 @@ jobs:
       - name: Build HTML
         run: |
           cd Help
-          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook', clean_envir = FALSE, params = list(version = '[${{ github.ref_name }}]'))"
+          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook', params = list(version = '[${{ github.ref_name }}]'))"
       - name: Build ePub
         run: |
           cd Help
-          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::epub_book', clean_envir = FALSE, params = list(version = '[${{ github.ref_name }}]'))"
+          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::epub_book', params = list(version = '[${{ github.ref_name }}]'))"
       - name: Build PDF
         run: |
           cd Help
-          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book', clean_envir = FALSE, params = list(version = '[${{ github.ref_name }}]'))"
+          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book', params = list(version = '[${{ github.ref_name }}]'))"
       - name: Upload help files
         uses: actions/upload-artifact@v4
         with:
@@ -94,7 +94,7 @@ jobs:
           name: help-files
           path: Help/_book/
       - name: Deploy to Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.7
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: Help/_book/

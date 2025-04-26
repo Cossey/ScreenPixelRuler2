@@ -212,8 +212,8 @@ The cursor is displayed at the position of the mouse cursor on screen, relative 
 If the cursor is to the far top or far left to the ruler, the it does not appear.
 
 The above options are all configured in the `Cursor` section.
-`Cursor → Frozen` is used when the cursor is [frozen](\#freeze).
-`Cursor → Locked` is used when the cursor is [locked to a guideline](\#guideline-locked).
+`Cursor → Frozen` is used when the cursor is [frozen](\#freezing-the-cursor).
+`Cursor → Locked` is used when the cursor is [locked to a guideline](\#locking-to-guidelines).
 
 *Offset* `Ruler → Cursor → Offset` is used to add additional padding between the cursor number and the cursor background square.
 The padding is added to the top of the number unless the number is rotated, if rotated then it is added to the right side.

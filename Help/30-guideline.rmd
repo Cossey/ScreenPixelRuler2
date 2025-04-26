@@ -16,7 +16,7 @@ Removing a Guideline (keyboard shortcut `Ctrl + Shift + Alt + D`) will remove th
 All the Guidelines can be cleared by using the `Ruler Menu → Guidelines → Clear All` submenu or via the *Guidelines* dialog.
 Guidelines are also cleared before Importing Guidelines.
 
-## Locking to Guidelines
+## Locking to Guidelines {#locking-to-guidelines}
 
 Creating a Guideline will allow you to lock the mouse to that Guideline.
 Locking the mouse to a Guideline will allow you to move the mouse only along the locked axis.
