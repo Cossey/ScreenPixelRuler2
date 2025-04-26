@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   net:
-    name: .NET
+    name: Test Compile and Installer
     runs-on: windows-latest
     timeout-minutes: 6
 
@@ -18,7 +18,7 @@ jobs:
         dotnet-version: 8.0
 
     - name: Setup msbuild
-      uses: microsoft/setup-msbuild@2
+      uses: microsoft/setup-msbuild@v2
 
     - name: Build Code
       run: msbuild -r -p:Configuration=Release
