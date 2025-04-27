@@ -55,7 +55,7 @@ jobs:
 
     steps:
     - name: Create release notes
-      uses: Cossey/release-notes-generator-action@v2.1.4
+      uses: docker://decathlon/release-notes-generator-action:3.1.6
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         OUTPUT_FOLDER: temp_release_notes
