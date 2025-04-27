@@ -61,6 +61,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: net
 
+    outputs:
+      installfile: ${{ needs.net.outputs.installfile }}
+
     steps:
     - name: Create release notes
       uses: Cossey/release-notes-generator-action@v2.1.4
@@ -102,8 +105,8 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: deployment-files/Deployment/Installer/Output/${{ needs.net.outputs.installfile }}
-        asset_name: ${{ needs.net.outputs.installfile }}
+        asset_path: deployment-files/Deployment/Installer/Output/${{ needs.release-notes.outputs.installfile }}
+        asset_name: ${{ needs.release-notes.outputs.installfile }}
         asset_content_type: application/octet-stream
 
   net-choco:
