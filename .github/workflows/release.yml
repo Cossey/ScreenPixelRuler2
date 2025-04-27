@@ -98,6 +98,13 @@ jobs:
         asset_name: ScreenPixelRuler-${{ github.event.milestone.title }}.exe
         asset_content_type: application/octet-stream
 
+    - name: Publish release
+      uses: eregon/publish-release@v1.0.3
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        release_id: ${{ steps.create_release.outputs.id }}
+
   net-choco:
     name: Publish Chocolatey Release
     runs-on: windows-latest
@@ -135,7 +142,9 @@ jobs:
         path: artifacts/deployment-files/Deployment/Choco/*
         if-no-files-found: error
 
-
+    - name: Upload package to chocolatey repository
+      run: choco push --source https://push.chocolatey.org/ --api-key=${{ secrets.CHOCO_API_KEY }}
+      working-directory: artifacts/deployment-files/Deployment/Choco
   
   help:
     name: Build Help
