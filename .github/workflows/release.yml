@@ -84,6 +84,10 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v4
 
+    - name: Log md
+      run: |
+        ls
+
     - name: Create release draft
       id: create_release
       uses: actions/create-release@v1
@@ -92,7 +96,7 @@ jobs:
       with:
         tag_name: ${{ github.event.milestone.title }}
         release_name: Release ${{ github.event.milestone.title }}
-        body_path: ./artifacts/release-notes/changelog.md
+        body_path: artifacts/release-notes/changelog.md
         draft: true
         prerelease: false
 
@@ -128,7 +132,7 @@ jobs:
       run: |
         $content = Get-Content -Path 'artifacts/deployment-files/Deployment/Choco/screenpixelruler.nuspec'
         $content = $content -replace '%version%', '${{ github.event.milestone.title }}'
-        $content = $content -replace '%releasenotes%', (Get-Content -Path 'artifacts/release-notes/changelog.md')
+        $content = $content -replace '%releasenotes%', ((Get-Content -Path 'artifacts/release-notes/changelog.md') -replace '`n','`r`n')
         $content | Set-Content -Path 'artifacts/deployment-files/Deployment/Choco/screenpixelruler.nuspec'
       shell: pwsh
 
@@ -140,7 +144,7 @@ jobs:
       shell: pwsh
     
     - name: Create package
-      run: choco pack --version ${{ github.event.milestone.title }}
+      run: choco pack
       working-directory: artifacts/deployment-files/Deployment/Choco
 
     - name: Upload package artifact
@@ -150,9 +154,7 @@ jobs:
         path: artifacts/deployment-files/Deployment/Choco/*
         if-no-files-found: error
 
-    - name: Upload package to chocolatey repository
-      run: choco push screenpixelruler.${{ github.event.milestone.title }}.nupkg --source https://push.chocolatey.org/ --api-key=${{ secrets.CHOCO_API_KEY }}
-      working-directory: artifacts/deployment-files/Deployment/Choco
+
   
   help:
     name: Build Help
