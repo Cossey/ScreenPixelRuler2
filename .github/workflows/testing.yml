@@ -1,0 +1,168 @@
+name: Testing
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version'
+        required: true
+        default: '0.0.0.0'
+        type: string
+      test-bookdown:
+        description: 'Test Bookdown'
+        required: true
+        type: boolean
+      test-chocolatey:
+        description: 'Test Chocolatey'
+        required: true
+        type: boolean
+      test-setup:
+        description: 'Test Setup'
+        required: true
+        type: boolean
+
+jobs:
+  net:
+    name: Compile Software
+    runs-on: windows-latest
+
+    outputs:
+      installfile: ${{ steps.install_name.outputs.filename }}
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0
+
+    - name: Setup msbuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Compile code
+      run: msbuild -r -p:Version=${{ github.event.inputs.version }} -p:Configuration=Release
+
+    - name: Remove unrequired files
+      run: Remove-Item ScreenPixelRuler2/bin/Release/net8.0-windows7.0/* -include *.pdb
+      shell: pwsh
+
+    - name: Upload compiled artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: compiled-files
+        path: ScreenPixelRuler2/bin/Release/net8.0-windows7.0
+
+    - name: Compile installer
+      run: iscc Deployment\Installer\Installer.iss
+
+    - name: Get installer file name
+      id: install_name
+      run: echo "::set-output name=filename::$((Get-ChildItem Deployment\Installer\Output\*.exe)[0].Name)"
+      shell: pwsh
+
+    - name: Upload deployment artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: deployment-files
+        path: |
+          Deployment/Installer/Output/${{ steps.install_name.outputs.filename }}
+          Deployment/Choco
+          Resources
+          LICENSE.md
+          .github/release-notes.yml
+  
+  chocolatey:
+    name: Test Chocolatey
+    runs-on: windows-latest
+    needs: net
+    timeout-minutes: 10
+    if: ${{ github.event.inputs.test-chocolatey == 'true' }}
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: artifacts
+
+    - name: Setup package details
+      run: |
+        $content = Get-Content -Path 'artifacts/deployment-files/Deployment/Choco/screenpixelruler.nuspec'
+        $content = $content -replace '%version%', '${{ github.event.inputs.version }}'
+        $content = $content -replace '%releasenotes%', (Get-Content -Path 'artifacts/release-notes/changelog.md')
+        $content | Set-Content -Path 'artifacts/deployment-files/Deployment/Choco/screenpixelruler.nuspec'
+      shell: pwsh
+
+    - name: Copy software to package
+      run: |
+        Copy-Item -Path 'artifacts/compiled-files/*' -Destination 'artifacts/deployment-files/Deployment/Choco/tools'
+        Copy-Item -Path 'artifacts/deployment-files/Resources/*.thm' -Destination 'artifacts/deployment-files/Deployment/Choco/tools'
+        Copy-Item -Path 'artifacts/deployment-files/LICENSE.md' -Destination 'artifacts/deployment-files/Deployment/Choco/tools'
+      shell: pwsh
+    
+    - name: Create package
+      run: choco pack screenpixelruler.nuspec
+      working-directory: artifacts/deployment-files/Deployment/Choco
+
+    - name: Upload package artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: package-file
+        path: artifacts/deployment-files/Deployment/Choco/screenpixelruler.${{ github.event.inputs.version }}.nupkg
+
+  setup:
+    name: Test Setup
+    runs-on: windows-latest
+    needs: net
+    timeout-minutes: 5
+    if: ${{ github.event.inputs.test-setup == 'true' }}
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: artifacts
+    
+    - name: Test Installer
+      run: |
+        cd Deployment\Installer\Output 
+        .\installer.exe /SP- /VERYSILENT /SUPPRESSMSGBOXES /LOG=".\install.log"
+  
+    - name: Upload Install log
+      uses: actions/upload-artifact@v4
+      with:
+        name: install-log
+        path: Deployment\Installer\Output\install.log
+
+  bookdown:
+    name: Bookdown
+    runs-on: macOS-latest
+    timeout-minutes: 10
+    if: ${{ github.event.inputs.test-bookdown == 'true' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v2
+      - name: Setup Pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+      - name: Setup Tinytex
+        uses: r-lib/actions/setup-tinytex@v2
+      - name: Setup rmarkdown
+        run: Rscript -e 'install.packages(c("rmarkdown","bookdown"))'
+      - name: Build HTML
+        run: |
+          cd Help
+          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook', params = list(version = '[${{ github.ref_name }}]'))"
+      - name: Build ePub
+        run: |
+          cd Help
+          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::epub_book', params = list(version = '[${{ github.ref_name }}]'))"
+      - name: Build PDF
+        run: |
+          cd Help
+          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book', params = list(version = '[${{ github.ref_name }}]'))"
+      - name: Upload help files
+        uses: actions/upload-artifact@v4
+        with:
+          name: help-files
+          path: Help/_book/

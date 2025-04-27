@@ -6,7 +6,7 @@ on:
 
 jobs:
   net:
-    name: .NET
+    name: Compile Software
     runs-on: windows-latest
 
     outputs:
@@ -118,13 +118,8 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         path: artifacts
-  
-    - name: Remove deployment artifacts
-      uses: geekyeggo/delete-artifact@v1
-      with:
-        name: deployment-files
 
-    - name: Setup nuspec values
+    - name: Setup package details
       run: |
         $content = Get-Content -Path 'artifacts/deployment-files/Deployment/Choco/screenpixelruler.nuspec'
         $content = $content -replace '%version%', '${{ github.event.milestone.title }}'
@@ -132,7 +127,7 @@ jobs:
         $content | Set-Content -Path 'artifacts/deployment-files/Deployment/Choco/screenpixelruler.nuspec'
       shell: pwsh
 
-    - name: Copy files to package folder
+    - name: Copy software to package
       run: |
         Copy-Item -Path 'artifacts/compiled-files/*' -Destination 'artifacts/deployment-files/Deployment/Choco/tools'
         Copy-Item -Path 'artifacts/deployment-files/Resources/*.thm' -Destination 'artifacts/deployment-files/Deployment/Choco/tools'
@@ -149,7 +144,7 @@ jobs:
         name: package-file
         path: artifacts/deployment-files/Deployment/Choco/screenpixelruler.${{ github.event.milestone.title }}.nupkg
 
-    - name: Upload package
+    - name: Upload package to chocolatey repository
       run: choco push screenpixelruler.${{ github.event.milestone.title }}.nupkg --source https://push.chocolatey.org/ --api-key=${{ secrets.CHOCO_API_KEY }}
       working-directory: artifacts/deployment-files/Deployment/Choco
   
