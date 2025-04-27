@@ -94,8 +94,8 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: deployment-files/Deployment/Installer/Output/screenpixelruler-${{ github.event.milestone.title }}.exe
-        asset_name: screenpixelruler-${{ github.event.milestone.title }}.exe
+        asset_path: deployment-files/Deployment/Installer/Output/ScreenPixelRuler-${{ github.event.milestone.title }}.exe
+        asset_name: ScreenPixelRuler-${{ github.event.milestone.title }}.exe
         asset_content_type: application/octet-stream
 
   net-choco:
