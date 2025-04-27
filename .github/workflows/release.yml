@@ -104,7 +104,8 @@ jobs:
       run: |
         $content = Get-Content -Path 'artifacts/deployment-files/Deployment/Choco/screenpixelruler.nuspec'
         $content = $content -replace '%version%', '${{ github.event.milestone.title }}'
-        $content = $content -replace '%releasenotes%', ((Get-Content -Path 'artifacts/release-notes/changelog.md') -replace '`n','`r`n')
+        $releasenotes = (Get-Content -Raw -Path 'artifacts/release-notes/changelog.md') -replace '\n',"`r`n" 
+        $content = $content -replace '%releasenotes%', $releasenotes
         $content | Set-Content -Path 'artifacts/deployment-files/Deployment/Choco/screenpixelruler.nuspec'
       shell: pwsh
 
