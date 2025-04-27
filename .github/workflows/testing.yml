@@ -24,7 +24,7 @@ on:
 jobs:
   net:
     name: Compile Software
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     outputs:
       installfile: ${{ steps.install_name.outputs.filename }}
@@ -72,7 +72,13 @@ jobs:
           Resources
           LICENSE.md
           .github/release-notes.yml
+  
+  release:
+    name: Release Notes
+    runs-on: ubuntu-latest
+    needs: net
 
+    steps:
     - name: Create release notes
       uses: Cossey/release-notes-generator-action@v2.1.4
       env:
@@ -84,11 +90,11 @@ jobs:
       with:
         name: release-notes
         path: temp_release_notes/changelog.md
-  
+
   chocolatey:
     name: Test Chocolatey
     runs-on: windows-latest
-    needs: net
+    needs: release
     timeout-minutes: 10
     if: ${{ github.event.inputs.test-chocolatey == 'true' }}
     steps:
