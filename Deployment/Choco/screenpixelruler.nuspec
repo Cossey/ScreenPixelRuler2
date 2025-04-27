@@ -9,7 +9,7 @@
     <authors>Stewart Cossey</authors>
     <projectUrl>https://github.com/Cossey/ScreenPixelRuler2</projectUrl>
     <iconUrl>https://cdn.rawgit.com/Cossey/storage/8fb7267a/images/logos/screenpixelruler.png</iconUrl>
-    <copyright>2020 Stewart Cossey</copyright>
+    <copyright>2025 Stewart Cossey</copyright>
     <licenseUrl>https://github.com/Cossey/ScreenPixelRuler2/blob/master/LICENSE.md</licenseUrl>
     <projectSourceUrl>https://github.com/Cossey/ScreenPixelRuler2</projectSourceUrl>
     <bugTrackerUrl>https://github.com/Cossey/ScreenPixelRuler2/issues</bugTrackerUrl>
@@ -30,7 +30,7 @@
 %releasenotes%
     </releaseNotes>
     <dependencies>
-      <dependency id="dotnetcore3-desktop-runtime" version="3.1" />
+      <dependency id="dotnet-8.0-desktopruntime" />
     </dependencies>
   </metadata>
   <files>
