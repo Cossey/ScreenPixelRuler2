@@ -48,23 +48,37 @@ jobs:
           LICENSE.md
           .github/release-notes.yml
 
+    - name: Release notes config
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-notes-config
+        path: .github/release-notes.yml
+        if-no-files-found: error
+
   release-notes:
     name: Create Release Notes
     runs-on: ubuntu-latest
     needs: net
 
     steps:
+    - name: Download realease notes config
+      uses: actions/download-artifact@v4
+      with:
+        name: release-notes-config
+
     - name: Create release notes
       uses: docker://decathlon/release-notes-generator-action:latest
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         OUTPUT_FOLDER: temp_release_notes
+        CONFIG_FILE: release-notes-config/release-notes.yml
+        FILENAME: changelog_${{ github.event.milestone.title }}
 
     - name: Upload release note artifact
       uses: actions/upload-artifact@v4
       with:
         name: release-notes
-        path: temp_release_notes/changelog.md
+        path: temp_release_notes/changelog_${{ github.event.milestone.title }}.md
         if-no-files-found: error
 
   net-deploy:
@@ -81,7 +95,7 @@ jobs:
       with:
         tag_name: ${{ github.event.milestone.title }}
         release_name: Release ${{ github.event.milestone.title }}
-        body_path: release-notes/changelog.md
+        body_path: release-notes/changelog_${{ github.event.milestone.title }}.md
         draft: false
         prerelease: false
         make_latest: true
@@ -104,7 +118,7 @@ jobs:
       run: |
         $content = Get-Content -Path 'artifacts/deployment-files/Deployment/Choco/screenpixelruler.nuspec'
         $content = $content -replace '%version%', '${{ github.event.milestone.title }}'
-        $releasenotes = (Get-Content -Raw -Path 'artifacts/release-notes/changelog.md') -replace '\n',"`r`n" 
+        $releasenotes = (Get-Content -Raw -Path 'artifacts/release-notes/changelog_${{ github.event.milestone.title }}.md') -replace '\n',"`r`n" 
         $content = $content -replace '%releasenotes%', $releasenotes
         $content | Set-Content -Path 'artifacts/deployment-files/Deployment/Choco/screenpixelruler.nuspec'
       shell: pwsh
