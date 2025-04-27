@@ -72,6 +72,18 @@ jobs:
           Resources
           LICENSE.md
           .github/release-notes.yml
+
+    - name: Create release notes
+      uses: Cossey/release-notes-generator-action@v2.1.4
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        OUTPUT_FOLDER: temp_release_notes
+
+    - name: Upload release note artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-notes
+        path: temp_release_notes/changelog.md
   
   chocolatey:
     name: Test Chocolatey
@@ -124,7 +136,7 @@ jobs:
     
     - name: Test Installer
       run: |
-        cd Deployment\Installer\Output 
+        cd artifacts\deployment-files 
         .\installer.exe /SP- /VERYSILENT /SUPPRESSMSGBOXES /LOG=".\install.log"
   
     - name: Upload Install log
