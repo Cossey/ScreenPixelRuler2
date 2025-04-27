@@ -111,7 +111,7 @@ jobs:
   net-choco:
     name: Publish Chocolatey Release
     runs-on: windows-latest
-    needs: net
+    needs: net-deploy
 
     steps:
     - name: Download artifacts
