@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Themes | Screen Pixel Ruler 2.1.0.0</title>
+  <meta name="description" content="Help documentation for Screen Pixel Ruler." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Themes | Screen Pixel Ruler 2.1.0.0" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Help documentation for Screen Pixel Ruler." />
+  <meta name="github-repo" content="cossey/screenpixelruler2" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Themes | Screen Pixel Ruler 2.1.0.0" />
+  
+  <meta name="twitter:description" content="Help documentation for Screen Pixel Ruler." />
+  
+
+<meta name="author" content="Stewart Cossey" />
+
+
+<meta name="date" content="2025-04-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="config.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#features"><i class="fa fa-check"></i>Features</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i>Installation</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#providing-feedback"><i class="fa fa-check"></i>Providing feedback</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html"><i class="fa fa-check"></i>User Interface</a>
+<ul>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#rotating-the-ruler"><i class="fa fa-check"></i>Rotating the ruler</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#flipping-the-ruler"><i class="fa fa-check"></i>Flipping the ruler</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#shifting-to-the-cursor"><i class="fa fa-check"></i>Shifting to the cursor</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#freezing-the-cursor"><i class="fa fa-check"></i>Freezing the Cursor</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#exiting-the-software"><i class="fa fa-check"></i>Exiting the software</a></li>
+<li class="chapter" data-level="" data-path="ui.html"><a href="ui.html#accessing-this-help"><i class="fa fa-check"></i>Accessing this help</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html"><i class="fa fa-check"></i>Guidelines</a>
+<ul>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#adding-and-removing-guidelines"><i class="fa fa-check"></i>Adding and Removing Guidelines</a></li>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#clearing-guidelines"><i class="fa fa-check"></i>Clearing Guidelines</a></li>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#locking-to-guidelines"><i class="fa fa-check"></i>Locking to Guidelines</a></li>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#importing-and-exporting-guidelines"><i class="fa fa-check"></i>Importing and Exporting Guidelines</a>
+<ul>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#guideline-file-format"><i class="fa fa-check"></i>Guideline File Format</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="guidelines.html"><a href="guidelines.html#guideline-dialog"><i class="fa fa-check"></i>Guideline dialog</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html"><i class="fa fa-check"></i>Keyboard Shortcuts</a>
+<ul>
+<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html#global-shortcuts"><i class="fa fa-check"></i>Global Shortcuts</a></li>
+<li class="chapter" data-level="" data-path="keyboard.html"><a href="keyboard.html#local-shortcuts"><i class="fa fa-check"></i>Local Shortcuts</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="config.html"><a href="config.html"><i class="fa fa-check"></i>Configuration</a>
+<ul>
+<li class="chapter" data-level="" data-path="config.html"><a href="config.html#options"><i class="fa fa-check"></i>Options</a>
+<ul>
+<li class="chapter" data-level="" data-path="config.html"><a href="config.html#theme"><i class="fa fa-check"></i>Theme</a></li>
+<li class="chapter" data-level="" data-path="config.html"><a href="config.html#mouse-button-clicks"><i class="fa fa-check"></i>Mouse button clicks</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="config.html"><a href="config.html#location"><i class="fa fa-check"></i>Location</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html"><i class="fa fa-check"></i>Themes</a>
+<ul>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#supplied-themes"><i class="fa fa-check"></i>Supplied Themes</a>
+<ul>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#system"><i class="fa fa-check"></i>System</a></li>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#panda"><i class="fa fa-check"></i>Panda</a></li>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#mioplanet-pixelruler"><i class="fa fa-check"></i>MioPlanet PixelRuler</a></li>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#white-chocolate"><i class="fa fa-check"></i>White Chocolate</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#location-1"><i class="fa fa-check"></i>Location</a></li>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#creating-a-theme"><i class="fa fa-check"></i>Creating a Theme</a>
+<ul>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#objects"><i class="fa fa-check"></i>Objects</a></li>
+<li class="chapter" data-level="" data-path="themes.html"><a href="themes.html#file-format"><i class="fa fa-check"></i>File Format</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/Cossey/ScreenPixelRuler2/issues/new" target="blank">Submit an Issue</a></li>
+<li><a href="https://github.com/Cossey/ScreenPixelRuler2/releases/latest" target="blank">Get Latest Version</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Screen Pixel Ruler 2.1.0.0</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="themes" class="section level1 hasAnchor">
+<h1>Themes<a href="themes.html#themes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Themes can change the ruler colour, size or even the interval of the hatch marks.
+Screen Pixel Ruler comes with some supplied themes.</p>
+<div id="supplied-themes" class="section level2 hasAnchor">
+<h2>Supplied Themes<a href="themes.html#supplied-themes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="system" class="section level3 hasAnchor">
+<h3>System<a href="themes.html#system" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="images/theme-default.png" /><!-- --></p>
+<p>The built-in default theme for Screen Pixel Ruler.
+This theme adjusts to your Windows 10/11 theme.
+On older operating systems, the theme is black text on white, with red highlighting.</p>
+</div>
+<div id="panda" class="section level3 hasAnchor">
+<h3>Panda<a href="themes.html#panda" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="images/theme-panda.png" /><!-- --></p>
+<p>A high contrast theme with a thick ruler for easy visibility.</p>
+</div>
+<div id="mioplanet-pixelruler" class="section level3 hasAnchor">
+<h3>MioPlanet PixelRuler<a href="themes.html#mioplanet-pixelruler" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><img src="images/theme-mioplanet.png" /><!-- --></p>
+<p>A blue gradient ruled designed to mimic the look of the MioPlanet PixelRuler software.</p>
+</div>
+<div id="white-chocolate" class="section level3 hasAnchor">
+<h3>White Chocolate<a href="themes.html#white-chocolate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A white on brown coloured theme.
+Simple pallet swap of the Default theme.</p>
+</div>
+</div>
+<div id="location-1" class="section level2 hasAnchor">
+<h2>Location<a href="themes.html#location-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Themes are stored in the two locations, depending on if you installed from the installer or from the chocolatey package.</p>
+<p>Installer: %appdata%\screenpixelruler<br />
+Chocolatey: %chocolateyinstall%\lib\screenpixelruler\tools</p>
+</div>
+<div id="creating-a-theme" class="section level2 hasAnchor">
+<h2>Creating a Theme<a href="themes.html#creating-a-theme" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You can create your own themes for Screen Pixel Ruler.
+Themes have a <code>thm</code> file extension and are written in <a href="https://yaml.org">yaml</a>.
+Looking at the existing themes can help you understand how to create your own.</p>
+<div id="objects" class="section level3 hasAnchor">
+<h3>Objects<a href="themes.html#objects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Below are objects and explainations of them that can be used in the theme file.</p>
+<p><code>&lt;string&gt;</code> A string of text.</p>
+<p><code>&lt;boolean&gt;</code> Either <code>true</code> or <code>false</code>.</p>
+<p><code>&lt;decimal&gt;</code> A decimal number like <code>1.0</code> or <code>1.5</code>.</p>
+<p><code>&lt;number&gt;</code> A number like <code>1</code> or <code>15</code>.</p>
+<p><code>&lt;array&gt;</code> An array of objects.</p>
+<p><code>&lt;align&gt;</code> Text alignment.
+Supported values are:
+- <code>Near</code>/<code>0</code> Align text to the left/top
+- <code>Center</code>/<code>1</code> Align text to the center
+- <code>Far</code>/<code>2</code> Align text to the right/bottom</p>
+<p><code>&lt;colour&gt;</code> A colour value.
+Supported input types are:
+- <code>'#RRGGBB'</code> Hex/HTML Colour
+- <code>RRR, GGG, BBB</code> Decimal (0-255)
+- <code>ColorName</code> Name</p>
+<p><code>&lt;colours&gt;</code> An array of either one (<code>[ &lt;colour&gt; ]</code>) or two colour values (<code>[ &lt;colour&gt;, &lt;colour&gt; ]</code>).
+If two colours are provided then the colour will be a gradient.</p>
+<blockquote>
+<p>For a list of colour names see the <a href="https://docs.microsoft.com/en-us/dotnet/api/system.drawing.knowncolor?view=netcore-3.1">KnownColor Enum</a> reference.</p>
+</blockquote>
+</div>
+<div id="file-format" class="section level3 hasAnchor">
+<h3>File Format<a href="themes.html#file-format" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The rendering order of the elements are <code>Background ← Border ← Hatch Marks ← Guidelines ← Cursor</code>.</p>
+<div id="fields" class="section level4 hasAnchor">
+<h4>Fields<a href="themes.html#fields" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<pre><code>Name: &lt;string&gt; The name of the theme.
+Cursor: Cursor themeing.
+  Line: &lt;colour&gt; The cursor line colour.
+  Font: The font used for the cursor.
+    Family: &lt;string&gt; The font family.
+    Size: &lt;decimal&gt; The font size.
+    Bold: &lt;boolean&gt; Whether the font is bold.
+    Italic: &lt;boolean&gt; Whether the font is italicised.
+    Underline: &lt;boolean&gt; Whether the font is underlined.
+    Strikeout: &lt;boolean&gt; Whether the font is striked out.
+  Background: &lt;colours&gt; The background colours for the cursor.
+  Frozen: The frozen colours for the cursor.
+    Line: &lt;colour&gt; The frozen line colour.
+    Font: The font used for the frozen cursor.
+      Family: &lt;string&gt; The font family.
+      Size: &lt;decimal&gt; The font size.
+      Bold: &lt;boolean&gt; Whether the font is bold.
+      Italic: &lt;boolean&gt; Whether the font is italicised.
+      Underline: &lt;boolean&gt; Whether the font is underlined.
+      Strikeout: &lt;boolean&gt; Whether the font is striked out.
+    Background: &lt;colours&gt; The frozen background colours.
+  Locked: The guideline locked colours for the cursor.
+    Line: &lt;colour&gt; The locked line colour.
+    Font: The font used for the locked cursor.
+      Family: &lt;string&gt; The font family.
+      Size: &lt;decimal&gt; The font size.
+      Bold: &lt;boolean&gt; Whether the font is bold.
+      Italic: &lt;boolean&gt; Whether the font is italicised.
+      Underline: &lt;boolean&gt; Whether the font is underlined.
+      Strikeout: &lt;boolean&gt; Whether the font is striked out.
+    Background: &lt;colours&gt; The locked background colours.
+Ruler: Ruler themeing.
+  Size: &lt;number&gt; The size of the ruler in pixels.
+  Background: &lt;colours&gt; The background colour for the ruler.
+  Border:
+    Colour: &lt;colour&gt; The border colour.
+    Spacing: &lt;number&gt; The spacing between the border and the ruler.
+  Marks: The hatch marks.
+    Colour: &lt;colour&gt; The colour of the hatch marks.
+    Size:
+      Horizontal: &lt;number&gt; The size of the hatch marks when horizontal.
+      Vertical: &lt;number&gt; The size of the hatch marks when vertical.
+    Zero: The zero hatch mark.
+        NumberVisible: &lt;boolean&gt; Whether the number zero is displayed.
+        Size:
+          Horizontal: &lt;number&gt; The size of the zero hatch mark when horizontal.
+          Vertical: &lt;number&gt; The size of the zero hatch mark when vertical.
+    Sizes: &lt;array&gt; The sizes of the hatch marks.
+      Interval: &lt;number&gt; The interval of the hatch marks.
+      Colour: &lt;colour&gt; The colour of the hatch marks.
+      Size:
+        Horizontal: &lt;number&gt; The size of the hatch marks when horizontal.
+        Vertical: &lt;number&gt; The size of the hatch marks when vertical.
+  Numbers: The numbers on the ruler.
+    Padding: Padding from the nearest edge to the numbers.
+      Horizontal: &lt;number&gt; Padding when ruler is Horizontal.
+      Vertical: &lt;number&gt; Padding when ruler is Vertical.
+    OppositeOffsetPadding: Additional padding when the ruler hatch marks a flipped.
+      Horizontal: &lt;number&gt; Padding when ruler is Horizontal.
+      Vertical: &lt;number&gt; Padding when ruler is Vertical.
+    Offset: Adds additional padding from the cursor background to the number.
+      Horizontal: &lt;number&gt; Offset when ruler is Horizontal.
+      Vertical: &lt;number&gt; Offset when ruler is Vertical.
+    Colour: &lt;colour&gt; The colour of the numbers.
+    Font: The font used for the numbers.
+      Family: &lt;string&gt; The font family.
+      Size: &lt;decimal&gt; The font size.
+      Bold: &lt;boolean&gt; Whether the font is bold.
+      Italic: &lt;boolean&gt; Whether the font is italicised.
+      Underline: &lt;boolean&gt; Whether the font is underlined.
+      Strikeout: &lt;boolean&gt; Whether the font is striked out.
+    Display:
+      Interval: &lt;number&gt; The interval at which numbers should appear.
+      Vertical: Settings for when the ruler is vertical.
+        Rotate: &lt;boolean&gt; Whether the numbers should be rotated by 90 degrees.
+        Alignment: &lt;align&gt; How the numbers should be aligned.
+      Horizontal: Settings for when the ruler is horizontal.
+        Rotate: &lt;boolean&gt; Whether the numbers should be rotated by 90 degrees.
+        Alignment: &lt;align&gt; How the numbers should be aligned.
+  Guidelines:
+    Guideline: The guidelines.
+      Colour: &lt;colour&gt; The colour of the guidelines.
+      Size:
+        Horizontal: &lt;number&gt; The size of the guidelines when horizontal.
+        Vertical: &lt;number&gt; The size of the guidelines when vertical.
+    Locked: The guideline locked onto.
+      Colour: &lt;colour&gt; The colour of the guideline that has been locked onto.
+      Size:
+        Horizontal: &lt;number&gt; The size of the guideline that has been locked onto when horizontal.
+        Vertical: &lt;number&gt; The size of the guideline that has been locked onto when vertical.
+    Nearest: The guideline nearest to the cursor.
+      Colour: &lt;colour&gt; The colour of the nearest guideline.
+      Size:
+        Horizontal: &lt;number&gt; The size of the nearest guideline when horizontal.
+        Vertical: &lt;number&gt; The size of the nearest guideline when vertical.</code></pre>
+</div>
+<div id="ui-theme-elements" class="section level4 hasAnchor">
+<h4>UI Theme Elements<a href="themes.html#ui-theme-elements" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>This section helps explains the user interface theme elements.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
+<img src="images/ruler-theme.png" alt="The Ruler user interface with theme elements highlighted."  />
+<p class="caption">
+Figure 5: The Ruler user interface with theme elements highlighted.
+</p>
+</div>
+<p>Zero is the Zero Mark which is explained further below.</p>
+<p>Numbers are configured in <code>Ruler → Number</code> secion.
+The <code>Ruler → Number → Display → Interval</code> determines how often the numbers appear.
+An interval of <code>50</code> means that numbers will appear at the 50th, 100th, 150th, etc hatch marks.
+The other properties under <code>Ruler → Number</code> determine the font, colour and size of the numbers.</p>
+<p>Cursor is explained further below.</p>
+<p>Background is the background colour of the ruler.
+This is set at <code>Ruler → Background</code> and can be a single colour or a gradient when two colours are provided.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<img src="images/ruler-cursor.png" alt="The cursor that appears in the ruler."  />
+<p class="caption">
+Figure 6: The cursor that appears in the ruler.
+</p>
+</div>
+<p>The cursor is displayed at the position of the mouse cursor on screen, relative to the ruler.
+If the cursor is to the far top or far left to the ruler, the it does not appear.</p>
+<p>The above options are all configured in the <code>Cursor</code> section.
+<code>Cursor → Frozen</code> is used when the cursor is <a href="ui.html#freezing-the-cursor">frozen</a>.
+<code>Cursor → Locked</code> is used when the cursor is <a href="guidelines.html#locking-to-guidelines">locked to a guideline</a>.</p>
+<p><em>Offset</em> <code>Ruler → Cursor → Offset</code> is used to add additional padding between the cursor number and the cursor background square.
+The padding is added to the top of the number unless the number is rotated, if rotated then it is added to the right side.</p>
+<p><em>Cursor Background</em> <code>Cursor → Background</code> is used to set the background colour of the cursor square.</p>
+<p><em>Cursor Line</em> <code>Cursor → Line</code> is used to set the colour of the line of the cursor.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-10"></span>
+<img src="images/ruler-hashmarks.png" alt="The ruler hatch marks."  />
+<p class="caption">
+Figure 7: The ruler hatch marks.
+</p>
+</div>
+<p><em>Zero Mark</em> hatch mark is provided by the <code>Ruler → Marks → Zero → Size</code> property.
+You can also set the <code>Ruler → Marks → Zero → NumberVisible</code> property to <code>false</code> to omit the 0 number.</p>
+<p>Size interval 10 and Size Interval 50 hatch marks are provided by the <code>Ruler → Marks → Sizes</code> array.
+Below is an example of a 50 pixel interval hatch mark:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb3-1"><a href="themes.html#cb3-1" tabindex="-1"></a><span class="co">...</span></span>
+<span id="cb3-2"><a href="themes.html#cb3-2" tabindex="-1"></a><span class="co">  Marks:</span></span>
+<span id="cb3-3"><a href="themes.html#cb3-3" tabindex="-1"></a><span class="co">    Sizes:</span></span>
+<span id="cb3-4"><a href="themes.html#cb3-4" tabindex="-1"></a><span class="co">      - Interval: 50</span></span>
+<span id="cb3-5"><a href="themes.html#cb3-5" tabindex="-1"></a><span class="co">        Colour: #000000</span></span>
+<span id="cb3-6"><a href="themes.html#cb3-6" tabindex="-1"></a><span class="co">        Size:</span></span>
+<span id="cb3-7"><a href="themes.html#cb3-7" tabindex="-1"></a><span class="co">          Horizontal: 20</span></span>
+<span id="cb3-8"><a href="themes.html#cb3-8" tabindex="-1"></a><span class="co">          Vertical: 40</span></span>
+<span id="cb3-9"><a href="themes.html#cb3-9" tabindex="-1"></a><span class="co">...</span></span></code></pre></div>
+<p><em>Marks Size</em> hatch marks are provided by the <code>Ruler → Marks → Size</code> properties.
+The colour is provided by the <code>Ruler → Marks → Colour</code> property.
+Every even pixel on the ruler will have a hatch mark provided by this value.
+Set the size to <code>0</code> to omit the default hatch marks.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="images/ruler-vertical.png" alt="Vertical ruler."  />
+<p class="caption">
+Figure 8: Vertical ruler.
+</p>
+</div>
+<p><em>Padding</em> from the <code>Ruler → Numbers → Padding</code> property, applies padding to the numbers from the nearest edge.</p>
+<p><em>Opposite Offset Padding</em> under the <code>Ruler → Numbers → OppositeOffsetPadding</code>) property is the additional padding that is applied when the ruler is flipped to the opposite default direction.
+This is applied in addition to any padding that is applied via <code>Ruler → Numbers → Padding</code> property.</p>
+<p><em>Vertical Rotate</em> (the <code>Ruler → Numbers → Display → Vertical → Rotate</code> and <code>Ruler → Numbers → Display → Horizontal → Rotate</code> properties) rotates the numbers 90 degrees.</p>
+<blockquote>
+<p>Note: The direction of the rotated numbers cannot be changed.</p>
+</blockquote>
+</div>
+<div id="default-values" class="section level4 hasAnchor">
+<h4>Default Values<a href="themes.html#default-values" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div class="line-block">Font<br />
+    Family: <code>Courier New</code><br />
+    Size: <code>9</code><br />
+    Bold: <code>false</code><br />
+    Italic: <code>false</code><br />
+    Underline: <code>false</code><br />
+    Strikeout: <code>false</code><br />
+<br />
+Cursor → Locked<br />
+    Cursor → Frozen<br />
+<br />
+Cursor → Frozen<br />
+    Cursor<br />
+<br />
+Ruler → Background<br />
+     <code>White</code><br />
+<br />
+Ruler → Marks → Zero → NumberVisible<br />
+    <code>false</code><br />
+<br />
+Ruler → Marks → Zero → Colour<br />
+    Ruler → Marks → Colour<br />
+        <code>Transparent</code><br />
+<br />
+Ruler → Guidelines → Nearest<br />
+    Ruler → Guidelines → Guideline<br />
+<br />
+Ruler → Guidelines → Locked<br />
+    Ruler → Guidelines → Guideline<br />
+<br />
+Ruler → Guideline → Guideline → Size<br />
+     Ruler → Size<br />
+<br />
+Ruler → Guideline → Guideline → Colour<br />
+     Ruler → Marks → Colour</div>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="config.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/Cossey/screenpixelruler2/edit/master/Help/90-themes.rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["ScreenPixelRuler.pdf", "ScreenPixelRuler.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
