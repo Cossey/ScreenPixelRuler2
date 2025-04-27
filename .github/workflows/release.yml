@@ -56,17 +56,12 @@ jobs:
           LICENSE.md
           .github/release-notes.yml
 
-  net-deploy:
-    name: Publish Github Release
+  release-notes:
+    name: Create Release Notes
     runs-on: ubuntu-latest
     needs: net
 
     steps:
-    - name: Download deployment artifacts
-      uses: actions/download-artifact@v4
-      with: 
-        name: deployment-files
-
     - name: Create release notes
       uses: Cossey/release-notes-generator-action@v2.1.4
       env:
@@ -79,6 +74,15 @@ jobs:
         name: release-notes
         path: temp_release_notes/changelog.md
 
+  net-deploy:
+    name: Publish Github Release
+    runs-on: ubuntu-latest
+    needs: release-notes
+
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+
     - name: Create release draft
       id: create_release
       uses: actions/create-release@v1
@@ -87,7 +91,7 @@ jobs:
       with:
         tag_name: ${{ github.event.milestone.title }}
         release_name: Release ${{ github.event.milestone.title }}
-        body_path: temp_release_notes/changelog.md
+        body_path: artifacts/release-notes/changelog.md
         draft: true
         prerelease: false
 
@@ -97,7 +101,7 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./Deployment/Installer/Output/${{ needs.net.outputs.installfile }}
+        asset_path: artifacts/deployment-files/Deployment/Installer/Output/${{ needs.net.outputs.installfile }}
         asset_name: ${{ needs.net.outputs.installfile }}
         asset_content_type: application/octet-stream
 
@@ -111,7 +115,7 @@ jobs:
   net-choco:
     name: Publish Chocolatey Release
     runs-on: windows-latest
-    needs: net-deploy
+    needs: release-notes
 
     steps:
     - name: Download artifacts
