@@ -24,7 +24,7 @@ on:
 jobs:
   net:
     name: Compile Software
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     outputs:
       installfile: ${{ steps.install_name.outputs.filename }}
