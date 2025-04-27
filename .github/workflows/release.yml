@@ -73,6 +73,7 @@ jobs:
       with:
         name: release-notes
         path: temp_release_notes/changelog.md
+        if-no-files-found: error
 
   net-deploy:
     name: Publish Github Release
@@ -91,7 +92,7 @@ jobs:
       with:
         tag_name: ${{ github.event.milestone.title }}
         release_name: Release ${{ github.event.milestone.title }}
-        body_path: artifacts/release-notes/changelog.md
+        body_path: ./artifacts/release-notes/changelog.md
         draft: true
         prerelease: false
 
@@ -139,14 +140,15 @@ jobs:
       shell: pwsh
     
     - name: Create package
-      run: choco pack screenpixelruler.nuspec
+      run: choco pack --version ${{ github.event.milestone.title }}
       working-directory: artifacts/deployment-files/Deployment/Choco
 
     - name: Upload package artifact
       uses: actions/upload-artifact@v4
       with:
         name: package-file
-        path: artifacts/deployment-files/Deployment/Choco/screenpixelruler.${{ github.event.milestone.title }}.nupkg
+        path: artifacts/deployment-files/Deployment/Choco/*
+        if-no-files-found: error
 
     - name: Upload package to chocolatey repository
       run: choco push screenpixelruler.${{ github.event.milestone.title }}.nupkg --source https://push.chocolatey.org/ --api-key=${{ secrets.CHOCO_API_KEY }}
