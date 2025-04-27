@@ -1,14 +1,14 @@
 changelog:
-    sections:
-    - title: "Improvements"
-      labels: [ "enhancement" ]
-    - title: "Fixes"
-      labels: [ "bug", "regression" ]
-    - title: "Dependency Updates"
-      labels: [ "dependencies" ]
-    issues:
-      exclude:
-        labels: ["wontfix", "question", "duplicate", "invalid"]
-    contributors:
-      exclude: 
-        names: [ "*" ]
+  sections:
+  - title: "Improvements"
+    labels: [ "enhancement" ]
+  - title: "Fixes"
+    labels: [ "bug", "regression" ]
+  - title: "Dependency Updates"
+    labels: [ "dependencies" ]
+  issues:
+    exclude:
+      labels: ["wontfix", "question", "duplicate", "invalid"]
+  contributors:
+    exclude: 
+      names: [ "*" ]
