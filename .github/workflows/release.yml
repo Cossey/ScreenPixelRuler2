@@ -42,7 +42,7 @@ jobs:
 
     - name: Get installer file name
       id: install_name
-      run: echo "::set-output name=filename::$((Get-ChildItem Deployment\Installer\Output\*.exe)[0].Name)"
+      run: echo "filename=$((Get-ChildItem Deployment\Installer\Output\*.exe)[0].Name)" >> $GITHUB_OUTPUT
       shell: pwsh
 
     - name: Upload deployment artifacts
@@ -97,8 +97,8 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./Deployment/Installer/Output/${{ needs.build.outputs.installfile }}
-        asset_name: ${{ needs.build.outputs.installfile }}
+        asset_path: ./Deployment/Installer/Output/${{ needs.net.outputs.installfile }}
+        asset_name: ${{ needs.net.outputs.installfile }}
         asset_content_type: application/octet-stream
 
     - name: Publish release
